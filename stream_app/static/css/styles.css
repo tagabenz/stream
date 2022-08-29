@@ -1,0 +1,64 @@
+@font-face {
+    font-family: "CTCSans";
+    src : url('../fonts/CTCSans-ExtraBold.otf')
+}
+
+* {
+    font-family: "CTCSans";
+}
+
+body{
+    background-color: rgb(237,237,237);
+    margin: 0 auto;
+    width: 100%;
+}
+
+header{
+    background-color: white;
+    height: 74px;
+    /* padding: 16px 80px 16px 80px; */
+    width: 100%;
+    position: fixed;
+    top: 0px;
+}
+
+#page{
+    margin-top: 100px;
+}
+
+a:link, a:visited{
+    text-decoration: none;
+    color: inherit;
+}
+
+img.Header_item{
+    margin-top: 16px;
+    margin-left: 16px;
+}
+
+a.Header_item{
+    margin-right: 50px;
+}
+
+#link_logo{
+    font-size: 42px;
+    margin-left: 10px;
+}
+.logo, .search, .user{
+    text-transform: uppercase;
+    width: 33.3%;
+    float: left;
+
+}
+
+.logo{
+
+}
+
+.user{
+    text-align: right;
+}
+
+.search{
+    text-align: center;
+}
