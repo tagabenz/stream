@@ -1,6 +1,12 @@
 @font-face {
     font-family: "CTCSans";
-    src : url('../fonts/CTCSans-ExtraBold.otf')
+    src : url('../fonts/CTCSans-ExtraBold.otf');
+}
+
+@font-face {
+    font-family: "CTCSans";
+    src : url('../fonts/CTCSans-Bold.otf');
+    font-weight: Bold;
 }
 
 * {
@@ -22,8 +28,11 @@ header{
     border-bottom: 2px solid #cccccc;
 }
 
-#page{
-    margin-top: 100px;
+.page{
+    margin-top: 50px;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    padding-top: 0.5rem;
 }
 
 a:link, a:visited{
@@ -49,7 +58,7 @@ a:link, a:visited{
 }
 
 a.Header_item{
-  display: block;
+  display: inline-block;
   margin-top: 1rem; !important;
 }
 a.Header_item:hover{
@@ -62,10 +71,46 @@ a.Header_item:hover{
 .menu{
   margin-left: 2rem; !important;
   background-color: rgb(237,237,237);
-  border: 2px solid #cccccc;
+}
+
+.b_radius{
+  background-color: rgb(237,237,237);
+  border: 2px solid rgb(237,237,237);
   border-radius: 5px;
 }
 
 .menu:hover{
   border: 2px solid rgb(128,174,255);
+}
+
+details summary::-webkit-details-marker {
+  display: none;
+}
+
+details > summary {
+  list-style: none;
+}
+
+.dropdown-menu{
+  margin-top: 0px;
+  margin-left: 20px;
+  padding: 1rem;
+  min-width: 200px;
+
+}
+
+.page_elem{
+  background-color: white;
+  border: 1px solid #cccccc; !important;
+  border-radius: 5px;
+  box-shadow: 3px 3px #777777;
+}
+
+.dropdown-item{
+  display: block;
+  text-transform: capitalize;
+}
+
+a.dropdown-item:hover{
+  color: rgb(128,174,255);
 }
