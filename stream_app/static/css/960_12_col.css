@@ -16,14 +16,33 @@
 body {
   min-width: 960px;
 }
+article{
+  background-color: white;
+  border: 1px solid black;
+  /* border-radius: 1px; */
+  /* box-shadow: 1px 1px #777777; */
+  padding: 0.5rem;
+}
 
+article:hover{
+    border: 1px solid rgb(128,174,255); !important;
+}
+
+h2{
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+a:hover{
+  color: rgb(128,174,255);
+}
 /* `Container
 ----------------------------------------------------------------------------------------------------*/
 
 .container_12 {
   margin-left: auto;
   margin-right: auto;
-  width: 960px;
+  width: 1024px;
   background-color: #ccc;
 }
 
@@ -45,10 +64,7 @@ body {
   display: inline;
   float: left;
   margin: 10px;
-  background-color: white;
-  /* border: 1px solid #cccccc; !important; */
-  /* border-radius: 5px; */
-  /* box-shadow: 1px 1px #777777; */
+
 }
 
 .push_1, .pull_1,
