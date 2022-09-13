@@ -1,4 +1,4 @@
-from django.views.generic import ListView
+from django.views.generic import ListView, DetailView
 from blog.models import Blogs
 
 
@@ -12,3 +12,8 @@ class BlogsListView(ListView):
         context['title']='Блог'
 
         return context
+
+
+class BlogsDetailView(DetailView):
+    model=Blogs
+    template_name='blog_detail.html'

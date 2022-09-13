@@ -8,7 +8,7 @@
 {% if blogs_list %}
 <section class="page_elem container_12">
   {% for blog in blogs_list %}
-  <a href="#">
+  <a href="{{ blog.id }}" target="_blank">
     <article class="grid_4">
       <img src="{{ blog.img_url }}" alt="" width="300" height="187">
       <h2>{{ blog.title }}</h2>

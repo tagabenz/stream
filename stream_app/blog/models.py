@@ -5,4 +5,4 @@ class Blogs(models.Model):
     img_url=models.CharField(max_length=1000)
 
     def __str__(self):
-        return self.title
+        return str(f"id:{self.id} {self.title} ")
