@@ -1,0 +1,2 @@
+[test]
+ubuntu ansible_host=192.168.1.168 ansible_user=taga
