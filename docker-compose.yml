@@ -15,5 +15,6 @@ services:
     user: postgres
     environment:
       - POSTGRES_PASSWORD=django
+      - POSTGRES_USER=postgres
     volumes:
       - $PWD/PGDATA:/var/lib/postgresql/data
