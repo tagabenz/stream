@@ -15,14 +15,10 @@ services:
     user: postgres
     environment:
       - POSTGRES_PASSWORD=django
-      - PGDATA=/var/lib/postgresql/data
+    volumes_from:
+      - pg_data
+
+  pg_data:
+    image: alpine:latest
     volumes:
       - $PWD/PGDATA:/var/lib/postgresql/data
-
-volumes:
-  PGDATA:
-    driver: local
-    driver_opts:
-       type: none
-       o: bind
-       device: $PWD/PGDATA
