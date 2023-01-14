@@ -17,6 +17,6 @@ services:
       - POSTGRES_PASSWORD=django
     volumes:
       - PGDATA:/var/lib/postgresql/data
-      - $PWD/DATABSE:/db
+      - $PWD/DATABASE:/db
 volumes:
   PGDATA:
