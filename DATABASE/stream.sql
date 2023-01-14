@@ -1,9 +1,122 @@
 --
+-- PostgreSQL database cluster dump
+--
+
+SET default_transaction_read_only = off;
+
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+
+--
+-- Roles
+--
+
+CREATE ROLE postgres;
+ALTER ROLE postgres WITH SUPERUSER INHERIT CREATEROLE CREATEDB LOGIN REPLICATION BYPASSRLS PASSWORD 'SCRAM-SHA-256$4096:ylbtNYRynSYhSvhCAnL8NQ==$UPnWHjgD1J+nLu2gohjfyiJVUDptMKi+E9THQVpaLwY=:QPRp83gwydSUYnW7IRaL6tvbpQvMHWk2hSJ2MqDaprA=';
+
+--
+-- User Configurations
+--
+
+
+
+
+
+
+
+
+--
+-- Databases
+--
+
+--
+-- Database "template1" dump
+--
+
+\connect template1
+
+--
 -- PostgreSQL database dump
 --
 
 -- Dumped from database version 15.1 (Debian 15.1-1.pgdg110+1)
 -- Dumped by pg_dump version 15.1 (Debian 15.1-1.pgdg110+1)
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+--
+-- PostgreSQL database dump complete
+--
+
+--
+-- Database "postgres" dump
+--
+
+\connect postgres
+
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 15.1 (Debian 15.1-1.pgdg110+1)
+-- Dumped by pg_dump version 15.1 (Debian 15.1-1.pgdg110+1)
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+--
+-- PostgreSQL database dump complete
+--
+
+--
+-- Database "stream_db" dump
+--
+
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 15.1 (Debian 15.1-1.pgdg110+1)
+-- Dumped by pg_dump version 15.1 (Debian 15.1-1.pgdg110+1)
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+--
+-- Name: stream_db; Type: DATABASE; Schema: -; Owner: postgres
+--
+
+CREATE DATABASE stream_db WITH TEMPLATE = template0 ENCODING = 'UTF8' LOCALE_PROVIDER = libc LOCALE = 'en_US.utf8';
+
+
+ALTER DATABASE stream_db OWNER TO postgres;
+
+\connect stream_db
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -376,7 +489,7 @@ COPY public.auth_permission (id, name, content_type_id, codename) FROM stdin;
 --
 
 COPY public.auth_user (id, password, last_login, is_superuser, username, first_name, last_name, email, is_staff, is_active, date_joined) FROM stdin;
-1	pbkdf2_sha256$390000$3Bg2dkOb5qanbsVPPSrwVR$jC5hIw1TRStOJTbauqfLjEHv29XGL3g4cIgAf+OnhWI=	2023-01-09 10:46:30.64953+00	t	admin				t	t	2023-01-09 10:46:21.233387+00
+1	pbkdf2_sha256$390000$K14jU6bQfyA5PoFZZQOwgG$VdhXpWkd6m8ZcZ5fLvSKmPiRVcXFPlaVIjAYJGaAZi4=	2023-01-14 13:30:15.414733+00	t	admin				t	t	2023-01-14 13:29:18.358569+00
 \.
 
 
@@ -401,7 +514,6 @@ COPY public.auth_user_user_permissions (id, user_id, permission_id) FROM stdin;
 --
 
 COPY public.blog_blogs (id, title, description, img_url) FROM stdin;
-2	Как начать стримить	Текст	https://obsproject.com/assets/images/features/FeatureDocksB.jpg
 \.
 
 
@@ -410,12 +522,6 @@ COPY public.blog_blogs (id, title, description, img_url) FROM stdin;
 --
 
 COPY public.django_admin_log (id, action_time, object_id, object_repr, action_flag, change_message, content_type_id, user_id) FROM stdin;
-1	2023-01-09 10:47:59.923213+00	1	id:1 123 	1	[{"added": {}}]	7	1
-2	2023-01-09 10:48:20.436657+00	1	id:1 123 	3		7	1
-3	2023-01-09 10:53:36.481839+00	2	id:2 Как начать стримить 	1	[{"added": {}}]	7	1
-4	2023-01-09 10:54:18.420878+00	2	id:2 Как начать стримить 	2	[{"changed": {"fields": ["Img url"]}}]	7	1
-5	2023-01-12 14:10:16.895224+00	3	id:3 123 	1	[{"added": {}}]	7	1
-6	2023-01-12 14:10:53.880875+00	3	id:3 123 	3		7	1
 \.
 
 
@@ -439,26 +545,26 @@ COPY public.django_content_type (id, app_label, model) FROM stdin;
 --
 
 COPY public.django_migrations (id, app, name, applied) FROM stdin;
-1	contenttypes	0001_initial	2023-01-09 10:45:59.563552+00
-2	auth	0001_initial	2023-01-09 10:45:59.717027+00
-3	admin	0001_initial	2023-01-09 10:45:59.758761+00
-4	admin	0002_logentry_remove_auto_add	2023-01-09 10:45:59.777349+00
-5	admin	0003_logentry_add_action_flag_choices	2023-01-09 10:45:59.800702+00
-6	contenttypes	0002_remove_content_type_name	2023-01-09 10:45:59.844032+00
-7	auth	0002_alter_permission_name_max_length	2023-01-09 10:45:59.865508+00
-8	auth	0003_alter_user_email_max_length	2023-01-09 10:45:59.883119+00
-9	auth	0004_alter_user_username_opts	2023-01-09 10:45:59.901809+00
-10	auth	0005_alter_user_last_login_null	2023-01-09 10:45:59.918934+00
-11	auth	0006_require_contenttypes_0002	2023-01-09 10:45:59.926205+00
-12	auth	0007_alter_validators_add_error_messages	2023-01-09 10:45:59.944305+00
-13	auth	0008_alter_user_username_max_length	2023-01-09 10:45:59.966518+00
-14	auth	0009_alter_user_last_name_max_length	2023-01-09 10:45:59.984364+00
-15	auth	0010_alter_group_name_max_length	2023-01-09 10:46:00.006009+00
-16	auth	0011_update_proxy_permissions	2023-01-09 10:46:00.028301+00
-17	auth	0012_alter_user_first_name_max_length	2023-01-09 10:46:00.045655+00
-18	sessions	0001_initial	2023-01-09 10:46:00.075641+00
-19	blog	0001_initial	2023-01-09 10:47:39.452559+00
-20	blog	0002_blogs_description_blogs_img_url	2023-01-09 10:52:59.97738+00
+1	contenttypes	0001_initial	2023-01-14 13:28:56.929439+00
+2	auth	0001_initial	2023-01-14 13:28:57.081129+00
+3	admin	0001_initial	2023-01-14 13:28:57.117698+00
+4	admin	0002_logentry_remove_auto_add	2023-01-14 13:28:57.138842+00
+5	admin	0003_logentry_add_action_flag_choices	2023-01-14 13:28:57.16959+00
+6	contenttypes	0002_remove_content_type_name	2023-01-14 13:28:57.203894+00
+7	auth	0002_alter_permission_name_max_length	2023-01-14 13:28:57.224712+00
+8	auth	0003_alter_user_email_max_length	2023-01-14 13:28:57.245254+00
+9	auth	0004_alter_user_username_opts	2023-01-14 13:28:57.264822+00
+10	auth	0005_alter_user_last_login_null	2023-01-14 13:28:57.285482+00
+11	auth	0006_require_contenttypes_0002	2023-01-14 13:28:57.290555+00
+12	auth	0007_alter_validators_add_error_messages	2023-01-14 13:28:57.308681+00
+13	auth	0008_alter_user_username_max_length	2023-01-14 13:28:57.335419+00
+14	auth	0009_alter_user_last_name_max_length	2023-01-14 13:28:57.354288+00
+15	auth	0010_alter_group_name_max_length	2023-01-14 13:28:57.372523+00
+16	auth	0011_update_proxy_permissions	2023-01-14 13:28:57.391608+00
+17	auth	0012_alter_user_first_name_max_length	2023-01-14 13:28:57.411079+00
+18	blog	0001_initial	2023-01-14 13:28:57.431604+00
+19	blog	0002_blogs_description_blogs_img_url	2023-01-14 13:28:57.448171+00
+20	sessions	0001_initial	2023-01-14 13:28:57.479286+00
 \.
 
 
@@ -467,7 +573,7 @@ COPY public.django_migrations (id, app, name, applied) FROM stdin;
 --
 
 COPY public.django_session (session_key, session_data, expire_date) FROM stdin;
-cnmtjdy2fbuk9qaji9x6dh2ltludx28y	.eJxVjEEOwiAQRe_C2pBOoVBcuvcMZJgZpGpoUtqV8e7apAvd_vfef6mI21ri1mSJE6uzAnX63RLSQ-oO-I71Nmua67pMSe-KPmjT15nleTncv4OCrXxrMoGBXQ5owdiBELvgjXFZyHoQ5rEPNlnxjkeTSVyXPFnnAggNPST1_gDrRzgO:1pEpfi:8maJ-n0qVhoDUTIWpl1JV8nq6MULRzpTUkHw9lwNjNg	2023-01-23 10:46:30.655002+00
+len62qs8s806sqdp1w61xbug7ynqrdys	.eJxVjDsOwjAQBe_iGln-rT-U9JzB8q5tHECOFCcV4u4QKQW0b2bei8W0rS1uoyxxyuzMJDv9bpjoUfoO8j3128xp7usyId8VftDBr3Muz8vh_h20NNq3JkDttMkOlQ0eBWolCahSAR-Mqwhe-KBryjbpKsA6FYyRDkuQGkxl7w_ZqTdW:1pGgbv:o75tAphajzJeSFA91F4bdzOuv5gQSgkn-lKDtiRTw3s	2023-01-28 13:30:15.418896+00
 \.
 
 
@@ -517,14 +623,14 @@ SELECT pg_catalog.setval('public.auth_user_user_permissions_id_seq', 1, false);
 -- Name: blog_blogs_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.blog_blogs_id_seq', 3, true);
+SELECT pg_catalog.setval('public.blog_blogs_id_seq', 1, false);
 
 
 --
 -- Name: django_admin_log_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.django_admin_log_id_seq', 6, true);
+SELECT pg_catalog.setval('public.django_admin_log_id_seq', 1, false);
 
 
 --
@@ -850,5 +956,9 @@ ALTER TABLE ONLY public.django_admin_log
 
 --
 -- PostgreSQL database dump complete
+--
+
+--
+-- PostgreSQL database cluster dump complete
 --
 
