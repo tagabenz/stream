@@ -6,7 +6,7 @@ services:
       ENV: DEV
     build: .
     volumes:
-      - $PWD/stream_app:/app
+      - ./stream_app:/app
     ports:
       - 8000:8000
     links:
@@ -19,7 +19,7 @@ services:
       - POSTGRES_PASSWORD=django
     volumes:
       - PGDATA:/var/lib/postgresql/data
-      - $PWD/DATABASE:/db
+      - ./DATABASE:/db
 
 volumes:
   PGDATA:
