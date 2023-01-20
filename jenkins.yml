@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  web:
+    environment:
+      ENV: DEV
+    build: .
+    volumes:
+      - $PWD/stream_app:/app
+    ports:
+      - 8000:8000
+    links:
+      - db
+
+  db:
+    image: postgres:latest
+    user: postgres
+    environment:
+      - POSTGRES_PASSWORD=django
+    volumes:
+      - PGDATA:/var/lib/postgresql/data
+      - $PWD/DATABASE:/db
+
+volumes:
+  PGDATA:
