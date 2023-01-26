@@ -1,13 +1,7 @@
-version: '3.3'
+version: '3.8'
 
 services:
-  proxy:
-    build: ./nginx
-    links:
-      - web
-    ports:
-      - 80:80
-      
+
   web:
     environment:
       ENV: STAGE
@@ -16,6 +10,8 @@ services:
       - 8000:8000
     links:
       - db
+    volumes:
+      - STATIC:/app/stream_app/static
 
   db:
     image: postgres:latest
@@ -25,5 +21,15 @@ services:
     volumes:
       - PGDATA:/var/lib/postgresql/data
 
+  proxy:
+    build: ./nginx
+    links:
+      - web
+    ports:
+      - 80:80
+    volumes:
+      - STATIC:/app/stream_app/static
+
 volumes:
   PGDATA:
+  STATIC:
