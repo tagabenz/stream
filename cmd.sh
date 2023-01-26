@@ -7,6 +7,5 @@ if [ "$ENV" = 'DEV' ]; then
 
 elif [ "$ENV" = 'STAGE' ]; then
   echo "Running Staging Server"
-  # exec uwsgi --http 0.0.0.0:9090 --wsgi-file /app/stream_app/stream_app/wsgi.py --callable application
   gunicorn stream_app.wsgi:application --bind 0.0.0.0:8000
 fi
