@@ -3,7 +3,7 @@ version: '3.3'
 services:
   web:
     environment:
-      ENV: DEV
+      ENV: STAGE
     build: .
     ports:
       - 8000:8000
