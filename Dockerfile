@@ -1,9 +1,12 @@
-FROM python:3-alpine
+FROM python:latest
 
     WORKDIR /app
     COPY . .
+    COPY cmd.sh /
 
     RUN pip install --upgrade pip
     RUN pip install --no-cache-dir -r requirements.txt
 
-    CMD [ "python", "./stream_app/manage.py", "runserver", "0.0.0.0:8000"]
+    WORKDIR /app/stream_app
+    
+    ENTRYPOINT ["/cmd.sh"]

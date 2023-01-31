@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+
+  web:
+    environment:
+      ENV: STAGE
+    build: .
+    ports:
+      - 8000:8000
+    links:
+      - db
+    volumes:
+      - STATIC:/app/stream_app/static
+
+  db:
+    image: postgres:latest
+    user: postgres
+    environment:
+      - POSTGRES_PASSWORD=django
+    volumes:
+      - PGDATA:/var/lib/postgresql/data
+
+  proxy:
+    build: ./nginx
+    links:
+      - web
+    ports:
+      - 80:80
+    volumes:
+      - STATIC:/app/stream_app/static
+
+volumes:
+  PGDATA:
+  STATIC:
