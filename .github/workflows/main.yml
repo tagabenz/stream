@@ -1,8 +1,10 @@
 name: CI
+env:
+  COMPOSE_ARG: "-f prod.yml -p stream"
 
 on:
   push:
-    branches: 
+    branches:
       - main
 
 jobs:
@@ -12,5 +14,6 @@ jobs:
       - name: Get_code
         uses: actions/checkout@v3
       - name: Build_project
-        run: pwd
-        
+        run: docker-compose ${{ env.COMPOSE_ARG }} build --no-cache
+      - name: start_project
+        run: docker-compose ${{ env.COMPOSE_ARG }} up
