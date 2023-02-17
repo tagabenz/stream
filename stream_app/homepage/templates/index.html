@@ -3,11 +3,24 @@
 
 {% block body %}
 
-<!-- Wrapper element for sizing or positioning the player -->
-<div class="player-wrapper">
-  <!-- OvenPlayer will be initialized inside this element. -->
-  <div id="player_id"></div>
-</div>
+<div id="player_id"></div>
+    <!-- Load OvenPlayer via CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/ovenplayer/dist/ovenplayer.js"></script>
 
+    <script>
+
+        // Initialize OvenPlayer
+        const player = OvenPlayer.create('player_id', {
+            sources: [
+                {
+                    label: 'label_for_video',
+                    type : "webrtc",
+                    file : "ws://oven:3333/app/stream",
+                }
+            ]
+        });
+
+        player.play();
+    </script>
 
 {% endblock %}

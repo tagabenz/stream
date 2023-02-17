@@ -12,6 +12,20 @@ services:
     links:
       - db
 
+  oven:
+    image: airensoft/ovenmediaengine:0.15.0
+    ports:
+      - 1935:1935
+      - 4000:4000/udp
+      - 3333:3333
+      - 3334:3334
+      - 3478:3478
+      - 9000:9000
+      - 9999:9999/udp
+    volumes:
+      - $PWD/oven_config:/opt/ovenmediaengine/bin/origin_conf/
+    links:
+      - web
   db:
     image: postgres:latest
     user: postgres
