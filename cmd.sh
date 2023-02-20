@@ -9,5 +9,5 @@ elif [ "$ENV" = 'STAGE' ]; then
   gunicorn stream_app.wsgi:application --bind 0.0.0.0:8000
 elif [ "$ENV" = 'PROD' ]; then
   echo "Running Production Server"
-  gunicorn stream_app.wsgi:application --bind 0.0.0.0:8000  
+  gunicorn stream_app.wsgi:application --bind 0.0.0.0:8000
 fi

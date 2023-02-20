@@ -8,7 +8,7 @@
         <link rel="preload" href="{% static 'fonts/CTCSans-Bold.otf' %}" as="font" />
         <link rel="stylesheet" href="{% static 'css/styles.css' %}" type="text/css">
         <script src="{% static 'jss/content.js' %}" type="text/javascript"></script>
-        <script src="https://cdn.jsdelivr.net/npm/ovenplayer/dist/ovenplayer.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/ovenplayer/dist/ovenplayer.js"></script> -->
     </head>
 
     <body>
@@ -30,7 +30,26 @@
               </div>
             </div>
             <div class="search">
-                <p>поиск</p>
+              <details id="menu">
+                <summary class="btn Header_item menu b_radius">
+                  Начать стрим
+                </summary>
+                <div class="dropdown-page dropdown-menu page_elem">
+                  <h3>Настройка программы для трансляции</h3>
+
+                  <ol class="p0">
+                    <li>Перейдите в настройки вашей программы для трансляции и вставьте туда ссылку (URL) и ключ (KEY) потока.</li>
+                    <ul>
+                      <li>URL: <b></b> </li>
+                      <li>KEY: <b>stream</b> </li>
+                    </ul>
+                    <li>Вернитесь на эту страницу и нажмите кнопку «ЗАПУСК» ниже, чтобы создать плеер.</li>
+                    <li>Запустите трансляцию в вашей программе.</li>
+                    <a href="/player"><button type="button" name="button" class="btn_start Header_item menu b_radius">ЗАПУСК</button></a>
+                  </ol>
+                </div>
+              </details>
+
             </div>
             <div class="user">
                 <a href="#" class="Header_item">войти</a>
