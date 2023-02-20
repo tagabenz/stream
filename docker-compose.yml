@@ -11,6 +11,7 @@ services:
       - 8000:8000
     links:
       - db
+      - oven
 
   oven:
     image: airensoft/ovenmediaengine:0.15.0
@@ -24,8 +25,7 @@ services:
       - 9999:9999/udp
     volumes:
       - $PWD/oven_config:/opt/ovenmediaengine/bin/origin_conf/
-    links:
-      - web
+
   db:
     image: postgres:latest
     user: postgres

@@ -3,23 +3,23 @@
 
 {% block body %}
 
-<!-- <div id="player_id"></div> -->
+<div id="player_id"></div>
     <!-- Load OvenPlayer via CDN -->
-    <!-- <script src="https://cdn.jsdelivr.net/npm/ovenplayer/dist/ovenplayer.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/ovenplayer/dist/ovenplayer.js"></script>
 
-    <!-- <script>
+    <script>
 
         // Initialize OvenPlayer
         const player = OvenPlayer.create('player_id', {
             sources: [
                 {
                     type : "webrtc",
-                    file : "ws://172.20.10.2:3333/app/stream",
+                    file : "ws://stream.online:3333/app/stream",
                 }
             ]
         });
 
         player.play();
-    </script> -->
+    </script>
 
 {% endblock %}
