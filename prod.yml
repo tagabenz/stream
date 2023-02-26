@@ -14,7 +14,7 @@ services:
     volumes:
       - STATIC:/app/stream_app/static
 
-   oven:
+  oven:
     image: airensoft/ovenmediaengine:0.15.0
     ports:
       - 1935:1935
