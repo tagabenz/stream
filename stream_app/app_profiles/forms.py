@@ -1,10 +1,9 @@
 from django import forms
 
+from app_profiles.models import User
 
-class UserForm(forms.Form):
-    login = forms.CharField()
-    password = forms.CharField()
-    first_name = forms.CharField()
-    last_name = forms.CharField()
-    email = forms.EmailField()
-    dob = forms.DateField()
+
+class UserForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields='__all__'

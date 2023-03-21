@@ -3,9 +3,9 @@
 {% block body %}
 
 <h2>Регистрация</h2>
-<form action="/register" method="post"></form>
+<form action="/register/" method="post">
     {% csrf_token %}
     {{ user_form.as_p }}
     <button type="submit">Регистрация</button>
-
+</form>
 {% endblock %}
