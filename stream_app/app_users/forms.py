@@ -1,3 +1,6 @@
 from django import forms
 
-class Users
+
+class AuthForm(forms.Form):
+    username=CharField()
+    password=CharField(widget=forms.PasswordInput)
