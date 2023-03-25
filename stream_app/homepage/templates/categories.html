@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block body %}
+
+<h1>Категории</h1>
+
+<ul>
+    {% for m in menu %}
+    <li>{{ m }}</li>
+    {% endfor %}
+</ul>
+
+{% endblock %}
