@@ -2,8 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponseNotFound
 from django.views.generic import TemplateView
 
-
-menu=['Игры','Общение','Кино']
+from stream_app import settings
 
 
 class Index(TemplateView):
@@ -17,7 +16,14 @@ class Index(TemplateView):
 
 
 def categories(request):
-    return render(request, 'categories.html', {'menu': menu, 'title': 'Категории - Lastream.online'})
+    menu=['Игры','Общение','Кино']
+    context={
+        'menu': menu, 
+        'title': 'Категории - Lastream.online', 
+        'settings': settings.DEBUG
+    }
+
+    return render(request, 'categories.html', context=context)
 
 def about(request):
     return render(request, 'about.html', {'title': 'О нас - Lastream.online'})

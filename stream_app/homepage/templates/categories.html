@@ -1,14 +1,19 @@
 {% extends 'base.html' %}
-{% load static %}
 
 {% block body %}
 
-<h1>Категории</h1>
+{% if settings %}
+    <h1>Категории</h1>
 
-<ul>
+    <ul>
     {% for m in menu %}
-    <li>{{ m }}</li>
+        <li><a href="">{{ m.title }}</a></li>
     {% endfor %}
-</ul>
+    </ul>
+
+{% else %}    
+    <h1 class="position-absolute top-50 start-50 translate-middle">Данный раздел пока в разработке...</h1>
+{% endif %}    
+
 
 {% endblock %}
