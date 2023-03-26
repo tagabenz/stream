@@ -2,22 +2,22 @@
 
 {% block body %}
 
-{% block cat %}
-{% if settings %}
-<div class="px-3 py-2 border-bottom mb-3">
-   <div class="container d-flex flex-wrap justify-content-lg-start ms-5">
-        {% for m in cats %}
-            <button class="btn btn-primary rounded-pill px-3 ms-2" onclick="location.href='{{ m.pk }}';" data-bs-toggle="button">{{ m.name }}</button>
-        {% endfor %}
-   </div>
-</div>
+    {% block cat %}
+    {% if settings %}
+    <div class="px-3 py-2 border-bottom mb-3">
+        <div class="container d-flex flex-wrap justify-content-lg-start ms-5">
+            {% for m in cats %}
+                <button class="btn btn-primary rounded-pill px-3 ms-2" onclick="location.href='{{ m.get_absolute_url }}';" data-bs-toggle="button">{{ m.name }}</button>
+            {% endfor %}
+        </div>
+    </div>
 
     {% else %}    
     <h2 class="position-absolute top-50 start-50 translate-middle">Данный раздел пока в разработке...</h2>
-{% endif %}    
-{% endblock cat %}
+    {% endif %}    
+    {% endblock cat %}
 
-{% block content %}
-{% endblock content %}
+    {% block content %}
+    {% endblock content %}
 
 {% endblock %}

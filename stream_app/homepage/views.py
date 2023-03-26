@@ -6,9 +6,6 @@ from stream_app import settings
 from .models import Categories
 
 
-cats=Categories.objects.all()
-
-
 class Index(TemplateView):
     template_name='index.html'
 
@@ -20,7 +17,7 @@ class Index(TemplateView):
 
 
 def categories(request):
-    
+    cats=Categories.objects.all()
     context={
         'cats': cats, 
         'title': 'Категории - Lastream.online', 
@@ -30,7 +27,7 @@ def categories(request):
     return render(request, 'categories.html', context=context)
 
 def show_categories(request, pk):
-    
+    cats=Categories.objects.all()
     context={
         'cat_id': pk,
         'cats': cats, 
