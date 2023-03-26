@@ -1,9 +1,8 @@
 {% extends 'base.html' %}
 
 {% block body %}
-
+<h1 class="text-center">Категории</h1>
 {% if settings %}
-    <h1 class="text-center">Категории</h1>
 
     <ul>
     {% for m in menu %}
@@ -12,7 +11,7 @@
     </ul>
 
     {% else %}    
-    <h1 class="position-absolute top-50 start-50 translate-middle">Данный раздел пока в разработке...</h1>
+    <h2 class="position-absolute top-50 start-50 translate-middle">Данный раздел пока в разработке...</h2>
 {% endif %}    
 
 {% endblock %}
