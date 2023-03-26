@@ -3,6 +3,10 @@ from django.http import HttpResponseNotFound
 from django.views.generic import TemplateView
 
 from stream_app import settings
+from .models import Categories
+
+
+cats=Categories.objects.all()
 
 
 class Index(TemplateView):
@@ -16,14 +20,25 @@ class Index(TemplateView):
 
 
 def categories(request):
-    menu=['Игры','Общение','Кино']
+    
     context={
-        'menu': menu, 
+        'cats': cats, 
         'title': 'Категории - Lastream.online', 
-        'settings': settings.DEBUG
+        'settings': settings.DEBUG,
     }
     
     return render(request, 'categories.html', context=context)
+
+def show_categories(request, pk):
+    
+    context={
+        'cat_id': pk,
+        'cats': cats, 
+        'title': 'Категории - Lastream.online', 
+        'settings': settings.DEBUG,
+    }
+    
+    return render(request, 'show_cat.html', context=context)
 
 def about(request):
     return render(request, 'about.html', {'title': 'О нас - Lastream.online'})

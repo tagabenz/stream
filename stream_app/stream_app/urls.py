@@ -11,7 +11,7 @@ from app_profiles.views import UserFormView
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('homepage.urls')),
-    path('blog/', BlogsListView.as_view()),
+    path('blog/', BlogsListView.as_view(), name='blog'),
     path('blog/<int:pk>/', BlogsDetailView.as_view()),
     path('register/', UserFormView.as_view()),
 ]
