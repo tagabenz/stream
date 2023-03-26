@@ -22,7 +22,7 @@ def categories(request):
         'title': 'Категории - Lastream.online', 
         'settings': settings.DEBUG
     }
-
+    
     return render(request, 'categories.html', context=context)
 
 def about(request):

@@ -3,7 +3,7 @@
 {% block body %}
 
 {% if settings %}
-    <h1>Категории</h1>
+    <h1 class="text-center">Категории</h1>
 
     <ul>
     {% for m in menu %}
@@ -11,9 +11,8 @@
     {% endfor %}
     </ul>
 
-{% else %}    
+    {% else %}    
     <h1 class="position-absolute top-50 start-50 translate-middle">Данный раздел пока в разработке...</h1>
 {% endif %}    
-
 
 {% endblock %}

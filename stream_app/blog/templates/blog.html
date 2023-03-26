@@ -1,7 +1,9 @@
 {% extends 'base.html' %}
 {% load static %}
+
 {% block body %}
 <h1 class="text-center">Блог</h1>
+
 {% if blogs_list %}
 <section class="py-5 container album">
   <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
@@ -18,12 +20,11 @@
       </article>
     </a>
   {% endfor %}
-
   </div>
 </section>
 
 {% else %}
-<h1 class="text-center">Здесь пока ничего нет...</h1>
+<h1 class="position-absolute top-50 start-50 translate-middle">Здесь пока ничего нет...</h1>
 {% endif %}
 
 {% endblock %}
