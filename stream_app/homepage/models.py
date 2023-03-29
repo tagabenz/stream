@@ -2,12 +2,31 @@ from django.db import models
 from django.urls import reverse
 
 
-# Create your models here.
+
+class Menu(models.Model):
+    name = models.CharField(max_length=100)
+    url = models.CharField(max_length=200,blank=True)
+
+    def __str__(self) -> str:
+        return self.name
+    
+    class Meta():
+        verbose_name="Меню"
+        verbose_name_plural="Меню"
+        ordering=['id']
+
+
 class Categories(models.Model):
     name = models.CharField(max_length=100,db_index=True)
-
-    # def __str__(self):
-    #     return self.name
+    menu = models.ForeignKey('Menu', on_delete=models.PROTECT, null=True)
     
     def get_absolute_url(self):
         return reverse('cat_show',kwargs={'pk': self.pk})
+    
+    def __str__(self) -> str:
+        return self.name
+    
+    class Meta():
+        verbose_name="Категории"
+        verbose_name_plural="Категории"
+        ordering=['id']

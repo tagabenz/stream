@@ -1,19 +1,16 @@
 from django.shortcuts import render
 from django.http import HttpResponseNotFound
-from django.views.generic import TemplateView
 
 from stream_app import settings
-from .models import Categories
+from .models import Categories, Menu
 
 
-class Index(TemplateView):
-    template_name='index.html'
+def index(request):
+    context={
+        'title': 'Lastream.online', 
+    }
 
-    def get_context_data(self,**kwargs):
-        context=super().get_context_data(**kwargs)
-        context['title']='Lastream.online'
-
-        return context
+    return render(request, 'index.html', context=context)
 
 
 def categories(request):
@@ -26,6 +23,7 @@ def categories(request):
     
     return render(request, 'categories.html', context=context)
 
+
 def show_categories(request, pk):
     cats=Categories.objects.all()
     context={
@@ -37,8 +35,10 @@ def show_categories(request, pk):
     
     return render(request, 'show_cat.html', context=context)
 
+
 def about(request):
     return render(request, 'about.html', {'title': 'О нас - Lastream.online'})
+
 
 def pageNotFound(request, exception):
     return HttpResponseNotFound('<h1>Страница не найдена</h1>')
