@@ -1,5 +1,5 @@
 from django import template
-from homepage.models import *
+from menu.models import *
 
 register=template.Library()
 
