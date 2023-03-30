@@ -23,10 +23,7 @@
               </a>
 
               <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                {% get_menu as menu %}
-                {% for m in menu %}
-                <li><a href="{{ m.url }}" class="header-item nav-link px-2 text-white">{{ m }}</a></li>
-                {% endfor %}
+                {% show_menu 'id' cat_selecteed %}
               </ul>
 
               <!-- <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3 align-items-center" role="search">
