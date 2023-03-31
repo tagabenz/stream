@@ -5,7 +5,7 @@ from django.urls import reverse
 class Menu(models.Model):
     name = models.CharField(max_length=100)
     url = models.CharField(max_length=200,blank=True)
-
+    
     def __str__(self) -> str:
         return self.name
     
@@ -29,3 +29,13 @@ class Categories(models.Model):
         verbose_name="Категории"
         verbose_name_plural="Категории"
         ordering=['id']
+
+
+class MenuItem(models.Model):
+    name=models.CharField(max_length=50)
+    parent=models.ForeignKey('self',on_delete=models.CASCADE,null=True,blank=True,related_name='children')
+
+    def __str__(self) -> str:
+        return self.name
+    
+    

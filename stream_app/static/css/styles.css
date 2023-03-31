@@ -9,6 +9,11 @@ header {
     font-size: 17px;
 }
 
+.active{
+    color: rgb(128,174,255)!important;
+    text-decoration: underline;
+}
+
 .header-item:hover{
     color: rgb(128,174,255)!important;
 }

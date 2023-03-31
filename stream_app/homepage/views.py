@@ -4,7 +4,7 @@ from django.http import HttpResponseNotFound
 
 def index(request):
     context={
-        'title': 'Lastream.online', 
+        'title': 'Lastream.online',
     }
 
     return render(request, 'index.html', context=context)
