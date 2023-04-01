@@ -17,10 +17,10 @@ class Menu(models.Model):
 
 class Categories(models.Model):
     name = models.CharField(max_length=100,db_index=True)
-    menu = models.ForeignKey('Menu', on_delete=models.PROTECT, null=True)
-    
+    slug = models.SlugField(max_length=255,unique=True,db_index=True, verbose_name='URL')
+
     def get_absolute_url(self):
-        return reverse('cat_show',kwargs={'pk': self.pk})
+        return reverse('cat_show',kwargs={'post_slug': self.slug})
     
     def __str__(self) -> str:
         return self.name
@@ -29,13 +29,4 @@ class Categories(models.Model):
         verbose_name="Категории"
         verbose_name_plural="Категории"
         ordering=['id']
-
-
-class MenuItem(models.Model):
-    name=models.CharField(max_length=50)
-    parent=models.ForeignKey('self',on_delete=models.CASCADE,null=True,blank=True,related_name='children')
-
-    def __str__(self) -> str:
-        return self.name
-    
     

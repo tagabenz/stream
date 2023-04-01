@@ -23,7 +23,7 @@
               </a>
 
               <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                {% show_menu 'id' request.path %}
+                {% show_menu 'id' request.get_full_path %} 
               </ul>
 
               <!-- <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3 align-items-center" role="search">

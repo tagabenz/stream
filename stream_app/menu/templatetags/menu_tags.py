@@ -10,11 +10,4 @@ def show_menu(sort=None,request_path=None):
         menu=Menu.objects.all()
     else:
         menu=Menu.objects.order_by(sort)    
-    return {"menu":menu,'request_path':request_path[:-1]}
-
-
-@register.inclusion_tag("menu.html")
-def draw_menu(menu_items):
-    items=menu_items.filter(parent__isnull=True)
-
-    
+    return {"menu":menu,'request_path':request_path}

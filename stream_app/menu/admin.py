@@ -8,9 +8,5 @@ class MenuAdmin(admin.ModelAdmin):
 
 @admin.register(Categories)
 class CategoriesAdmin(admin.ModelAdmin):
-    list_display=('id','name')
-
-
-@admin.register(MenuItem)
-class Menu(admin.ModelAdmin):
-    pass
+    list_display=('id','name','slug')
+    prepopulated_fields= {"slug":("name",)}
