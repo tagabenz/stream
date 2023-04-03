@@ -3,8 +3,11 @@
     src : url('../fonts/CTCSans-ExtraBold.otf');
 }
 
-header {
+* {
     font-family: "CTCSans";
+}
+
+header {
     letter-spacing: 0.03rem;
     font-size: 17px;
 }
