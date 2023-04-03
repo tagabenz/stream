@@ -16,7 +16,7 @@ urlpatterns = [
     path('blog/', BlogsListView.as_view(), name='blog'),
     path('blog/<int:pk>/', BlogsDetailView.as_view()),
     path('login', login_view, name='login'),
-    path('register/', UserFormView.as_view()),
+    path('register/', include('app_profiles.urls')),
 ]
 
 if settings.DEBUG:

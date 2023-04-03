@@ -7,14 +7,20 @@
     <div class="px-3 py-2 border-bottom mb-3">
         <div class="container d-flex flex-wrap justify-content-lg-start ms-5">
             {% for m in cats %}
-            
-                <button class="btn btn-outline-dark rounded-pill px-3 ms-2" onclick="location.href='{{ m.get_absolute_url }}';" data-bs-toggle="button">
-                    {% if m.img %}
-                    <img class=""src="{{ m.img.url }}" />
-                    {% endif %}
-                    {{ m.name }}
-                </button>
-    
+                {% if m.slug in  request.get_full_path %}
+                    <button class="btn btn-dark rounded-pill px-3 ms-2" onclick="location.href='{{ m.get_absolute_url }}';" data-bs-toggle="button">
+                        {% if m.img %}
+                        <img class=""src="{{ m.img.url }}" />
+                        {% endif %}
+                        {{ m.name }}
+                    </button>
+                {% else %}
+                    <button class="btn btn-outline-dark rounded-pill px-3 ms-2" onclick="location.href='{{ m.get_absolute_url }}';" data-bs-toggle="button">
+                        {% if m.img %}
+                        <img class=""src="{{ m.img.url }}" />
+                        {% endif %}
+                        {{ m.name }}
+                {% endif %}        
             {% endfor %}      
         </div>
     </div>
