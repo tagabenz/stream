@@ -1,19 +1,28 @@
 from django.shortcuts import render
+from django.views import View
 
 from app_users.forms import AuthForm
 
 
-def login_view(request):
-    if request.method == "POST":
-        form=AuthForm(request.POST)
-        if form.is_valid():
-            print(form.cleaned_data)
-    else:
+class LoginView(View):
+
+    def get(self,request):
         form=AuthForm()
-    
-    context={
+        context={
         'form': form,
         'title' : "Вход - Lastream.online",
-    }
+        }
 
-    return render(request,'login.html',context=context)
+        return render(request,'login.html',context=context)
+
+    def post(self,request):
+        form=AuthForm(request.POST)
+        context={
+        'form': form,
+        'title' : "Вход - Lastream.online",
+        }
+
+        if form.is_valid():
+            print(form.cleaned_data)
+
+        return render(request,'login.html',context=context)   
