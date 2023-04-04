@@ -2,6 +2,6 @@
     {% if m.url in request_path %}
         <li><a href="{{ m.url }}" class="nav-link px-2 active">{{ m }}</a></li>
     {% else %}
-        <li><a href="{{ m.url }}" class="header-item nav-link px-2 text-white">{{ m }}</a></li>
+        <li><a href="{{ m.url }}" class="focus-item nav-link px-2 text-white">{{ m }}</a></li>
     {% endif %}
 {% endfor %}

@@ -4,9 +4,16 @@ from app_users.forms import AuthForm
 
 
 def login_view(request):
-    auth_form=AuthForm()
+    if request.method == "POST":
+        form=AuthForm(request.POST)
+        if form.is_valid():
+            print(form.cleaned_data)
+    else:
+        form=AuthForm()
+    
     context={
-        'form': auth_form
+        'form': form,
+        'title' : "Вход - Lastream.online",
     }
 
     return render(request,'login.html',context=context)

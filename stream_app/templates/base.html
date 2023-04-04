@@ -15,7 +15,7 @@
     </head>
 
     <body class="bg-light">
-        <header class="p-1 text-bg-dark text-uppercase">
+        <header class="p-1 text-bg-dark text-uppercase font-ctc">
           <div class="container-fluid">
             <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
               <a href="{% url 'home' %}" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
@@ -31,8 +31,8 @@
               </form> -->
 
               <div class="text-end">
-                <button type="button" class="btn btn-warning text-uppercase">Войти</button>
-                <button type="button" class="btn btn-light" onclick="location.href='{% url 'register' %}';">Регистрация</button>
+                <button type="button" class="btn btn-warning text-uppercase" onclick="location.href='{% url 'login' %}';">Войти</button>
+                <button type="button" class="btn btn-light" onclick="location.href='{% url 'registration' %}';">Регистрация</button>
               </div>
             </div>
           </div>

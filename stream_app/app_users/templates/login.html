@@ -2,11 +2,36 @@
 {% load static %}
 {% block body %}
 
-<h1>Страница входа</h1>
-<form method="post">
+<!-- <div class="text-center">
+    <main class="form-signin w-100 m-auto">
+        <form action="{% url 'login' %}" method="post">
+            {% csrf_token %}
+            <img class="mb-2" src="{% static 'img/logo.png' %}">
+            <h1 class="h3 mb-3 fw-normal font-ctc">Войти в Lastream</h1>
+            
+            <div class="form-floating">
+                <input type="text" class="form-control" id="{{ form.username.id_for_label }}" placeholder="Логин">
+                <label for="{{ form.username.id_for_label }}">{{ form.username.label }}</label>
+            </div>
+            <div class="form-floating">
+                <input type="password" class="form-control" id="floatingPassword" placeholder="Пароль">
+                <label for="{{ form.password.id_for_label }}">{{ form.password.label }}</label>
+            </div>
+        
+            <div class="checkbox mb-3">
+                <label>
+                <input type="checkbox" value="remember-me"> Запомнить
+                </label>
+            </div>
+            <button class="w-100 btn btn-lg btn-dark text-uppercase font-ctc focus-item" type="submit">Войти</button>
+            <p class="mt-5 mb-3 text-muted">&copy; 2023</p>
+        </form>
+      </main>
+</div> -->
+
+<form action="{% url 'login' %}" method="post">
     {% csrf_token %}
     {{ form.as_p }}
     <button type="submit">Войти</button>
 </form>
-
 {% endblock %}
