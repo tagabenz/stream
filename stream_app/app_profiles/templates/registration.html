@@ -2,19 +2,21 @@
 {% load static %}
 
 {% block body %}
-<div class="container" style="max-width: 600px;">
+<div class="container" style="max-width: 400px;">
     <main class="p-3 w-100 m-auto">
         <div class="text-center">
             <img class="mb-2" src="{% static 'img/logo.png' %}">
             <h1 class="h3 mb-3 fw-normal font-ctc">Регистрация в Lastream</h1>
         </div>
+
         <form action="{% url 'registration' %}" method="post">
             {% csrf_token %}
             {% for f in user_form %}
 
-                <div class="col mb-3">
-                    <label for="{{ f.id_for_label }}" class="form-label font-ctc">{{ f.label }}</label>
+                <div class="form-floating mb-2">
                     {{ f }}
+                    <label for="{{ f.id_for_label }}">{{ f.label }}</label>
+                    
                     {{ f.errors }}
                 </div>
 

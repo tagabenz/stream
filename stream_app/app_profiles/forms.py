@@ -12,7 +12,7 @@ class UserForm(forms.ModelForm):
         fields='__all__'
         widgets = {}
         for m in User._meta.get_fields():
-            widgets[m.name] = forms.TextInput(attrs={'class': 'form-control'})
+            widgets[m.name] = forms.TextInput(attrs={'class': 'form-control', 'placeholder': "Логин",})
             
     def clean_login(self):
         login=self.cleaned_data['login']
