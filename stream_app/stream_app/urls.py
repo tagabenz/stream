@@ -15,7 +15,7 @@ urlpatterns = [
     path('categories/', include('menu.urls')),
     path('blog/', BlogsListView.as_view(), name='blog'),
     path('blog/<int:pk>/', BlogsDetailView.as_view()),
-    path('login', LoginView.as_view(), name='login'),
+    path('login/', LoginView.as_view(), name='login'),
     path('registration/', include('app_profiles.urls')),
 ]
 

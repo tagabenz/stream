@@ -3,5 +3,4 @@ from .models import *
 
 @admin.register(User)
 class UserAdmin(admin.ModelAdmin):
-    # list_display=('id','name','url')
-    pass
+    list_display=('login',)
