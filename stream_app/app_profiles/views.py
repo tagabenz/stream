@@ -8,7 +8,6 @@ from app_profiles.models import User
 
 class UserFormView(View):
     
-    
     def get(self, request):
         user_form=UserForm()
         context={
@@ -29,4 +28,3 @@ class UserFormView(View):
             return HttpResponseRedirect('/')
         
         return render(request, 'registration.html', context={'user_form': user_form})    
-

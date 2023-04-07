@@ -9,4 +9,6 @@ class User(models.Model):
     email = models.EmailField(verbose_name='Email')
     dob = models.DateField(verbose_name='Дата рождения')
 
-
+    class Meta():
+        verbose_name="Пользователи"
+        verbose_name_plural="Пользователи"
