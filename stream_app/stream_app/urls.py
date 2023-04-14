@@ -5,8 +5,7 @@ from django.conf.urls.static import static
 from stream_app import settings
 from homepage.views import pageNotFound
 from blog.views import BlogsListView, BlogsDetailView
-from app_profiles.views import UserFormView
-from app_users.views import LoginView
+from app_users.views import LoginView, UserRegistration
 
 
 urlpatterns = [
@@ -16,7 +15,7 @@ urlpatterns = [
     path('blog/', BlogsListView.as_view(), name='blog'),
     path('blog/<int:pk>/', BlogsDetailView.as_view()),
     path('login/', LoginView.as_view(), name='login'),
-    path('registration/', include('app_profiles.urls')),
+    path('registration/', UserRegistration.as_view(), name='registration'),
 ]
 
 if settings.DEBUG:

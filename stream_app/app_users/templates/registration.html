@@ -11,19 +11,16 @@
 
         <form action="{% url 'registration' %}" method="post">
             {% csrf_token %}
-            {% for f in user_form %}
+            {% for f in form %}
 
                 <div class="form-floating mb-2">
                     {{ f }}
                     <label for="{{ f.id_for_label }}">{{ f.label }}</label>
-                    
                     {{ f.errors }}
                 </div>
 
             {% endfor %}
-
             <button type="submit" class="w-100 btn btn-lg btn-dark text-uppercase focus-item font-ctc">Зарегистрироваться</button>
-
         </form>
       </main>
 </div>

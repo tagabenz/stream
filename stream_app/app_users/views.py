@@ -1,7 +1,9 @@
 from django.shortcuts import render
 from django.views import View
+from django.urls import reverse_lazy
+from django.views.generic import CreateView
 
-from app_users.forms import AuthForm
+from app_users.forms import *
 
 
 class LoginView(View):
@@ -26,3 +28,9 @@ class LoginView(View):
             print(form.cleaned_data)
 
         return render(request,'login.html',context=context)   
+    
+    
+class UserRegistration(CreateView):
+    form_class=UserForm
+    template_name='registration.html'
+    success_url = reverse_lazy('login')
