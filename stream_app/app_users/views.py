@@ -1,36 +1,25 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views import View
 from django.urls import reverse_lazy
 from django.views.generic import CreateView
+from django.contrib.auth import logout
+from django.contrib.auth.views import LoginView
 
 from app_users.forms import *
 
 
-class LoginView(View):
-
-    def get(self,request):
-        form=AuthForm()
-        context={
-        'form': form,
-        'title' : "Вход - Lastream.online",
-        }
-
-        return render(request,'login.html',context=context)
-
-    def post(self,request):
-        form=AuthForm(request.POST)
-        context={
-        'form': form,
-        'title' : "Вход - Lastream.online",
-        }
-
-        if form.is_valid():
-            print(form.cleaned_data)
-
-        return render(request,'login.html',context=context)   
+class LoginView(LoginView):
+    form_class=AuthForm
+    template_name='login.html'
     
     
 class UserRegistration(CreateView):
     form_class=UserForm
     template_name='registration.html'
     success_url = reverse_lazy('login')
+
+
+def logout_user(request):
+    logout(request)
+    
+    return redirect ('home')    

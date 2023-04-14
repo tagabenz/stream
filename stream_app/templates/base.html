@@ -31,9 +31,14 @@
               </form> -->
 
               <div class="text-end">
-                <button type="button" class="btn btn-warning text-uppercase" onclick="location.href='{% url 'login' %}';">Войти</button>
-                <button type="button" class="btn btn-light text-uppercase" onclick="location.href='{% url 'registration' %}';">Регистрация</button>
+                {% if request.user.is_authenticated %}
+                  <h2>{{ user.username }}</h2> <a href="{% url 'logout' %}">Выйти</a>
+                {% else %}
+                  <button type="button" class="btn btn-warning text-uppercase" onclick="location.href='{% url 'login' %}';">Войти</button>
+                  <button type="button" class="btn btn-light text-uppercase" onclick="location.href='{% url 'registration' %}';">Регистрация</button>
+                {% endif %}
               </div>
+
             </div>
           </div>
         </header>

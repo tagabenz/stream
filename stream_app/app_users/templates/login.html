@@ -16,7 +16,7 @@
                 {{ form.password }}
                 <label for="{{ form.password.id_for_label }}">{{ form.password.label }}</label>
             </div>
-        
+            <div class="text-danger">{{ form.non_field_errors }}</div>
             <div class="checkbox mb-3">
                 <label>
                 <input type="checkbox" value="remember-me"> Запомнить

@@ -16,7 +16,7 @@
                 <div class="form-floating mb-2">
                     {{ f }}
                     <label for="{{ f.id_for_label }}">{{ f.label }}</label>
-                    {{ f.errors }}
+                    <div class="text-danger">{{ f.errors }}</div>
                 </div>
 
             {% endfor %}
