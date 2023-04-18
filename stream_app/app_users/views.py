@@ -1,5 +1,4 @@
 from django.shortcuts import render, redirect
-from django.views import View
 from django.urls import reverse_lazy
 from django.views.generic import CreateView
 from django.contrib.auth import logout
@@ -18,6 +17,7 @@ class LoginView(LoginView):
 
         return context
     
+
 class UserRegistration(CreateView):
     form_class=UserForm
     template_name='registration.html'
@@ -28,6 +28,7 @@ class UserRegistration(CreateView):
         context['title']='Регистрация - Lastream.online'
 
         return context
+
 
 def logout_user(request):
     logout(request)
