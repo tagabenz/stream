@@ -129,7 +129,7 @@
 			</TLS> -->
 		</Host>
 		<API>
-			<AccessToken>tagabenz:1q2w3e4r</AccessToken>
+			<AccessToken>ome-access-token</AccessToken>
 			<CrossDomains>
 				<Url>*.airensoft.com</Url>
 				<Url>http://*.sub-domain.airensoft.com</Url>
