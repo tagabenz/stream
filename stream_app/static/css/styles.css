@@ -3,8 +3,17 @@
     src : url('../fonts/CTCSans-ExtraBold.otf');
 }
 
+@font-face {
+    font-family: "CTCSansBold";
+    src : url('../fonts/CTCSans-Bold.otf');
+}
+
 .font-ctc {
     font-family: "CTCSans";
+}
+
+.font-ctc-bold {
+    font-family: "CTCSansBold";
 }
 
 header {
