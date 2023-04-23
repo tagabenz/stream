@@ -1,10 +1,13 @@
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
-from django.views.generic import CreateView
+from django.views import View
+from django.views.generic import CreateView, UpdateView 
 from django.contrib.auth import logout
 from django.contrib.auth.views import LoginView
+from django.contrib.auth.mixins import LoginRequiredMixin
 
-from app_users.forms import *
+from .forms import *
+from .models import Users
 
 
 class LoginView(LoginView):
@@ -28,6 +31,22 @@ class UserRegistration(CreateView):
         context['title']='Регистрация - Lastream.online'
 
         return context
+
+
+class UserProfile(LoginRequiredMixin, View):
+    # redirect_field_name='/login'
+
+    def get(self, request):
+        user_form = UserEditForm(instance=request.user)
+        return render(request,'profile.html', context={'user_form': user_form,})
+    
+    def post(self, request):
+        user_form = UserEditForm(request.POST, instance=request.user)
+
+        if user_form.is_valid():
+            request.user.save()
+
+        return render(request,'profile.html', context={'user_form': user_form,})   
 
 
 def logout_user(request):

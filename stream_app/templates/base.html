@@ -16,7 +16,7 @@
     </head>
 
     <body class="bg-light">
-        <header class="p-1 text-bg-dark text-uppercase font-ctc">
+        <header class="p-1 text-bg-dark font-ctc">
           <div class="container-fluid">
             <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
               <a href="{% url 'home' %}" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
@@ -33,9 +33,13 @@
 
               
               {% if request.user.is_authenticated %}
-              <div class="dropdown text-end">
+              <div class="dropdown">
                 <a href="#" class="d-block link-light text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                  <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" class="rounded-circle">
+                  {% if user_form.image %}
+
+                  {% else %}
+                  <img src="{% static 'img/login_img.png' %}" alt="mdo" width="32" height="32" class="rounded-circle">
+                  {% endif %}
                 </a>
                 <ul class="dropdown-menu shadow" data-bs-theme="dark">
                   <li><a class="dropdown-item text-white focus-item font-ctc-bold text-capitalize" href="{% url 'profile' %}">Профиль</a></li>

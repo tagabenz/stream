@@ -1,5 +1,5 @@
 from django import forms
-from django.contrib.auth.forms import UserCreationForm,AuthenticationForm
+from django.contrib.auth.forms import UserCreationForm ,AuthenticationForm, UserChangeForm
 
 from .models import Users
 
@@ -24,3 +24,19 @@ class UserForm(UserCreationForm):
         widgets={
             'gender': forms.Select(attrs={'class': 'form-select', 'placeholder': "Пол",}),
         }
+
+
+class UserEditForm(UserChangeForm):
+    password = None
+    username=forms.CharField(min_length='3', max_length='20', label="Логин", widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': "Логин"}))
+    email=forms.EmailField(widget=forms.EmailInput(attrs={'class': 'form-control','readonly': ''}))
+    first_name=forms.CharField(min_length='3', max_length='20', label="Имя", widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': "Имя",}))
+    last_name=forms.CharField(min_length='3', max_length='20', label="Фамилия", widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': "Фамилия",}))
+    dob=forms.DateField(label="Дата рождения", widget=forms.DateInput(attrs={'class': 'form-control', 'placeholder': "Дата рождения",}))
+
+    class Meta():
+        model=Users
+        fields=('username','email','first_name','last_name','gender','dob')
+        widgets={
+                'gender': forms.Select(attrs={'class': 'form-select', 'placeholder': "Пол",}),
+            }

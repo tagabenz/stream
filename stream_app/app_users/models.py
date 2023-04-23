@@ -10,3 +10,5 @@ class Users(AbstractUser):
 
     gender = models.CharField(max_length=1,choices=GENDERS,verbose_name='Пол',default='Мужской')
     dob = models.DateField(null=True, verbose_name='Дата рождения')
+    email=models.EmailField(unique=True)
+    image=models.ImageField(null=True)
