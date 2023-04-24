@@ -9,7 +9,7 @@
             <h1>Профиль пользователя</h1>
         </div>
 
-        <form action="" method="post">
+        <form action="" method="post" enctype="multipart/form-data">
         {% csrf_token %}
             
             <div class="row g-5">
@@ -17,14 +17,17 @@
                     <h4 class="d-flex justify-content-center mb-3">
                         <span class="text-secondary">Изображение профиля</span>
                     </h4>
-                    {% if user_form.image %}
-
+                    {% if user.image %}
+                    <img src="{{ user.image.url }}" alt="" class="img-thumbnail rounded-circle d-block mx-auto" style="width: 200px; height: 200px;">
                     {% else %}
                     <img src="{% static 'img/login_img.png' %}" alt="" class="img-thumbnail rounded-circle d-block mx-auto" style="width: 200px; height: 200px;">
                     {% endif %}
-                    <div class="d-grid gap-2 col-6 mx-auto">
-                    <button type="submit" class="w-50 my-4 btn btn-outline-secondary btn-sm text-uppercase focus-item font-ctc mx-auto">Выбрать</button>
-                    </div>  
+                    
+                    <div class="input-group my-4">
+                        {{ user_form.image }}
+                        <button class="btn btn-outline-secondary btn-sm text-uppercase focus-item font-ctc" type="submit" id="inputGroupFileAddon04">Применить</button> 
+                    </div>
+                     
                 </div>
                 
 

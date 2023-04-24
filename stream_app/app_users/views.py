@@ -41,7 +41,7 @@ class UserProfile(LoginRequiredMixin, View):
         return render(request,'profile.html', context={'user_form': user_form,})
     
     def post(self, request):
-        user_form = UserEditForm(request.POST, instance=request.user)
+        user_form = UserEditForm(request.POST, request.FILES, instance=request.user)
 
         if user_form.is_valid():
             request.user.save()

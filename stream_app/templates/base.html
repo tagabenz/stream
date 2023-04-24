@@ -35,10 +35,10 @@
               {% if request.user.is_authenticated %}
               <div class="dropdown">
                 <a href="#" class="d-block link-light text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                  {% if user_form.image %}
-
+                  {% if user.image %}
+                  <img src="{{ user.image.url }}" alt="" width="32" height="32" class="rounded-circle">
                   {% else %}
-                  <img src="{% static 'img/login_img.png' %}" alt="mdo" width="32" height="32" class="rounded-circle">
+                  <img src="{% static 'img/login_img.png' %}" alt="" width="32" height="32" class="rounded-circle">
                   {% endif %}
                 </a>
                 <ul class="dropdown-menu shadow" data-bs-theme="dark">

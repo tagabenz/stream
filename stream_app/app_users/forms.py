@@ -33,10 +33,11 @@ class UserEditForm(UserChangeForm):
     first_name=forms.CharField(min_length='3', max_length='20', label="Имя", widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': "Имя",}))
     last_name=forms.CharField(min_length='3', max_length='20', label="Фамилия", widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': "Фамилия",}))
     dob=forms.DateField(label="Дата рождения", widget=forms.DateInput(attrs={'class': 'form-control', 'placeholder': "Дата рождения",}))
+    image=forms.ImageField(widget=forms.FileInput(attrs={'class': 'form-control',"id":"inputGroupFile04", "aria-describedby":"inputGroupFileAddon04", "aria-label":"Upload"}))
 
     class Meta():
         model=Users
-        fields=('username','email','first_name','last_name','gender','dob')
+        fields=('username','email','first_name','last_name','gender','dob','image')
         widgets={
                 'gender': forms.Select(attrs={'class': 'form-select', 'placeholder': "Пол",}),
             }
