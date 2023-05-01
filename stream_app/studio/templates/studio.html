@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block body %}
+
+<div class="py-4 text-center">
+    <h1 class="mb-0 font-ctc">Студия</h1>
+</div>
+
+<main class="container mx-0">
+    <div class="row py-3 text-bg-dark">
+        <div class="col-lg-4">
+            <div id="player_id">
+                <!-- Load OvenPlayer via CDN -->
+                <script src="https://cdn.jsdelivr.net/npm/ovenplayer/dist/ovenplayer.js"></script>
+            
+                <script>
+                    // Initialize OvenPlayer
+                    const player = OvenPlayer.create('player_id', {
+                        sources: [
+                            {
+                                type : "webrtc",
+                                file : "ws://192.168.1.243:3333/app/stream",
+                            }
+                        ]
+                    });
+            
+                    player.play();
+                </script>
+            </div>
+        </div>
+        <div class="col-lg-8"></div>
+    </div>
+</main>
+
+{% endblock %}

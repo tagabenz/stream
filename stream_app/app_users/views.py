@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views import View
-from django.views.generic import CreateView, UpdateView 
+from django.views.generic import CreateView
 from django.contrib.auth import logout
 from django.contrib.auth.views import LoginView
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -38,7 +38,7 @@ class UserProfile(LoginRequiredMixin, View):
 
     def get(self, request):
         user_form = UserEditForm(instance=request.user)
-        return render(request,'profile.html', context={'user_form': user_form,})
+        return render(request,'profile.html', context={'user_form': user_form,'title':'Профиль - Lastream.online'})
     
     def post(self, request):
         user_form = UserEditForm(request.POST, request.FILES, instance=request.user)
@@ -46,7 +46,7 @@ class UserProfile(LoginRequiredMixin, View):
         if user_form.is_valid():
             request.user.save()
 
-        return render(request,'profile.html', context={'user_form': user_form,})   
+        return render(request,'profile.html', context={'user_form': user_form, 'title':'Профиль - Lastream.online'})   
 
 
 def logout_user(request):
