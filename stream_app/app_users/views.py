@@ -8,7 +8,8 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 
 from .forms import *
 from .models import Users
-
+from studio.models import Stream
+ 
 
 class LoginView(LoginView):
     form_class=AuthForm
@@ -25,6 +26,16 @@ class UserRegistration(CreateView):
     form_class=UserForm
     template_name='registration.html'
     success_url = reverse_lazy('login')
+    
+    def form_valid(self, form):
+        self.object = form.save()
+        # Create Stream.objects in studio.models for User
+        Stream.objects.create(
+            title='Трансляция ' + form.cleaned_data['username'],
+            autor_id=self.object.id,
+            cat_id=1
+        )
+        return super().form_valid(form)
 
     def get_context_data(self,**kwargs):
         context=super().get_context_data(**kwargs)
@@ -52,4 +63,4 @@ class UserProfile(LoginRequiredMixin, View):
 def logout_user(request):
     logout(request)
     
-    return redirect ('home')    
+    return redirect ('home')   
