@@ -1,6 +1,7 @@
 from django import template
 from menu.models import *
 
+
 register=template.Library()
 
 

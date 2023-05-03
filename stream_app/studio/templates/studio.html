@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load stream_tags %}
+
 
 {% block body %}
 
@@ -7,9 +9,10 @@
     <h1 class="mb-0 font-ctc">Студия</h1>
 </div>
 
-<main class="container-fluid mx-0 text-center">
+<main class="container-fluid mx-0">
     <div class="row py-3 text-bg-dark">
-        <div class="col-lg-4">
+        
+        <div class="col-lg-4 mb-4">
             <div id="player_id">
                 <!-- Load OvenPlayer via CDN -->
                 <script src="https://cdn.jsdelivr.net/npm/ovenplayer/dist/ovenplayer.js"></script>
@@ -29,8 +32,16 @@
                 </script>
             </div>
         </div>
-        <div class="col-lg-4" id="form">FORM</div>
-        <div class="col-lg-4" id="form" style="background-color: brown;">CHAT</div>
+
+        <div class="col-lg-4 mb-4" id="stream_info">
+            {% show_stream_info user %}
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                <button type="button" class="btn btn-primary text-uppercase focus-item font-ctc">Изменить</button>
+            </div>   
+        </div>
+
+        <div class="col-lg-4" id="chat" style="background-color: brown;">CHAT</div>
+
     </div>
 </main>
 
