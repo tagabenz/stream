@@ -1,14 +1,22 @@
 from django.shortcuts import render
-from django.views.generic import View
+from django.views import View
+
+from .models import Stream
+from .forms import StreamForms
 
 
 class Studio(View):
-    
     def get(self, request):
-        context={
-        'title': 'Студия - Lastream.online',
-        }
+        user = Stream.objects.get(autor=request.user)
+        form = StreamForms(instance=user)
+       
+        return render(request,'studio.html', context={'form': form,'title':'Студия - Lastream.online'})
+    
+    def post(self, request):
+        user = Stream.objects.get(autor=request.user)
+        form = StreamForms(request.POST, instance=user)
 
-        return render(request, 'studio.html', context=context)    
-    
-    
+        if form.is_valid():
+            form.save()  
+
+        return render(request,'studio.html', context={'form': form,'title':'Студия - Lastream.online'})    

@@ -48,6 +48,7 @@ class UserProfile(LoginRequiredMixin, View):
 
     def get(self, request):
         user_form = UserEditForm(instance=request.user)
+        
         return render(request,'profile.html', context={'user_form': user_form,'title':'Профиль - Lastream.online'})
     
     def post(self, request):

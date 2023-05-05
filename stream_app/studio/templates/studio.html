@@ -35,8 +35,35 @@
 
         <div class="col-lg-4 mb-4" id="stream_info">
             {% show_stream_info user %}
-            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                <button type="button" class="btn btn-primary text-uppercase focus-item font-ctc">Изменить</button>
+            <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-primary text-uppercase focus-item font-ctc" data-bs-toggle="modal" data-bs-target="#staticBackdrop" >Изменить</button>
+            </div>
+            <!-- Modal -->
+            <div class="modal fade text-dark" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h2 class="modal-title fs-5 font-ctc" id="staticBackdropLabel">Настройки трансляции</h2>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="" method="post">
+                                {% csrf_token %}
+                                {% for f in form %}
+                                <div class="mb-2">
+                                    <label class="font-ctc" for="{{ f.id_for_label }}">{{ f.label }}</label>
+                                    {{ f }}
+                                    <div class="text-danger">{{ f.errors }}</div>
+                                </div>
+                                {% endfor %}
+                                <div class="modal-footer">
+                                    <button type="submit" class="btn btn-primary font-ctc text-uppercase focus-item">Сохранить</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
             </div>   
         </div>
 
