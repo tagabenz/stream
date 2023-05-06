@@ -37,14 +37,14 @@
 	<!-- Settings for the ports to bind -->
 	<Bind>
 		<!-- Enable this configuration if you want to use API Server -->
-		<!--
+		
 		<Managers>
 			<API>
 				<Port>${env:OME_API_PORT:8081}</Port>
 				<WorkerCount>1</WorkerCount>
 			</API>
 		</Managers>
-		-->
+		
 		<Providers>
 			<!-- Pull providers -->
 			<RTSPC>
@@ -58,19 +58,14 @@
 				<Port>${env:OME_RTMP_PROV_PORT:1935}</Port>
 				<WorkerCount>1</WorkerCount>
 			</RTMP>
-			<SRT>
+			<!-- <SRT>
 				<Port>${env:OME_SRT_PROV_PORT:9999}</Port>
 				<WorkerCount>1</WorkerCount>
-			</SRT>
-			<MPEGTS>
-				<!--
-					Listen on port 4000
-					This is just a demonstration to show that you can configure the port in several ways
-					<Port>${env:OME_MPEGTS_PROV_PORT:4000-4001,4004,4005/udp}</Port>
-				-->
+			</SRT> -->
+			<!-- <MPEGTS>
 				<Port>${env:OME_MPEGTS_PROV_PORT:4000/udp}</Port>
-			</MPEGTS>
-			<WebRTC>
+			</MPEGTS> -->
+			<!-- <WebRTC>
 				<Signalling>
 					<Port>${env:OME_WEBRTC_SIGNALLING_PORT:3333}</Port>
 					<TLSPort>${env:OME_WEBRTC_SIGNALLING_TLS_PORT:3334}</TLSPort>
@@ -82,7 +77,7 @@
 					<TcpRelayWorkerCount>1</TcpRelayWorkerCount>
 					<IceCandidate>*:10006/udp</IceCandidate>
 				</IceCandidates>
-			</WebRTC>
+			</WebRTC> -->
 		</Providers>
 
 		<Publishers>
@@ -101,7 +96,7 @@
 				<TLSPort>${env:OME_LLHLS_STREAM_TLS_PORT:3334}</TLSPort>
 				<WorkerCount>1</WorkerCount>
 			</LLHLS>
-			<WebRTC>
+			<!-- <WebRTC>
 				<Signalling>
 					<Port>${env:OME_WEBRTC_SIGNALLING_PORT:3333}</Port>
 					<TLSPort>${env:OME_WEBRTC_SIGNALLING_TLS_PORT:3334}</TLSPort>
@@ -113,10 +108,19 @@
 					<TcpForce>true</TcpForce>
 					<TcpRelayWorkerCount>1</TcpRelayWorkerCount>
 				</IceCandidates>
-			</WebRTC>
+			</WebRTC> -->
 		</Publishers>
 	</Bind>
-
+	<Managers>
+		<Host>
+			<Names>
+				<Name>*</Name>
+			</Names>
+		</Host>
+		<API>
+			<AccessToken>tagabenz:1q2w3e4r</AccessToken>
+		</API>
+	</Managers>
 	<VirtualHosts>
 		<!--
 			You can include multiple XML files by doing the following:
