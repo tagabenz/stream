@@ -14,6 +14,8 @@
         
         <div class="col-lg-4 mb-4">
             <div id="player_id">
+                <!-- Load hls.js to play HLS. -->
+                <script src="https://cdn.jsdelivr.net/npm/hls.js@latest/dist/hls.min.js"></script>
                 <!-- Load OvenPlayer via CDN -->
                 <script src="https://cdn.jsdelivr.net/npm/ovenplayer/dist/ovenplayer.js"></script>
             
@@ -22,8 +24,8 @@
                     const player = OvenPlayer.create('player_id', {
                         sources: [
                             {
-                                type : "webrtc",
-                                file : "ws://192.168.1.243:3333/app/stream",
+                                type: 'll-hls',
+                                file: "http://192.168.1.198:3333/app/stream/llhls.m3u8"
                             }
                         ]
                     });

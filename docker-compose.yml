@@ -26,7 +26,7 @@ services:
       - 9999:9999/udp
 
     environment:
-      - OME_HOST_IP=192.168.1.243
+      - OME_HOST_IP=192.168.1.198
       - OME_ORIGIN_PORT=9000
       - OME_RTMP_PROV_PORT=1935
       - OME_SRT_PROV_PORT=9999
@@ -38,8 +38,6 @@ services:
 
     volumes:
     - ./origin_conf:/opt/ovenmediaengine/bin/origin_conf
-    # command: /opt/ovenmediaengine/bin/OvenMediaEngine -c origin_conf
-    # restart: always
 
 
   db:
