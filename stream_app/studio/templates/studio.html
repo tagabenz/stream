@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load stream_tags %}
+
+
+{% block body %}
+
+<div class="py-4 text-center">
+    <h1 class="mb-0 font-ctc">Студия</h1>
+</div>
+
+<main class="container-fluid mx-0">
+    <div class="row py-3 text-bg-dark">
+        
+        <div class="col-lg-4 mb-4">
+            <div id="player_id">
+                <!-- Load hls.js to play HLS. -->
+                <script src="https://cdn.jsdelivr.net/npm/hls.js@latest/dist/hls.min.js"></script>
+                <!-- Load OvenPlayer via CDN -->
+                <script src="https://cdn.jsdelivr.net/npm/ovenplayer/dist/ovenplayer.js"></script>
+            
+                <script>
+                    // Initialize OvenPlayer
+                    const player = OvenPlayer.create('player_id', {
+                        sources: [
+                            {
+                                type: 'll-hls',
+                                file: "http://192.168.1.198:3333/app/stream/llhls.m3u8"
+                            }
+                        ]
+                    });
+            
+                    player.play();
+                </script>
+            </div>
+        </div>
+
+        <div class="col-lg-4 mb-4" id="stream_info">
+            {% show_stream_info user %}
+            <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-primary text-uppercase focus-item font-ctc" data-bs-toggle="modal" data-bs-target="#staticBackdrop" >Изменить</button>
+            </div>
+            <!-- Modal -->
+            <div class="modal fade text-dark" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h2 class="modal-title fs-5 font-ctc" id="staticBackdropLabel">Настройки трансляции</h2>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="" method="post">
+                                {% csrf_token %}
+                                {% for f in form %}
+                                <div class="mb-2">
+                                    <label class="font-ctc" for="{{ f.id_for_label }}">{{ f.label }}</label>
+                                    {{ f }}
+                                    <div class="text-danger">{{ f.errors }}</div>
+                                </div>
+                                {% endfor %}
+                                <div class="modal-footer">
+                                    <button type="submit" class="btn btn-primary font-ctc text-uppercase focus-item">Сохранить</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>   
+        </div>
+
+        <div class="col-lg-4" id="chat" style="background-color: brown;">CHAT</div>
+
+    </div>
+</main>
+
+{% endblock %}

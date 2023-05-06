@@ -1,8 +1,5 @@
-window.onload=function () {
-  document.onclick=hideDetails;
+function init() {
+
 }
 
-function hideDetails() {
-  var details = document.querySelector('details');
-  details.open = false;
-}
+window.onload=init;

@@ -9,7 +9,7 @@ class BlogsListView(ListView):
 
     def get_context_data(self,**kwargs):
         context=super().get_context_data(**kwargs)
-        context['title']='Блог'
+        context['title']='Блог - Lastream.online'
 
         return context
 
