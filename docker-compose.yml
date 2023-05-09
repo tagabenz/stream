@@ -14,7 +14,7 @@ services:
       - oven
 
   oven:
-    image: airensoft/ovenmediaengine:0.15.0
+    image: airensoft/ovenmediaengine:0.15.10
     ports:
       - 8081:8081
       - 1935:1935
