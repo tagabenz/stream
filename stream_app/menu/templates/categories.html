@@ -1,7 +1,5 @@
 {% extends 'base.html' %}
-
 {% block body %}
-
     {% block cat %}
     {% if settings %}
     <div class="px-3 py-2 border-bottom mb-3 font-ctc">
@@ -24,13 +22,10 @@
             {% endfor %}      
         </div>
     </div>
-
     {% else %}    
     <h2 class="position-absolute top-50 start-50 translate-middle">Данный раздел пока в разработке...</h2>
     {% endif %}    
     {% endblock cat %}
-
     {% block content %}
     {% endblock content %}
-
 {% endblock %}
