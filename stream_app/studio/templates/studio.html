@@ -1,23 +1,26 @@
 {% extends 'base.html' %}
 {% load static %}
 {% load stream_tags %}
-
-
 {% block body %}
+
 <div class="py-4 text-center">
     <h1 class="mb-0 font-ctc">Студия</h1>
 </div>
 <main class="container-fluid mx-0">
     <div class="row py-3 text-bg-dark">
-        <div class="col-lg-4 mb-4">
+        <div class="col-lg-4 mb-4" id="player">
+            {% verbatim %}
             <div id="player_id">
+                {{ player }}
             </div>
+            {% endverbatim %}
+            <script src="{% static 'jss/player.js' %}"></script>
         </div>
         <div class="col-lg-4 mb-4" id="stream_info">
             {% show_stream_info user %}
             <div class="d-grid gap-2 d-md-flex justify-content-md-center">
                 <!-- Button trigger modal -->
-                <button type="button" class="btn btn-primary text-uppercase focus-item font-ctc" data-bs-toggle="modal" data-bs-target="#staticBackdrop" >Изменить</button>
+                <button type="button" class="btn btn-primary text-uppercase focus-item font-ctc" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Изменить</button>
             </div>
             <!-- Modal -->
             <div class="modal fade text-dark" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
