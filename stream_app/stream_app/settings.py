@@ -12,10 +12,18 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 
 import os
 from pathlib import Path
-from dotenv import load_dotenv, find_dotenv
 
-load_dotenv(find_dotenv())
-print(os.getenv('HOST'))
+OME_HOST=os.getenv('OME_HOST')
+KEY=os.getenv('KEY')
+
+if os.getenv('ENV') == 'DEV':
+    PROTOCOL='http' 
+    LLHLS_PORT=3333
+else:
+    PROTOCOL='https'
+    LLHLS_PORT=3334
+    
+    
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -46,13 +54,11 @@ INSTALLED_APPS = [
     'app_users',
     'menu',
     'studio',
-    "corsheaders",
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -147,6 +153,3 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'app_users.Users'
 
 LOGIN_REDIRECT_URL = '/'
-
-CORS_ORIGIN_ALLOW_ALL = False
-# CORS_ORIGIN_WHITELIST = ["http://localhost:8080"]

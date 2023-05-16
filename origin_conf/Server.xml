@@ -152,18 +152,17 @@
 				-->
 			</Host>
 
-			<!-- Refer https://airensoft.gitbook.io/ovenmediaengine/signedpolicy
+	
 			<SignedPolicy>
 				<PolicyQueryKeyName>policy</PolicyQueryKeyName>
 				<SignatureQueryKeyName>signature</SignatureQueryKeyName>
 				<SecretKey>aKq#1kj</SecretKey>
 
 				<Enables>
-					<Providers>rtmp,webrtc,srt</Providers>
-					<Publishers>webrtc,hls,llhls,dash,lldash</Publishers>
+					<Providers>rtmp</Providers>
 				</Enables>
 			</SignedPolicy>
-			-->
+			
 
 			<!--
 			<OriginMapStore>
