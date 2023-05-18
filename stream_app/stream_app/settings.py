@@ -11,8 +11,19 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
 import os
-
 from pathlib import Path
+
+OME_HOST=os.getenv('OME_HOST')
+KEY=os.getenv('KEY')
+
+if os.getenv('ENV') == 'DEV':
+    PROTOCOL='http' 
+    LLHLS_PORT=3333
+else:
+    PROTOCOL='https'
+    LLHLS_PORT=3334
+    
+    
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -38,6 +49,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
     'homepage',
     'blog',
     'app_users',

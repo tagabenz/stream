@@ -4,6 +4,8 @@ services:
   web:
     environment:
       ENV: DEV
+      OME_HOST: 192.168.1.198
+      KEY: aKq#1kj
     build: .
     volumes:
       - $PWD/stream_app:/app
@@ -14,26 +16,19 @@ services:
       - oven
 
   oven:
-    image: airensoft/ovenmediaengine:0.15.0
+    image: airensoft/ovenmediaengine:0.15.10
     ports:
       - 8081:8081
       - 1935:1935
-      - 4000:4000/udp
       - 3333:3333
-      - 3334:3334
-      - 3478:3478
+      # - 3334:3334
       - 9000:9000
-      - 9999:9999/udp
 
-    environment:
-      - OME_HOST_IP=192.168.1.198
+    environment: 
       - OME_ORIGIN_PORT=9000
       - OME_RTMP_PROV_PORT=1935
-      - OME_SRT_PROV_PORT=9999
       - OME_LLHLS_STREAM_PORT=3333
-      - OME_WEBRTC_SIGNALLING_PORT=3333
-      - OME_WEBRTC_TCP_RELAY_PORT=3478
-      - OME_WEBRTC_CANDIDATE_PORT=10000-10004/udp
+      # - OME_LLHLS_STREAM_TLS_PORT=3334
       - OME_API_PORT=8081
 
     volumes:

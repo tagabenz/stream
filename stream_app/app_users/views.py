@@ -7,8 +7,9 @@ from django.contrib.auth.views import LoginView
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 from .forms import *
+from studio.key_generate import get_key
 from studio.models import Stream
- 
+
 
 class LoginView(LoginView):
     form_class=AuthForm
@@ -32,7 +33,8 @@ class UserRegistration(CreateView):
         Stream.objects.create(
             title='Трансляция ' + form.cleaned_data['username'],
             autor_id=self.object.id,
-            cat_id=1
+            cat_id=1,
+            stream_key=get_key(username=form.cleaned_data['username']),
         )
         return super().form_valid(form)
 
