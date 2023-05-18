@@ -25,4 +25,7 @@ class Studio(View):
         if form.is_valid():
             form.save()  
 
-        return render(request,'studio.html', context={'form': form,'title':'Студия - Lastream.online'})    
+        return render(request,'studio.html', context={
+            'form': form,
+            'title':'Студия - Lastream.online'
+            })    

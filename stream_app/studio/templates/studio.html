@@ -7,7 +7,8 @@
 </div>
 <main class="container-fluid mx-0">
     <div class="row py-3 text-bg-dark">
-        <div class="col-lg-4 mb-4" id="player">
+        <div class="col-lg-4 mb-4">
+            {{ user.username|json_script:"username" }}
             {% verbatim %}
             <div id="player_id">
                 {{ player }}
