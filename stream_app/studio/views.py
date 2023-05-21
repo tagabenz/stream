@@ -1,6 +1,9 @@
 from django.shortcuts import render
 from django.views import View
 
+from rest_framework.response import Response
+from rest_framework.views import APIView
+
 from .models import Stream
 from .forms import *
 from stream_app import settings
@@ -29,3 +32,9 @@ class Studio(View):
             'form': form,
             'title':'Студия - Lastream.online'
             })    
+    
+
+class StudioAPIView(APIView):
+    def get(self, request):
+        lst=Stream.objects.all().values()
+        return Response({'post':list(lst)})

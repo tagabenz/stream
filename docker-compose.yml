@@ -4,8 +4,8 @@ services:
   web:
     environment:
       ENV: DEV
-      OME_HOST: 192.168.1.198
-      KEY: aKq#1kj
+      OME_HOST: ${OME_HOST}
+      KEY: ${POLICY_KEY}
     build: .
     volumes:
       - $PWD/stream_app:/app
@@ -25,12 +25,13 @@ services:
       - 9000:9000
 
     environment: 
-      - OME_ORIGIN_PORT=9000
-      - OME_RTMP_PROV_PORT=1935
-      - OME_LLHLS_STREAM_PORT=3333
+      OME_ORIGIN_PORT: 9000
+      OME_RTMP_PROV_PORT: 1935
+      OME_LLHLS_STREAM_PORT: 3333
       # - OME_LLHLS_STREAM_TLS_PORT=3334
-      - OME_API_PORT=8081
-
+      OME_API_PORT: 8081
+      POLICY_KEY: ${POLICY_KEY}
+      OME_API_TOKEN: ${OME_API_TOKEN}  
     volumes:
     - ./origin_conf:/opt/ovenmediaengine/bin/origin_conf
 
@@ -39,7 +40,7 @@ services:
     image: postgres:latest
     user: postgres
     environment:
-      - POSTGRES_PASSWORD=django
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     volumes:
       - PGDATA:/var/lib/postgresql/data
       - $PWD/DATABASE:/db

@@ -23,7 +23,7 @@ class Categories(models.Model):
     def get_absolute_url(self):
         return reverse('cat_show',kwargs={'post_slug': self.slug})
     
-    def __str__(self) -> str:
+    def __str__(self):
         return self.name
     
     class Meta():

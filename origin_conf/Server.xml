@@ -118,7 +118,7 @@
 			</Names>
 		</Host>
 		<API>
-			<AccessToken>tagabenz:1q2w3e4r</AccessToken>
+			<AccessToken>${OME_API_TOKEN}</AccessToken>
 		</API>
 	</Managers>
 	<VirtualHosts>
@@ -156,7 +156,7 @@
 			<SignedPolicy>
 				<PolicyQueryKeyName>policy</PolicyQueryKeyName>
 				<SignatureQueryKeyName>signature</SignatureQueryKeyName>
-				<SecretKey>aKq#1kj</SecretKey>
+				<SecretKey>${POLICY_KEY}</SecretKey>
 
 				<Enables>
 					<Providers>rtmp</Providers>
