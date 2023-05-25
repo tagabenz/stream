@@ -13,7 +13,8 @@ class Studio(View):
     def get(self, request):
         user = Stream.objects.get(autor=request.user)
         form = StreamForms(instance=user)
-        form_settings = StreamSettingsForm(instance=user)
+        form_settings = StreamSettingsForm(instance=user)   
+        
         return render(request,'studio.html', context={
             'form': form,
             'form_settings': form_settings, 
@@ -24,17 +25,21 @@ class Studio(View):
     def post(self, request):
         user = Stream.objects.get(autor=request.user)
         form = StreamForms(request.POST, instance=user)
+        form_settings = StreamSettingsForm(instance=user) 
 
         if form.is_valid():
             form.save()  
 
         return render(request,'studio.html', context={
             'form': form,
-            'title':'Студия - Lastream.online'
+            'form_settings': form_settings, 
+            'title':'Студия - Lastream.online',
+            'stream_url': f"rtmp://{settings.OME_HOST}:1935/input",
             })    
     
 
 class StudioAPIView(APIView):
     def get(self, request):
         lst=Stream.objects.all().values()
+        
         return Response({'post':list(lst)})
