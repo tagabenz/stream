@@ -118,7 +118,7 @@
 			</Names>
 		</Host>
 		<API>
-			<AccessToken>${OME_API_TOKEN}</AccessToken>
+			<AccessToken>${env:OME_API_TOKEN}</AccessToken>
 		</API>
 	</Managers>
 	<VirtualHosts>
@@ -156,7 +156,7 @@
 			<SignedPolicy>
 				<PolicyQueryKeyName>policy</PolicyQueryKeyName>
 				<SignatureQueryKeyName>signature</SignatureQueryKeyName>
-				<SecretKey>${POLICY_KEY}</SecretKey>
+				<SecretKey>${env:POLICY_KEY}</SecretKey>
 
 				<Enables>
 					<Providers>rtmp</Providers>

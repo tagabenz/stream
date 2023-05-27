@@ -6,6 +6,9 @@ from rest_framework.views import APIView
 
 from .models import Stream
 from .forms import *
+from .serializers import StudioSerializer
+from .key_generate import get_key
+
 from stream_app import settings
 
 
@@ -40,6 +43,18 @@ class Studio(View):
 
 class StudioAPIView(APIView):
     def get(self, request):
-        lst=Stream.objects.all().values()
+        w=Stream.objects.all()
+
+        return Response(StudioSerializer(w,many=True).data)
+    
+    def put(self, request, *args, **kwargs):
+        # pk=kwargs.get('pk',None)
+        # if not pk:return Response({'error':'Method PUT not allowed'})
+        try:instance=Stream.objects.get(autor=request.user)
+        except:return Response({'error':'Object does not exists'})
+
+        serializer=StudioSerializer(data={'stream_key': get_key(request.user)},instance=instance)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
         
-        return Response({'post':list(lst)})
+        return Response(serializer.data)
