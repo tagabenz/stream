@@ -48,8 +48,6 @@ class StudioAPIView(APIView):
         return Response(StudioSerializer(w,many=True).data)
     
     def put(self, request, *args, **kwargs):
-        # pk=kwargs.get('pk',None)
-        # if not pk:return Response({'error':'Method PUT not allowed'})
         try:instance=Stream.objects.get(autor=request.user)
         except:return Response({'error':'Object does not exists'})
 

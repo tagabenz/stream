@@ -4,7 +4,6 @@ new Vue({
         player:[]
     },
     mounted: function () { 
-        const vm = this;
         const username = JSON.parse(document.getElementById('username').textContent);
         const player = OvenPlayer.create('player_id', {
             autoStart: true,
@@ -17,6 +16,6 @@ new Vue({
                 }
             ]
         });
-        vm.player=player.play()
+        this.player=player.play()
     },
 })
