@@ -15,7 +15,8 @@ function startStreaming(){
     let response = fetch(url);
     if (response.ok) { 
     // если HTTP-статус в диапазоне 200-299
+    
     } else {
-        alert("Ошибка HTTP: " + response.status);
+        alert("Сначала запустите видеокодер");
     }
 }
