@@ -51,6 +51,9 @@ class StudioAPIView(APIView):
        if command=="status_change":
            if instance.is_online==False:instance.is_online=True
            else:instance.is_online=False
+           instance.save()
+
+           return Response(instance.is_online)
     
     def put(self, request, command, *args, **kwargs):
         try:instance=Stream.objects.get(autor=request.user)
@@ -62,5 +65,3 @@ class StudioAPIView(APIView):
             serializer.save()
             
             return Response(serializer.data)
-        
-        
