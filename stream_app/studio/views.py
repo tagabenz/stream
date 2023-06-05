@@ -49,8 +49,8 @@ class StudioAPIView(APIView):
        except:return Response({'error':'Object does not exists'})
 
        if command=="status_change":
-           if instance.is_online==False:instance.is_online=True
-           else:instance.is_online=False
+           if instance.is_online:instance.is_online=False
+           else:instance.is_online=True
            instance.save()
 
            return Response(instance.is_online)

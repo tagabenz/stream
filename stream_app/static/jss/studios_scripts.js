@@ -10,15 +10,24 @@ function copyKey(){
     navigator.clipboard.writeText(copyText.value);
 }
 
-async function statusChange(){
+async function startStream(){
     var url=output_url
-    let response = await fetch(url);
-    if (response.ok) { 
-        // если HTTP-статус в диапазоне 200-299
-        alert(response.status);
-       
-    } else {
-        alert(response.status);
-    }
+    fetch(url)
+    .then(function() {
+        fetch(location.origin+"/api/v1/studio/status_change");
+        location.reload()
+    })
+    .catch(function() {
+        alert("Сначала запустите видеокодер")
+    });
 }
 
+async function stopStream(){
+    fetch(location.origin+"/api/v1/studio/status_change")
+    .then(function() {
+        location.reload()
+    })
+    .catch(function() {
+        
+    });
+}

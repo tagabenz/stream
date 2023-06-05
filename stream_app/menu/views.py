@@ -15,10 +15,10 @@ def categories(request):
     return render(request, 'categories.html', context=context)
 
 
-def show_categories(request, post_slug):
+def show_categories(request, cat_slug):
     cats=Categories.objects.all()
     context={
-        'cat_id': post_slug,
+        'cat_id': cat_slug,
         'cats': cats, 
         'title': 'Категории - Lastream.online', 
         'settings': settings.DEBUG,
