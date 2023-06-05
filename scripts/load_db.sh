@@ -1,0 +1,1 @@
+docker exec -it stream-db-1 bash -c "psql -f /db/stream.sql -U postgres"
