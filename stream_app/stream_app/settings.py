@@ -13,8 +13,10 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 import os
 from pathlib import Path
 
-OME_HOST=os.getenv('OME_HOST')
 KEY=os.getenv('KEY')
+OME_HOST=os.getenv('OME_HOST')
+
+PULL_URL=f"rtmp://{OME_HOST}:1935/input"
 
 if os.getenv('ENV') == 'DEV':
     PROTOCOL='http' 

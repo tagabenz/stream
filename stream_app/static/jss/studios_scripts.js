@@ -10,13 +10,15 @@ function copyKey(){
     navigator.clipboard.writeText(copyText.value);
 }
 
-function startStreaming(){
-    url='http://192.168.1.198:3333/input/tagabenz3/llhls.m3u8';
-    let response = fetch(url);
+async function startStreaming(){
+    var url=output_url
+    let response = await fetch(url);
     if (response.ok) { 
-    // если HTTP-статус в диапазоне 200-299
-    
+        // если HTTP-статус в диапазоне 200-299
+        
+       
     } else {
         alert("Сначала запустите видеокодер");
     }
 }
+
