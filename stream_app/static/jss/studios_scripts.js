@@ -10,15 +10,15 @@ function copyKey(){
     navigator.clipboard.writeText(copyText.value);
 }
 
-async function startStreaming(){
+async function statusChange(){
     var url=output_url
     let response = await fetch(url);
     if (response.ok) { 
         // если HTTP-статус в диапазоне 200-299
-        
+        alert(response.status);
        
     } else {
-        alert("Сначала запустите видеокодер");
+        alert(response.status);
     }
 }
 

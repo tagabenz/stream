@@ -1,7 +1,7 @@
 from rest_framework import serializers
 
 
-class StudioSerializer(serializers.Serializer):
+class Key_Generate_Serializer(serializers.Serializer):
     stream_key=serializers.CharField()
 
     def update(self,instance,validated_data):

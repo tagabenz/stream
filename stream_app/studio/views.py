@@ -6,7 +6,7 @@ from rest_framework.views import APIView
 
 from .models import Stream
 from .forms import *
-from .serializers import StudioSerializer
+from .serializers import *
 from .key_generate import get_key
 
 from stream_app import settings
@@ -44,17 +44,23 @@ class Studio(View):
     
 
 class StudioAPIView(APIView):
-    def get(self, request):
-        w=Stream.objects.all()
+    def get(self, request, command):
+       try:instance=Stream.objects.get(autor=request.user)
+       except:return Response({'error':'Object does not exists'})
 
-        return Response(StudioSerializer(w,many=True).data)
+       if command=="status_change":
+           if instance.is_online==False:instance.is_online=True
+           else:instance.is_online=False
     
-    def put(self, request, *args, **kwargs):
+    def put(self, request, command, *args, **kwargs):
         try:instance=Stream.objects.get(autor=request.user)
         except:return Response({'error':'Object does not exists'})
 
-        serializer=StudioSerializer(data={'stream_key': get_key(request.user)},instance=instance)
-        serializer.is_valid(raise_exception=True)
-        serializer.save()
+        if command=="key_generate":
+            serializer=Key_Generate_Serializer(data={'stream_key': get_key(request.user)},instance=instance)
+            serializer.is_valid(raise_exception=True)
+            serializer.save()
+            
+            return Response(serializer.data)
         
-        return Response(serializer.data)
+        
