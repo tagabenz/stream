@@ -10,7 +10,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('homepage.urls')),
     path('', include('app_users.urls')),
-    path('', include('menu.urls')),
     path('', include('blog.urls')),
     path('', include('studio.urls')),
     path('api/v1/studio/<slug:command>', StudioAPIView.as_view(),name="is_online"),

@@ -1,8 +1,7 @@
 {% extends 'base.html' %}
 {% block body %}
     {% block cat %}
-    {% if settings %}
-    <div class="px-3 py-2 border-bottom mb-3 font-ctc">
+    <div class="px-3 py-2 border-bottom font-ctc">
         <div class="container d-flex flex-wrap justify-content-lg-start ms-5">
             {% for m in cats %}
                 {% if m.slug in  request.get_full_path %}
@@ -21,11 +20,22 @@
                 {% endif %}        
             {% endfor %}      
         </div>
-    </div>
-    {% else %}    
-    <h2 class="position-absolute top-50 start-50 translate-middle">Данный раздел пока в разработке...</h2>
-    {% endif %}    
+    </div>   
     {% endblock cat %}
     {% block content %}
+    <div class="text-center">
+        {% if object_list %}
+        <h1 class="m-1 font-ctc">Сейчас в эфире</h1>
+        {% else %}    
+        <h1 class="position-absolute top-50 start-50 translate-middle">В данный момент никто не стримит :( Станьте первым!</h1>
+        {% endif %}
+    </div>
+    <main>
+        <section class="container-fluid">
+                {% for p in object_list %}
+                {{ p.title }}
+                {% endfor%}
+        </section>
+    </main>
     {% endblock content %}
 {% endblock %}
