@@ -1,41 +1,19 @@
 {% extends 'base.html' %}
+{% load menu_tags %}
 {% block body %}
-    {% block cat %}
-    <div class="px-3 py-2 border-bottom font-ctc">
-        <div class="container d-flex flex-wrap justify-content-lg-start ms-5">
-            {% for m in cats %}
-                {% if m.slug in  request.get_full_path %}
-                    <button class="btn btn-dark rounded-pill px-3 ms-2 text-blue" onclick="location.href='{{ m.get_absolute_url }}';" data-bs-toggle="button">
-                        {% if m.img %}
-                        <img class=""src="{{ m.img.url }}" />
-                        {% endif %}
-                        {{ m.name }}
-                    </button>
-                {% else %}
-                    <button class="btn btn-outline-dark rounded-pill px-3 ms-2" onclick="location.href='{{ m.get_absolute_url }}';" data-bs-toggle="button">
-                        {% if m.img %}
-                        <img class=""src="{{ m.img.url }}" />
-                        {% endif %}
-                        {{ m.name }}
-                {% endif %}        
-            {% endfor %}      
-        </div>
-    </div>   
-    {% endblock cat %}
-    {% block content %}
-    <div class="text-center">
-        {% if object_list %}
-        <h1 class="m-1 font-ctc">Сейчас в эфире</h1>
-        {% else %}    
-        <h1 class="position-absolute top-50 start-50 translate-middle">В данный момент никто не стримит :( Станьте первым!</h1>
-        {% endif %}
-    </div>
-    <main>
-        <section class="container-fluid">
-                {% for p in object_list %}
-                {{ p.title }}
-                {% endfor%}
-        </section>
-    </main>
-    {% endblock content %}
+{% show_cat request %}
+<div class="text-center">
+{% if object_list %}
+    <h1 class="m-1 font-ctc">Сейчас в эфире</h1>
+{% else %}    
+    <h1 class="position-absolute top-50 start-50 translate-middle">В данном разделе никто не стримит :( Станьте первым!</h1>
+{% endif %}
+</div>
+<main>
+    <section class="container-fluid">
+    {% for p in object_list %}
+        {{ p.title }}
+    {% endfor %}
+    </section>
+</main>
 {% endblock %}

@@ -8,9 +8,6 @@ from studio.models import Stream
 from menu.models import Categories
 
 
-cats=Categories.objects.all()
-
-
 def index(request):
     context={
         'title': 'Lastream.online',
@@ -33,7 +30,6 @@ class CategoriesViews(ListView):
 
     def get_context_data(self, **kwargs: Any):
         context = super().get_context_data(**kwargs)
-        context['cats']=cats
         context['title']='Категории - Lastream.online'
 
         return context
@@ -43,12 +39,17 @@ class CategoriesViews(ListView):
         return Stream.objects.filter(is_online=True)
     
 
-def show_categories(request, cat_slug):
-    cats=Categories.objects.all()
-    context={
-        'cat_id': cat_slug,
-        'cats': cats, 
-        'title': 'Категории - Lastream.online',
-    }
+class CategoriesSort(ListView):
+    model=Stream
+    template_name='categories.html'
+    allow_empty = False
     
-    return render(request, 'show_cat.html', context=context)    
+    def get_context_data(self, **kwargs: Any):
+        context = super().get_context_data(**kwargs)
+        context['title']='Категории - Lastream.online'
+
+        return context
+    
+    def get_queryset(self):
+        
+        return Stream.objects.filter(is_online=True, cat__slug=self.kwargs['cat_slug'])
