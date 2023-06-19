@@ -2,7 +2,7 @@
 {% load menu_tags %}
 {% block body %}
 {% show_cat request %}
-<div class="text-center">
+<div class="pb-4 text-center">
 {% if object_list %}
     <h1 class="m-1 font-ctc">Сейчас в эфире</h1>
 {% else %}    
@@ -10,10 +10,28 @@
 {% endif %}
 </div>
 <main>
-    <section class="container-fluid">
-    {% for p in object_list %}
-        {{ p.title }}
-    {% endfor %}
-    </section>
+    <div class="container-fluid m-0">
+        <div class="row row-cols-1 row-cols-sm-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-3 row-cols-xxl-4 g-3" style="width: 100%;">
+        {% for p in object_list %}
+            <div class="col mt-0 mb-3">
+                <div class="card shadow-sm" width="100%" height="307px">
+                    <svg class="bd-placeholder-img card-img-top" width="100%" height="200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+                    <div class="card-body p-1">
+                        <div class="row row-cols-2">
+                            <div class="col-2">
+                                <img src="" alt="" width="50" height="50" class="rounded-circle">
+                            </div>
+                            <div class="col-10 text-truncate">
+                                <strong>{{ p.title }}</strong>
+                                <p class="mb-0">{{ p.autor }}</p>
+                                <p class="mb-0">{{ p.cat }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+        </div>
+    </div>
 </main>
 {% endblock %}

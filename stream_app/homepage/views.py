@@ -42,8 +42,7 @@ class CategoriesViews(ListView):
 class CategoriesSort(ListView):
     model=Stream
     template_name='categories.html'
-    allow_empty = False
-    
+
     def get_context_data(self, **kwargs: Any):
         context = super().get_context_data(**kwargs)
         context['title']='Категории - Lastream.online'
