@@ -14,7 +14,8 @@ services:
     links:
       - db
       - oven
-
+    restart: always
+    
   oven:
     image: airensoft/ovenmediaengine:0.15.10
     ports:

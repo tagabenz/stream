@@ -4,8 +4,8 @@ from django.shortcuts import render
 from django.http import HttpResponseNotFound
 from django.views.generic import ListView
 
-from studio.models import Stream
 from menu.models import Categories
+from app_users.models import Users
 
 
 def index(request):
@@ -25,7 +25,7 @@ def pageNotFound(request, exception):
 
 
 class CategoriesViews(ListView):
-    model=Stream
+    model=Users
     template_name='categories.html'
 
     def get_context_data(self, **kwargs: Any):
@@ -36,11 +36,11 @@ class CategoriesViews(ListView):
 
     def get_queryset(self):
         
-        return Stream.objects.filter(is_online=True)
+        return Users.objects.filter(is_online=True)
     
 
 class CategoriesSort(ListView):
-    model=Stream
+    model=Users
     template_name='categories.html'
 
     def get_context_data(self, **kwargs: Any):
@@ -51,4 +51,4 @@ class CategoriesSort(ListView):
     
     def get_queryset(self):
         
-        return Stream.objects.filter(is_online=True, cat__slug=self.kwargs['cat_slug'])
+        return Users.objects.filter(is_online=True, cat__slug=self.kwargs['cat_slug'])

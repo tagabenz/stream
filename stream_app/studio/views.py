@@ -4,19 +4,17 @@ from django.views import View
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from .models import Stream
 from .forms import *
 from .serializers import *
 from .key_generate import get_key
-
+from app_users.models import Users
 from stream_app import settings
 
 
 class Studio(View):
     def get(self, request):
-        user = Stream.objects.get(autor=request.user)
-        form = StreamForms(instance=user)
-        form_settings = StreamSettingsForm(instance=user)   
+        form = StreamForms(instance=request.user)
+        form_settings = StreamSettingsForm(instance=request.user)   
         
         return render(request,'studio.html', context={
             'form': form,
@@ -27,9 +25,8 @@ class Studio(View):
             })
     
     def post(self, request):
-        user = Stream.objects.get(autor=request.user)
-        form = StreamForms(request.POST, instance=user)
-        form_settings = StreamSettingsForm(instance=user) 
+        form = StreamForms(request.POST, instance=request.user)
+        form_settings = StreamSettingsForm(instance=request.user) 
 
         if form.is_valid():
             form.save()  
@@ -45,7 +42,7 @@ class Studio(View):
 
 class StudioAPIView(APIView):
     def get(self, request, command):
-       try:instance=Stream.objects.get(autor=request.user)
+       try:instance=Users.objects.get(username=request.user)
        except:return Response({'error':'Object does not exists'})
 
        if command=="status_change":
@@ -56,7 +53,7 @@ class StudioAPIView(APIView):
            return Response(instance.is_online)
     
     def put(self, request, command, *args, **kwargs):
-        try:instance=Stream.objects.get(autor=request.user)
+        try:instance=Users.objects.get(username=request.user)
         except:return Response({'error':'Object does not exists'})
 
         if command=="key_generate":
