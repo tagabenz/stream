@@ -20,8 +20,8 @@ class Studio(View):
             'form': form,
             'form_settings': form_settings, 
             'title':'Студия - Lastream.online',
-            'stream_url': settings.PULL_URL,
-            'output_url': F"{settings.PROTOCOL}://{settings.OME_HOST}:{settings.LLHLS_PORT}/input/{request.user}/llhls.m3u8",
+            'pull_url': settings.PULL_URL,
+            'output_url': f"{settings.OUTPUT_URL}{request.user}/llhls.m3u8",
             })
     
     def post(self, request):
@@ -35,8 +35,8 @@ class Studio(View):
             'form': form,
             'form_settings': form_settings, 
             'title':'Студия - Lastream.online',
-            'stream_url': settings.PULL_URL,
-            'output_url': F"{settings.PROTOCOL}://{settings.OME_HOST}:{settings.LLHLS_PORT}/input/{request.user}/llhls.m3u8",
+            'pull_url': settings.PULL_URL,
+            'output_url': settings.OUTPUT_URL,
             })    
     
 

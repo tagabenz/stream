@@ -1,5 +1,5 @@
 function copyUrl() {
-    var copyText = document.getElementById("stream_url");
+    var copyText = document.getElementById("pull_url");
     copyText.select();
     navigator.clipboard.writeText(copyText.value);
 }

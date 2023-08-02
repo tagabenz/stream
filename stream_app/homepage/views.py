@@ -1,11 +1,15 @@
-from typing import Any, Dict
+from typing import Any
 
 from django.shortcuts import render
 from django.http import HttpResponseNotFound
 from django.views.generic import ListView
 
+from stream_app import settings
 from menu.models import Categories
 from app_users.models import Users
+
+from requests.auth import HTTPBasicAuth
+import requests,json
 
 
 def index(request):
@@ -26,17 +30,20 @@ def pageNotFound(request, exception):
 
 class CategoriesViews(ListView):
     model=Users
-    template_name='categories.html'
+    template_name='categories.html' 
 
     def get_context_data(self, **kwargs: Any):
+        
         context = super().get_context_data(**kwargs)
         context['title']='Категории - Lastream.online'
+        context['output_url']=settings.OUTPUT_URL
 
         return context
 
     def get_queryset(self):
-        
-        return Users.objects.filter(is_online=True)
+        online_streams=requests.get(f"{settings.PROTOCOL}://oven:8081/v1/vhosts/default/apps/input/streams", auth=HTTPBasicAuth(settings.OME_API_TOKEN[0], settings.OME_API_TOKEN[1])).json()['response']
+
+        return Users.objects.filter(username__in=online_streams)
     
 
 class CategoriesSort(ListView):
@@ -46,9 +53,11 @@ class CategoriesSort(ListView):
     def get_context_data(self, **kwargs: Any):
         context = super().get_context_data(**kwargs)
         context['title']='Категории - Lastream.online'
-
+        context['output_url']=settings.OUTPUT_URL
+        
         return context
     
     def get_queryset(self):
+        online_streams=requests.get(f"{settings.OME_API_URL}/vhosts/default/apps/input/streams", auth=HTTPBasicAuth(settings.OME_API_TOKEN[0], settings.OME_API_TOKEN[1])).json()['response']
         
-        return Users.objects.filter(is_online=True, cat__slug=self.kwargs['cat_slug'])
+        return Users.objects.filter(username__in=online_streams, cat__slug=self.kwargs['cat_slug'])

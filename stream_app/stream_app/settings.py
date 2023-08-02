@@ -13,19 +13,23 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 import os
 from pathlib import Path
 
-KEY=os.getenv('KEY')
+KEY=os.getenv('POLICY_KEY')
 OME_HOST=os.getenv('OME_HOST')
-
-PULL_URL=f"rtmp://{OME_HOST}:1935/input"
+OME_API_TOKEN=os.getenv('OME_API_TOKEN').split(':')
 
 if os.getenv('ENV') == 'DEV':
     PROTOCOL='http' 
     LLHLS_PORT=3333
+    OME_API_URL=f"{PROTOCOL}://oven:8081/v1"
 else:
     PROTOCOL='https'
     LLHLS_PORT=3334
-    
-    
+    OME_API_URL=f"{PROTOCOL}://{OME_HOST}:8081/v1"
+
+PULL_URL = f"rtmp://{OME_HOST}:1935/input"
+OUTPUT_URL =  f"{PROTOCOL}://{OME_HOST}:{LLHLS_PORT}/input/"
+
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -157,3 +161,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'app_users.Users'
 
 LOGIN_REDIRECT_URL = '/'
+

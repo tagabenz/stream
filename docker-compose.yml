@@ -5,7 +5,8 @@ services:
     environment:
       ENV: DEV
       OME_HOST: ${OME_HOST}
-      KEY: ${POLICY_KEY}
+      POLICY_KEY: ${POLICY_KEY}
+      OME_API_TOKEN: ${OME_API_TOKEN}
     build: .
     volumes:
       - $PWD/stream_app:/app
@@ -24,7 +25,8 @@ services:
       - 3333:3333
       # - 3334:3334
       - 9000:9000
-
+    restart: always
+    
     environment: 
       OME_ORIGIN_PORT: 9000
       OME_RTMP_PROV_PORT: 1935
