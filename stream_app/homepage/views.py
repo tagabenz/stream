@@ -1,15 +1,10 @@
-from typing import Any
-
 from django.shortcuts import render
 from django.http import HttpResponseNotFound
 from django.views.generic import ListView
 
-from stream_app import settings
 from menu.models import Categories
 from app_users.models import Users
-
-from requests.auth import HTTPBasicAuth
-import requests,json
+from .utils import DataMixin
 
 
 def index(request):
@@ -28,36 +23,31 @@ def pageNotFound(request, exception):
     return HttpResponseNotFound('<h1>Страница не найдена</h1>')
 
 
-class CategoriesViews(ListView):
+class CategoriesViews(DataMixin, ListView):
     model=Users
     template_name='categories.html' 
 
-    def get_context_data(self, **kwargs: Any):
-        
+    def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['title']='Категории - Lastream.online'
-        context['output_url']=settings.OUTPUT_URL
+        c_def = self.get_user_context()
 
-        return context
+        return dict(list(context.items()) + list(c_def.items()))
 
     def get_queryset(self):
-        online_streams=requests.get(f"{settings.PROTOCOL}://oven:8081/v1/vhosts/default/apps/input/streams", auth=HTTPBasicAuth(settings.OME_API_TOKEN[0], settings.OME_API_TOKEN[1])).json()['response']
 
-        return Users.objects.filter(username__in=online_streams)
+        return Users.objects.filter(username__in=self.get_stream_list())
     
 
-class CategoriesSort(ListView):
+class CategoriesSort(DataMixin, ListView):
     model=Users
     template_name='categories.html'
 
-    def get_context_data(self, **kwargs: Any):
+    def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['title']='Категории - Lastream.online'
-        context['output_url']=settings.OUTPUT_URL
-        
-        return context
+        c_def = self.get_user_context()
+
+        return dict(list(context.items()) + list(c_def.items()))
     
     def get_queryset(self):
-        online_streams=requests.get(f"{settings.OME_API_URL}/vhosts/default/apps/input/streams", auth=HTTPBasicAuth(settings.OME_API_TOKEN[0], settings.OME_API_TOKEN[1])).json()['response']
         
-        return Users.objects.filter(username__in=online_streams, cat__slug=self.kwargs['cat_slug'])
+        return Users.objects.filter(username__in=self.get_stream_list(), cat__slug=self.kwargs['cat_slug'])
