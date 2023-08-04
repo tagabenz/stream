@@ -41,7 +41,7 @@ class UserRegistration(CreateView):
 
 
 class UserProfile(LoginRequiredMixin, View):
-    # redirect_field_name='/login'
+    login_url = "/login"
 
     def get(self, request):
         user_form = UserEditForm(instance=request.user)

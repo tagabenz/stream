@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.views import View
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -11,7 +12,8 @@ from .key_generate import get_key
 from stream_app import settings
 
 
-class Studio(View):
+class Studio(LoginRequiredMixin,View):
+    login_url = "/login"
     def get(self, request):
         form = StreamForms(instance=request.user)
         form_settings = StreamSettingsForm(instance=request.user)   
