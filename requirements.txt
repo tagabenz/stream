@@ -4,3 +4,4 @@ psycopg2-binary
 gunicorn
 pillow
 requests
+django-debug-toolbar

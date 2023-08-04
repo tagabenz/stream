@@ -7,7 +7,7 @@ from rest_framework.views import APIView
 from .forms import *
 from .serializers import *
 from .key_generate import get_key
-from app_users.models import Users
+
 from stream_app import settings
 
 
@@ -15,7 +15,7 @@ class Studio(View):
     def get(self, request):
         form = StreamForms(instance=request.user)
         form_settings = StreamSettingsForm(instance=request.user)   
-        
+
         return render(request,'studio.html', context={
             'form': form,
             'form_settings': form_settings, 
@@ -36,9 +36,9 @@ class Studio(View):
             'form_settings': form_settings, 
             'title':'Студия - Lastream.online',
             'pull_url': settings.PULL_URL,
-            'output_url': settings.OUTPUT_URL,
+            'output_url': f"{settings.OUTPUT_URL}{request.user}/llhls.m3u8",
             })    
-    
+
 
 class StudioAPIView(APIView):
     def get(self, request, command):

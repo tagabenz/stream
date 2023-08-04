@@ -35,7 +35,7 @@ class CategoriesViews(DataMixin, ListView):
 
     def get_queryset(self):
 
-        return Users.objects.filter(username__in=self.get_stream_list())
+        return Users.objects.filter(username__in=self.get_stream_list()).select_related('cat')
     
 
 class CategoriesSort(DataMixin, ListView):
@@ -50,4 +50,4 @@ class CategoriesSort(DataMixin, ListView):
     
     def get_queryset(self):
         
-        return Users.objects.filter(username__in=self.get_stream_list(), cat__slug=self.kwargs['cat_slug'])
+        return Users.objects.filter(username__in=self.get_stream_list(), cat__slug=self.kwargs['cat_slug']).select_related('cat')
