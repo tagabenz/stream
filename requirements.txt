@@ -5,3 +5,5 @@ gunicorn
 pillow
 requests
 django-debug-toolbar
+python-socketio
+gevent-websocket

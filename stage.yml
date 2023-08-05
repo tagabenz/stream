@@ -1,37 +1,52 @@
 version: '3.3'
 
 services:
-
   web:
     environment:
       ENV: STAGE
+      OME_HOST: ${OME_HOST}
+      POLICY_KEY: ${POLICY_KEY}
+      OME_API_TOKEN: ${OME_API_TOKEN}
     build: .
+    volumes:
+      - $PWD/stream_app:/app
     ports:
       - 8000:8000
     links:
       - db
       - oven
-    volumes:
-      - STATIC:/app/stream_app/static
-
+    restart: always
+    
   oven:
-   image: airensoft/ovenmediaengine:0.15.0
-   ports:
-     - 1935:1935
-     - 4000:4000/udp
-     - 3333:3333
-     - 3334:3334
-     - 3478:3478
-     - 9000:9000
-     - 9999:9999/udp
+    image: airensoft/ovenmediaengine:0.15.10
+    ports:
+      - 8081:8081
+      - 1935:1935
+      - 3333:3333
+      - 3334:3334
+      - 9000:9000
+    restart: always
+    
+    environment: 
+      OME_ORIGIN_PORT: 9000
+      OME_RTMP_PROV_PORT: 1935
+      OME_LLHLS_STREAM_PORT: 3333
+      OME_LLHLS_STREAM_TLS_PORT: 3334
+      OME_API_PORT: 8081
+      POLICY_KEY: ${POLICY_KEY}
+      OME_API_TOKEN: ${OME_API_TOKEN}  
+    volumes:
+    - ./origin_conf:/opt/ovenmediaengine/bin/origin_conf
 
   db:
     image: postgres:latest
     user: postgres
     environment:
-      - POSTGRES_PASSWORD=django
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     volumes:
       - PGDATA:/var/lib/postgresql/data
+      - $PWD/DATABASE:/db
+    restart: always
 
   proxy:
     build: ./nginx

@@ -6,7 +6,8 @@ if [ "$ENV" = 'DEV' ]; then
   exec python ../manage.py runserver 0.0.0.0:8000
 elif [ "$ENV" = 'STAGE' ]; then
   echo "Running Staging Server"
-  gunicorn stream_app.wsgi:application --bind 0.0.0.0:8000
+  cd .. && gunicorn --bind 0.0.0.0:8000 stream_app.wsgi:application 
+  # cd .. && gunicorn --reload -k gevent -w 1 stream_app.wsgi:application --bind 0.0.0.0:8000 --log-level debug
 elif [ "$ENV" = 'PROD' ]; then
   echo "Running Production Server"
   gunicorn stream_app.wsgi:application --bind 0.0.0.0:8000
