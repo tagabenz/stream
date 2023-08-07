@@ -9,7 +9,7 @@ on:
 
 jobs:
   start_project:
-    runs-on: stage  
+    runs-on: stage-runner 
     steps:
       - name: info
         run: git status
