@@ -11,11 +11,11 @@ jobs:
   start_project:
     runs-on: stage-runner 
     steps:
-      - name: info
-        run: git status
       - name: Get_code
         uses: actions/checkout@v3
       - name: Build_project                                                 
         run: sudo docker-compose ${{ env.COMPOSE_ARG }} build --no-cache
+      - name: info
+        run: git status
       - name: start_project
         run: sudo docker-compose ${{ env.COMPOSE_ARG }} up -d
