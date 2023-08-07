@@ -14,6 +14,6 @@ jobs:
       - name: Get_code
         uses: actions/checkout@v3
       - name: Build_project                                                 
-        run: docker-compose ${{ env.COMPOSE_ARG }} build --no-cache -y
+        run: sudo docker-compose ${{ env.COMPOSE_ARG }} build --no-cache -y
       - name: start_project
-        run: docker-compose ${{ env.COMPOSE_ARG }} up
+        run: sudo docker-compose ${{ env.COMPOSE_ARG }} up
