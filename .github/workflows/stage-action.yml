@@ -1,6 +1,6 @@
 name: Stage deploy
 env:
-  COMPOSE_ARG: "-f stage.yml -p stream"
+  COMPOSE_ARG: "-f stage.yml"
 
 on:
   push:

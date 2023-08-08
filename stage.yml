@@ -15,10 +15,10 @@ services:
       - 8000:8000
     links:
       - db
-      - oven
+      - ome
     restart: always
     
-  oven:
+  ome:
     image: airensoft/ovenmediaengine:0.15.10
     ports:
       - 8081:8081
@@ -47,6 +47,7 @@ services:
     volumes:
       - PGDATA:/var/lib/postgresql/data
       - ./DATABASE:/db
+    # Bcommand: bash -c "psql -f /db/stream.sql -U postgres"
     restart: always
   
   proxy:
