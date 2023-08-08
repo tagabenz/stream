@@ -9,7 +9,7 @@ services:
       OME_API_TOKEN: ${OME_API_TOKEN}
     build: .
     volumes:
-      - $PWD/stream_app:/app
+      - ./stream_app:/app
       - STATIC:/app/stream_app/static
     ports:
       - 8000:8000
@@ -46,7 +46,7 @@ services:
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     volumes:
       - PGDATA:/var/lib/postgresql/data
-      - $PWD/DATABASE:/db
+      - ./DATABASE:/db
     restart: always
 
   proxy:
