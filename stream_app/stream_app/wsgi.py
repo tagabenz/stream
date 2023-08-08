@@ -1,6 +1,6 @@
 import os
 import socketio
-from . import settings 
+from stream_app import settings 
 
 from django.core.wsgi import get_wsgi_application
 
