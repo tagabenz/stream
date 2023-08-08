@@ -10,6 +10,7 @@ services:
     build: .
     volumes:
       - $PWD/stream_app:/app
+      - STATIC:/app/stream_app/static
     ports:
       - 8000:8000
     links:
