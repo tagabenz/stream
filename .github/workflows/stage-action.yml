@@ -13,6 +13,8 @@ jobs:
     steps:
       - name: Get_code
         uses: actions/checkout@v3
+      - name: Stop_project
+        uses: sudo docker-compose ${{ env.COMPOSE_ARG }} stop   
       - name: Build_project                                                 
         run: sudo docker-compose ${{ env.COMPOSE_ARG }} build --no-cache
       - name: start_project
