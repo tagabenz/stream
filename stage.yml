@@ -61,7 +61,7 @@ services:
       - ./nginx/stage.conf:/etc/nginx/conf.d/default.conf
       - ./cert/conf:/etc/letsencrypt:ro
       - ./cert/www:/var/www/certbot:ro
-    # command: '/bin/sh -c ''while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g "daemon off;"'''
+    command: '/bin/sh -c ''while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g "daemon off;"'''
     networks:
       nginx_net: 
     restart: unless-stopped   
@@ -71,13 +71,13 @@ services:
     volumes:
       - ./cert/conf:/etc/letsencrypt:rw
       - ./cert/www:/var/www/certbot:rw
-    # entrypoint:  "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"\
-    command: certonly --webroot --webroot-path=/var/www/certbot/ --email tagabenz@gmail.com.com --agree-tos --no-eff-email -d dev.lastream.online
+    entrypoint:  "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"\
+    # command: certonly --webroot --webroot-path=/var/www/certbot/ --email tagabenz@gmail.com.com --agree-tos --no-eff-email -d dev.lastream.online
     depends_on:
       - proxy  
     networks:
       nginx_net:
-    # restart: unless-stopped   
+    restart: unless-stopped   
 
 volumes:
   PGDATA:
