@@ -82,4 +82,3 @@ volumes:
 
 networks:
   nginx_net:
-    external: true
