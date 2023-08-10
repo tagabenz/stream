@@ -77,7 +77,7 @@ services:
       - proxy  
     networks:
       nginx_net:
-    restart: unless-stopped   
+    # restart: unless-stopped   
 
 volumes:
   PGDATA:
