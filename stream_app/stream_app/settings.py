@@ -20,7 +20,7 @@ OME_API_TOKEN=os.getenv('OME_API_TOKEN').split(':')
 if os.getenv('ENV') == 'DEV':
     PROTOCOL='http' 
     LLHLS_PORT=3333
-    OME_API_URL=f"{PROTOCOL}://oven:8081/v1"
+    OME_API_URL=f"{PROTOCOL}://ome:8081/v1"
 else:
     PROTOCOL='https'
     LLHLS_PORT=3334
