@@ -71,7 +71,7 @@ services:
     volumes:
       - ./cert/conf:/etc/letsencrypt:rw
       - ./cert/www:/var/www/certbot:rw
-    entrypoint:  "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"\
+    # entrypoint:  "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"\
     # command: certonly --webroot --webroot-path=/var/www/certbot/ --email tagabenz@gmail.com.com --agree-tos --no-eff-email -d dev.lastream.online
     depends_on:
       - proxy  
