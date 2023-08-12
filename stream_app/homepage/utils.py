@@ -14,5 +14,5 @@ class DataMixin():
 
     def get_stream_list(self):
 
-        return requests.get(f"{settings.PROTOCOL}://oven:8081/v1/vhosts/default/apps/input/streams", 
+        return requests.get(f"{settings.PROTOCOL}://ome:8081/v1/vhosts/default/apps/input/streams", 
                             auth=HTTPBasicAuth(settings.OME_API_TOKEN[0], settings.OME_API_TOKEN[1])).json()['response']    
