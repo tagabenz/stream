@@ -5,17 +5,18 @@ services:
     environment:
       ENV: DEV
       OME_HOST: ${OME_HOST}
-      POLICY_KEY: ${POLICY_KEY}
+      OME_POLICY_KEY: ${OME_POLICY_KEY}
       OME_API_TOKEN: ${OME_API_TOKEN}
+      OME_VHOST_NAME: ${OME_VHOST_NAME}
+      OME_APP_NAME: ${OME_APP_NAME}
     build: .
     volumes:
       - ./stream_app:/app
     ports:
       - 8000:8000
-    links:
-      - db
-      - oven
-    restart: always
+    networks:
+      nginx_net:
+    restart: unless-stopped
     
   ome:
     image: airensoft/ovenmediaengine:0.15.10
@@ -23,30 +24,37 @@ services:
       - 8081:8081
       - 1935:1935
       - 3333:3333
-      # - 3334:3334
+      - 3334:3334
       - 9000:9000
     restart: always
-    
     environment: 
       OME_ORIGIN_PORT: 9000
       OME_RTMP_PROV_PORT: 1935
       OME_LLHLS_STREAM_PORT: 3333
-      # - OME_LLHLS_STREAM_TLS_PORT=3334
+      OME_LLHLS_STREAM_TLS_PORT: 3334
       OME_API_PORT: 8081
-      POLICY_KEY: ${POLICY_KEY}
-      OME_API_TOKEN: ${OME_API_TOKEN}  
+      OME_POLICY_KEY: ${OME_POLICY_KEY}
+      OME_API_TOKEN: ${OME_API_TOKEN}
+      OME_VHOST_NAME: ${OME_VHOST_NAME}
+      OME_APP_NAME: ${OME_APP_NAME}   
     volumes:
     - ./origin_conf:/opt/ovenmediaengine/bin/origin_conf
+    networks:
+      nginx_net:
 
   db:
     image: postgres:latest
     user: postgres
-    environment:
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     volumes:
       - PGDATA:/var/lib/postgresql/data
       - ./DATABASE:/db
+    networks:
+      nginx_net:  
     restart: always
+
 
 volumes:
   PGDATA:
+
+networks:
+  nginx_net:
