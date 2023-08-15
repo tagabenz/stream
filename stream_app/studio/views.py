@@ -1,31 +1,66 @@
 from django.shortcuts import render
 from django.views import View
+from django.contrib.auth.mixins import LoginRequiredMixin
 
-from .models import Stream
+from rest_framework.response import Response
+from rest_framework.views import APIView
+
 from .forms import *
+from .serializers import *
+from .key_generate import get_key
+
 from stream_app import settings
 
 
-class Studio(View):
+class Studio(LoginRequiredMixin,View):
+    login_url = "/login"
     def get(self, request):
-        user = Stream.objects.get(autor=request.user)
-        form = StreamForms(instance=user)
-        form_settings = StreamSettingsForm(instance=user)
+        form = StreamForms(instance=request.user)
+        form_settings = StreamSettingsForm(instance=request.user)   
+
         return render(request,'studio.html', context={
             'form': form,
             'form_settings': form_settings, 
             'title':'Студия - Lastream.online',
-            'stream_url': f"rtmp://{settings.OME_HOST}:1935/input"
+            'pull_url': settings.OME_RTMP_INPUT_URL,
+            'output_url': f"{settings.OME_LLHLS_STREAMING_HOST}/{settings.OME_APP_NAME}/{request.user}/llhls.m3u8",
             })
     
     def post(self, request):
-        user = Stream.objects.get(autor=request.user)
-        form = StreamForms(request.POST, instance=user)
+        form = StreamForms(request.POST, instance=request.user)
+        form_settings = StreamSettingsForm(instance=request.user) 
 
         if form.is_valid():
             form.save()  
 
         return render(request,'studio.html', context={
             'form': form,
-            'title':'Студия - Lastream.online'
+            'form_settings': form_settings, 
+            'title':'Студия - Lastream.online',
+            'pull_url': settings.OME_RTMP_INPUT_URL,
+            'output_url': f"{settings.OME_LLHLS_STREAMING_HOST}/{settings.OME_APP_NAME}/{request.user}/llhls.m3u8",
             })    
+
+
+class StudioAPIView(APIView):
+    def get(self, request, command):
+       try:instance=Users.objects.get(username=request.user)
+       except:return Response({'error':'Object does not exists'})
+
+       if command=="status_change":
+           if instance.is_online:instance.is_online=False
+           else:instance.is_online=True
+           instance.save()
+
+           return Response(instance.is_online)
+    
+    def put(self, request, command, *args, **kwargs):
+        try:instance=Users.objects.get(username=request.user)
+        except:return Response({'error':'Object does not exists'})
+
+        if command=="key_generate":
+            serializer=Key_Generate_Serializer(data={'stream_key': get_key(request.user)},instance=instance)
+            serializer.is_valid(raise_exception=True)
+            serializer.save()
+            
+            return Response(serializer.data)

@@ -21,9 +21,9 @@ class Categories(models.Model):
     img = models.ImageField(upload_to="svg/", null=True)
 
     def get_absolute_url(self):
-        return reverse('cat_show',kwargs={'post_slug': self.slug})
+        return reverse('show_categories',kwargs={'cat_slug': self.slug})
     
-    def __str__(self) -> str:
+    def __str__(self):
         return self.name
     
     class Meta():

@@ -69,7 +69,7 @@ if __name__ == "__main__":
 
 def get_key(username):
     exp = datetime.now() + timedelta(hours=720)
-    BASE_URL=f"rtmp://{settings.OME_HOST}:{settings.LLHLS_PORT}/input/{username}"
+    BASE_URL=f"{settings.PULL_URL}/{username}"
     KEY=settings.KEY
     
     manager = SignedPolicy(BASE_URL, KEY)

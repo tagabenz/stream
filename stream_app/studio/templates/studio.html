@@ -8,13 +8,19 @@
 <main class="container-fluid mx-0">
     <div class="row py-3 text-bg-dark">
         <div class="col-lg-4 mb-4">
-            {{ user.username|json_script:"username" }}
-            {% verbatim %}
-            <div id="player_id">
-                {{ player }}
-            </div>
-            {% endverbatim %}
+            {{ output_url|json_script:"output_url" }}
+            <div id="player_id"></div>
             <script src="{% static 'jss/player.js' %}"></script>
+            <!-- <div id="waiting-rtmp-text" class="mt-2 text-center">
+                <div class="spinner-grow spinner-grow-sm" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+                Ожидание запуска трансляции
+            </div>
+            <div id="connected-rtmp-input-text" class="mt-4 text-center text-primary d-none">
+                Вы в эфире. <br>
+                <span class="text-muted small">(The popup will close automatically.)</span>
+            </div> -->
         </div>
         <div class="col-lg-4 mb-4" id="stream_info">
             {% show_stream_info user %}
@@ -55,8 +61,9 @@
         <div class="col-lg-4 mb-4">
             <h2 class="font-ctc h4 text-white-50">Настройки трансляции:</h2>
             <div class="input-group mb-2">
-                <span class="input-group-text text-bg-dark"><label for="stream_url" class="font-ctc text-white-50 h5 mb-0">URL:</label></span>
-                <input type="text" class="form-control text-bg-dark" id="stream_url" value="{{ stream_url }}" disabled>
+                <span class="input-group-text text-bg-dark"><label for="pull_url" class="font-ctc text-white-50 h5 mb-0">URL:</label></span>
+                <input type="text" class="form-control text-bg-dark" id="pull_url" value="{{ pull_url }}" disabled>
+                <button type="button" class="btn btn-outline-light text-uppercase focus-item font-ctc" onclick="copyUrl()">Копировать</button>
             </div>
             <form action="" method="post"></form>
                 {% csrf_token %}
@@ -65,9 +72,11 @@
                     <span class="input-group-text text-bg-dark"><label for="{{ f.id_for_label }}" class="font-ctc text-white-50 h5 mb-0">{{ f.label }}</label></span>
                     {{ f }}
                     {% endfor %}
+                    <button type="button" class="btn btn-outline-light text-uppercase focus-item font-ctc" onclick="copyKey()">Копировать</button>
                 </div>
             </form>
         </div>
     </div>
 </main>
+<script src="{% static 'jss/studios_scripts.js' %}"></script>
 {% endblock %}

@@ -10,20 +10,60 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
-import os
+import os,base64
 from pathlib import Path
 
-OME_HOST=os.getenv('OME_HOST')
-KEY=os.getenv('KEY')
 
-if os.getenv('ENV') == 'DEV':
-    PROTOCOL='http' 
-    LLHLS_PORT=3333
-else:
-    PROTOCOL='https'
-    LLHLS_PORT=3334
+def get_http_protocol():
+    if os.getenv('ENV') == 'DEV':protocol = 'http'
+    else:protocol = 'https'
     
-    
+    return protocol
+
+def get_llhls_publisher_port():
+    if os.getenv('ENV') == 'DEV':port = '3333'
+    else:port=3334
+
+    return port
+
+def get_ws_protocol(enable_tls):
+    protocol = 'ws'
+
+    if 'true' in enable_tls:
+        protocol = 'wss'
+
+    return protocol
+
+def encode_access_token(token):
+    return base64 \
+        .b64encode(token.encode('utf-8')) \
+        .decode('utf-8')
+
+
+OME_HOST = os.getenv('OME_HOST')
+OME_POLICY_KEY=os.getenv('OME_POLICY_KEY')
+PROTOCOL = get_http_protocol()
+OME_API_HOST = f'{PROTOCOL}://ome:8081/v1'
+OME_API_AUTH_HEADER = {'authorization': 'Basic ' + encode_access_token(os.getenv('OME_API_TOKEN'))}
+OME_VHOST_NAME = os.getenv('OME_VHOST_NAME')
+OME_APP_NAME = os.getenv('OME_APP_NAME')
+# OME_STREAM_NAME = app.config['OME_STREAM_NAME']
+OME_API_GET_STREAMS = OME_API_HOST + f'/vhosts/{OME_VHOST_NAME}/apps/{OME_APP_NAME}/streams'
+OME_RTMP_INPUT_URL = f'rtmp://{OME_HOST}:1935/{OME_APP_NAME}'
+OME_LLHLS_STREAMING_PROTOCOL = get_http_protocol()
+OME_LLHLS_STREAMING_HOST = f'{OME_LLHLS_STREAMING_PROTOCOL}://{OME_HOST}:{get_llhls_publisher_port()}'
+# percent_encoded_stream_id = parse.quote(f'srt://{OME_HOST}:{ app.config["OME_SRT_PROVIDER_PORT"]}/{OME_APP_NAME}/', safe='')
+# OME_SRT_INPUT_URL = f'srt://{OME_HOST}:{ app.config["OME_SRT_PROVIDER_PORT"]}?streamid={percent_encoded_stream_id}'
+# OME_WEBRTC_INPUT_PROTOCOL = get_ws_protocol(
+#     app.config['OME_WEBRTC_PROVIDER_ENABLE_TLS'])
+# OME_WEBRTC_INPUT_HOST = f'{OME_WEBRTC_INPUT_PROTOCOL}://{OME_HOST}:{app.config["OME_WEBRTC_PROVIDER_PORT"]}'
+# OME_WEBRTC_STREAMING_PROTOCOL = get_ws_protocol(
+#     app.config['OME_WEBRTC_PUBLISHER_ENABLE_TLS'])
+# OME_WEBRTC_STREAMING_HOST = f'{OME_WEBRTC_STREAMING_PROTOCOL}://{OME_HOST}:{app.config["OME_WEBRTC_PUBLISHER_PORT"]}'
+
+# OME_API_TOKEN=os.getenv('OME_API_TOKEN').split(':')
+
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -35,7 +75,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-%zz2d0a5rb0%5v)$p6l1f8n@*(8ef#tgds4-^*qx=b8p%cw_!$'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+if os.getenv('ENV') == 'PROD':DEBUG = False
+else:DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -49,6 +90,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'debug_toolbar',
     'rest_framework',
     'homepage',
     'blog',
@@ -65,6 +107,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "debug_toolbar.middleware.DebugToolbarMiddleware",
 ]
 
 ROOT_URLCONF = 'stream_app.urls'
@@ -154,3 +197,12 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'app_users.Users'
 
 LOGIN_REDIRECT_URL = '/'
+
+INTERNAL_IPS = [
+    "127.0.0.1",
+]
+
+if DEBUG:
+    import socket  # only if you haven't already imported this
+    hostname, _, ips = socket.gethostbyname_ex(socket.gethostname())
+    INTERNAL_IPS = [ip[: ip.rfind(".")] + ".1" for ip in ips] + ["127.0.0.1", "10.0.2.2"]

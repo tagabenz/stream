@@ -8,7 +8,6 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 
 from .forms import *
 from studio.key_generate import get_key
-from studio.models import Stream
 
 
 class LoginView(LoginView):
@@ -29,13 +28,9 @@ class UserRegistration(CreateView):
     
     def form_valid(self, form):
         self.object = form.save()
-        # Create Stream.objects in studio.models for User
-        Stream.objects.create(
-            title='Трансляция ' + form.cleaned_data['username'],
-            autor_id=self.object.id,
-            cat_id=1,
-            stream_key=get_key(username=form.cleaned_data['username']),
-        )
+        self.object.stream_key=get_key(form.cleaned_data['username'])
+        self.object.stream_name=f"Трансляция {form.cleaned_data['username']}"
+        
         return super().form_valid(form)
 
     def get_context_data(self,**kwargs):
@@ -46,7 +41,7 @@ class UserRegistration(CreateView):
 
 
 class UserProfile(LoginRequiredMixin, View):
-    # redirect_field_name='/login'
+    login_url = "/login"
 
     def get(self, request):
         user_form = UserEditForm(instance=request.user)
