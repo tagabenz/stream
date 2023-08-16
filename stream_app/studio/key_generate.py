@@ -69,7 +69,7 @@ if __name__ == "__main__":
 
 def get_key(username):
     exp = datetime.now() + timedelta(hours=720)
-    BASE_URL=f"{settings.OME_LLHLS_STREAMING_HOST}/{settings.OME_APP_NAME}/{username}"
+    BASE_URL=f"{settings.OME_RTMP_INPUT_URL}/{username}"
     KEY=settings.OME_POLICY_KEY
     
     manager = SignedPolicy(BASE_URL, KEY)
