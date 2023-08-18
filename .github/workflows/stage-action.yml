@@ -1,6 +1,6 @@
 name: Stage deploy
 env:
-  COMPOSE_ARG: "--env.file .env.stage -f stage.yml"
+  COMPOSE_ARG: "--env-file .env.stage -f stage.yml"
 on:
   push:
     branches:
