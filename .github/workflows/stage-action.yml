@@ -16,4 +16,4 @@ jobs:
       - name: Build_project                                                 
         run: docker-compose ${{ env.COMPOSE_ARG }} build --no-cache
       - name: start_project
-        run: docker-compose ${{ env.COMPOSE_ARG }} up -d
+        run: docker-compose --env-file .env.stage ${{ env.COMPOSE_ARG }} up -d
