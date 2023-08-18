@@ -2,6 +2,7 @@ version: '3.3'
 
 services:
   web:
+    user: 1000:1001
     environment:
       ENV: DEV
       OME_HOST: ${OME_HOST}
@@ -72,6 +73,7 @@ services:
   
   certbot:
     image: certbot/certbot
+    user: 1000:1001
     volumes:
       - ./cert/conf:/etc/letsencrypt:rw
       - ./cert/www:/var/www/certbot:rw
