@@ -1,6 +1,6 @@
 name: Stage deploy
 env:
-  COMPOSE_ARG: "-f stage.yml"
+  COMPOSE_ARG: "--env.file .env.stage -f stage.yml"
 on:
   push:
     branches:
@@ -15,4 +15,4 @@ jobs:
       - name: Build_project                                                 
         run: docker compose ${{ env.COMPOSE_ARG }} build --no-cache
       - name: start_project
-        run: docker compose ${{ env.COMPOSE_ARG }} --env.file .env.stage up -d
+        run: docker compose ${{ env.COMPOSE_ARG }} up -d
