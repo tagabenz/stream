@@ -1,3 +1,17 @@
 {% extends 'base.html' %}
 {% block body %}
+<div class="position-relative overflow-hidden p-3 text-center bg-body-tertiary">
+    <h1>Данная версия сайта является демонстрацией проекта для портфолио</h1>
+    <div class="m-5">
+        <h3>Как это работает</h3>
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/v47tq9n4AP8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+    </div>
+</div>
+<div class="px-5">
+    <b>Github: <a href="https://github.com/tagabenz/stream">https://github.com/tagabenz/stream</a></b>
+    <br><b>Стек проекта:</b> Django, PostgresSQL, RestAPI, Boostrap, JS, Nginx, Docker.
+    <br><b>В основе проекта лежит OpenSource проект стримингового движка </b><a href="https://airensoft.gitbook.io/ovenmediaengine/">OvenMediaEngine</a>
+    <br>Настроенно CI/CD окружение для локальной разработки (<a href="https://github.com/tagabenz/stream/blob/main/docker-compose.yml">файл docker-compose.yml</a>)
+    <br>и Pipeline для поставки кода на удаленный (Stage) сервер при помощи Github Action (<a href="https://github.com/tagabenz/stream/blob/main/stage.yml">файл Stage.yml</a>).
+</div>
 {% endblock %}

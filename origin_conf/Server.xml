@@ -40,7 +40,7 @@
 		
 		<Managers>
 			<API>
-				<Port>${env:OME_API_PORT:8081}</Port>
+				<Port>8081</Port>
 				<WorkerCount>1</WorkerCount>
 			</API>
 		</Managers>
@@ -55,7 +55,7 @@
 			</OVT>
 			<!-- Push providers -->
 			<RTMP>
-				<Port>${env:OME_RTMP_PROV_PORT:1935}</Port>
+				<Port>1935</Port>
 				<WorkerCount>1</WorkerCount>
 			</RTMP>
 			<!-- <SRT>
@@ -83,7 +83,7 @@
 		<Publishers>
 			<!-- The OVT is protocol for ORIGIN-EDGE -->
 			<OVT>
-				<Port>${env:OME_ORIGIN_PORT:9000}</Port>
+				<Port>9000</Port>
 				<WorkerCount>1</WorkerCount>
 			</OVT>
 			<LLHLS>
@@ -92,8 +92,7 @@
 				Note that LLHLS runs higher performance over HTTP/2.
 				Therefore, it is recommended to use TLS Port.
 				-->
-				<Port>${env:OME_LLHLS_STREAM_PORT:3333}</Port>
-				<TLSPort>${env:OME_LLHLS_STREAM_TLS_PORT:3334}</TLSPort>
+				<Port>3333</Port>
 				<WorkerCount>1</WorkerCount>
 			</LLHLS>
 			<!-- <WebRTC>
