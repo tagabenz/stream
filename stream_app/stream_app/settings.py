@@ -26,6 +26,12 @@ def get_llhls_publisher_port():
 
     return port
 
+def get_api_port():
+    if os.getenv('ENV') == 'DEV':port = '8081'
+    else:port='8082'
+
+    return port
+
 def get_ws_protocol(enable_tls):
     protocol = 'ws'
 
@@ -48,7 +54,7 @@ OME_APP_NAME = os.getenv('OME_APP_NAME')
 
 OME_POLICY_KEY=os.getenv('OME_POLICY_KEY')
 
-OME_API_HOST = f'{PROTOCOL}://ome:8081/v1'
+OME_API_HOST = f'{PROTOCOL}://{OME_HOST}:{get_api_port()}/v1'
 OME_API_AUTH_HEADER = {'authorization': 'Basic ' + encode_access_token(os.getenv('OME_API_TOKEN'))}
 
 # OME_STREAM_NAME = app.config['OME_STREAM_NAME']
