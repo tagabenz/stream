@@ -24,14 +24,11 @@ services:
       - 8081:8081
       - 1935:1935
       - 3333:3333
-      - 3334:3334
       - 9000:9000
     restart: always
     environment: 
-      OME_ORIGIN_PORT: 9000
       OME_RTMP_PROV_PORT: 1935
       OME_LLHLS_STREAM_PORT: 3333
-      OME_LLHLS_STREAM_TLS_PORT: 3334
       OME_API_PORT: 8081
       OME_POLICY_KEY: ${OME_POLICY_KEY}
       OME_API_TOKEN: ${OME_API_TOKEN}

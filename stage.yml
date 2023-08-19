@@ -2,11 +2,14 @@ version: '3.3'
 
 services:
   web:
+    user: 1000:1001
     environment:
       ENV: STAGE
       OME_HOST: ${OME_HOST}
-      POLICY_KEY: ${POLICY_KEY}
+      OME_POLICY_KEY: ${OME_POLICY_KEY}
       OME_API_TOKEN: ${OME_API_TOKEN}
+      OME_VHOST_NAME: ${OME_VHOST_NAME}
+      OME_APP_NAME: ${OME_APP_NAME}
     build: .
     volumes:
       - ./stream_app:/app
@@ -21,20 +24,19 @@ services:
     image: airensoft/ovenmediaengine:0.15.10
     ports:
       - 8081:8081
+      - 8082:8082
       - 1935:1935
       - 3333:3333
       - 3334:3334
       - 9000:9000 
-    environment:
-      OME_ORIGIN_PORT: 9000
-      OME_RTMP_PROV_PORT: 1935
-      # OME_LLHLS_STREAM_PORT: 3333
-      OME_LLHLS_STREAM_TLS_PORT: 3334
-      OME_API_PORT: 8081
-      POLICY_KEY: ${POLICY_KEY}
-      OME_API_TOKEN: ${OME_API_TOKEN}  
+    environment: 
+      OME_POLICY_KEY: ${OME_POLICY_KEY}
+      OME_API_TOKEN: ${OME_API_TOKEN}
+      OME_VHOST_NAME: ${OME_VHOST_NAME}
+      OME_APP_NAME: ${OME_APP_NAME}   
     volumes:
     - ./origin_conf/Server_stage.xml:/opt/ovenmediaengine/bin/origin_conf/Server.xml
+    - ./cert/conf:/etc/letsencrypt:ro
     networks:
       nginx_net:
     restart: always  
@@ -42,8 +44,6 @@ services:
   db:
     image: postgres:latest
     user: postgres
-    environment:
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     volumes:
       - PGDATA:/var/lib/postgresql/data
       - ./DATABASE:/db
@@ -69,6 +69,7 @@ services:
   
   certbot:
     image: certbot/certbot
+    user: 1000:1001
     volumes:
       - ./cert/conf:/etc/letsencrypt:rw
       - ./cert/www:/var/www/certbot:rw
@@ -86,3 +87,4 @@ volumes:
 
 networks:
   nginx_net:
+

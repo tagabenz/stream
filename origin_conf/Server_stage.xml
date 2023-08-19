@@ -41,6 +41,7 @@
 		<Managers>
 			<API>
 				<Port>8081</Port>
+				<TLSPort>8082</TLSPort>
 				<WorkerCount>1</WorkerCount>
 			</API>
 		</Managers>
@@ -83,7 +84,7 @@
 		<Publishers>
 			<!-- The OVT is protocol for ORIGIN-EDGE -->
 			<OVT>
-				<Port>9000</Port>
+				<Port>9000}</Port>
 				<WorkerCount>1</WorkerCount>
 			</OVT>
 			<LLHLS>
@@ -93,6 +94,7 @@
 				Therefore, it is recommended to use TLS Port.
 				-->
 				<Port>3333</Port>
+				<TLSPort>3334</TLSPort>
 				<WorkerCount>1</WorkerCount>
 			</LLHLS>
 			<!-- <WebRTC>
@@ -115,6 +117,11 @@
 			<Names>
 				<Name>*</Name>
 			</Names>
+			<TLS>
+				<CertPath>/etc/letsencrypt/live/dev.lastream.online/fullchain.pem</CertPath>
+				<KeyPath>/etc/letsencrypt/live/dev.lastream.online/privkey.pem</KeyPath>
+				<ChainCertPath>/etc/letsencrypt/live/dev.lastream.online/chain.pem</ChainCertPath>
+			</TLS>
 		</Host>
 		<API>
 			<AccessToken>${env:OME_API_TOKEN}</AccessToken>
@@ -142,13 +149,11 @@
 					-->
 					<Name>*</Name>
 				</Names>
-				<!--
 				<TLS>
-					<CertPath>path/to/file.crt</CertPath>
-					<KeyPath>path/to/file.key</KeyPath>
-					<ChainCertPath>path/to/file.crt</ChainCertPath>
+					<CertPath>/etc/letsencrypt/live/dev.lastream.online/fullchain.pem</CertPath>
+					<KeyPath>/etc/letsencrypt/live/dev.lastream.online/privkey.pem</KeyPath>
+					<ChainCertPath>/etc/letsencrypt/live/dev.lastream.online/chain.pem</ChainCertPath>
 				</TLS>
-				-->
 			</Host>
 
 	
@@ -317,7 +322,7 @@
 								<PartialSegmentMaxAge>-1</PartialSegmentMaxAge>
 							</CacheControl>
 							-->
-							<ChunkDuration>0.5</ChunkDuration>
+							<ChunkDuration>0.2</ChunkDuration>
 							<!-- PartHoldBack SHOULD be at least three times the Part Target Duration -->
 							<PartHoldBack>1.5</PartHoldBack>
 							<SegmentDuration>6</SegmentDuration>

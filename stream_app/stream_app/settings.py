@@ -26,6 +26,12 @@ def get_llhls_publisher_port():
 
     return port
 
+def get_api_port():
+    if os.getenv('ENV') == 'DEV':port = '8081'
+    else:port='8082'
+
+    return port
+
 def get_ws_protocol(enable_tls):
     protocol = 'ws'
 
@@ -40,15 +46,20 @@ def encode_access_token(token):
         .decode('utf-8')
 
 
-OME_HOST = os.getenv('OME_HOST')
-OME_POLICY_KEY=os.getenv('OME_POLICY_KEY')
 PROTOCOL = get_http_protocol()
-OME_API_HOST = f'{PROTOCOL}://ome:8081/v1'
-OME_API_AUTH_HEADER = {'authorization': 'Basic ' + encode_access_token(os.getenv('OME_API_TOKEN'))}
+
+OME_HOST = os.getenv('OME_HOST')
 OME_VHOST_NAME = os.getenv('OME_VHOST_NAME')
 OME_APP_NAME = os.getenv('OME_APP_NAME')
+
+OME_POLICY_KEY=os.getenv('OME_POLICY_KEY')
+
+OME_API_HOST = f'{PROTOCOL}://{OME_HOST}:{get_api_port()}/v1'
+OME_API_AUTH_HEADER = {'authorization': 'Basic ' + encode_access_token(os.getenv('OME_API_TOKEN'))}
+
 # OME_STREAM_NAME = app.config['OME_STREAM_NAME']
 OME_API_GET_STREAMS = OME_API_HOST + f'/vhosts/{OME_VHOST_NAME}/apps/{OME_APP_NAME}/streams'
+
 OME_RTMP_INPUT_URL = f'rtmp://{OME_HOST}:1935/{OME_APP_NAME}'
 OME_LLHLS_STREAMING_PROTOCOL = get_http_protocol()
 OME_LLHLS_STREAMING_HOST = f'{OME_LLHLS_STREAMING_PROTOCOL}://{OME_HOST}:{get_llhls_publisher_port()}'
@@ -76,8 +87,10 @@ SECRET_KEY = 'django-insecure-%zz2d0a5rb0%5v)$p6l1f8n@*(8ef#tgds4-^*qx=b8p%cw_!$
 
 # SECURITY WARNING: don't run with debug turned on in production!
 if os.getenv('ENV') == 'PROD':DEBUG = False
-else:DEBUG = True
-
+else:
+    DEBUG = True
+    CSRF_TRUSTED_ORIGINS=[f"https://{OME_HOST}"]
+    
 ALLOWED_HOSTS = ['*']
 
 
