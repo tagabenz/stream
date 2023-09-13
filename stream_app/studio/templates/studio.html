@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
-{% load stream_tags %}
+{% load chat_tags %}
+{% load stream_tags %}  
 {% block body %}
 <div class="py-4 text-center">
     <h1 class="mb-0 font-ctc">Студия</h1>
@@ -55,7 +56,7 @@
                 </div>
             </div>   
         </div>
-        <div class="col-lg-4" id="chat" style="background-color: brown;">CHAT</div>
+        {% chat user %}
     </div>
     <div class="row py-3 text-bg-dark">
         <div class="col-lg-4 mb-4">
@@ -78,5 +79,5 @@
         </div>
     </div>
 </main>
-<script src="{% static 'jss/studios_scripts.js' %}"></script>
+<script src="{% static 'jss/studio.js' %}"></script>
 {% endblock %}

@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% block body %}
-<div class="position-relative overflow-hidden p-3 text-center bg-body-tertiary">
+<p>{{request.COOKIES}}</p>
+<!-- <div class="position-relative overflow-hidden p-3 text-center bg-body-tertiary">
     <h1>Данная версия сайта является демонстрацией проекта для портфолио</h1>
     <div class="m-5">
         <h3>Как это работает</h3>
@@ -13,5 +14,5 @@
     <br><b>В основе проекта лежит OpenSource проект стримингового движка </b><a href="https://airensoft.gitbook.io/ovenmediaengine/">OvenMediaEngine</a>
     <br>Настроенно CI/CD окружение для локальной разработки (<a href="https://github.com/tagabenz/stream/blob/main/docker-compose.yml">файл docker-compose.yml</a>)
     <br>и Pipeline для поставки кода на удаленный (Stage) сервер при помощи Github Action (<a href="https://github.com/tagabenz/stream/blob/main/stage.yml">файл Stage.yml</a>)
-</div>
+</div> -->
 {% endblock %}

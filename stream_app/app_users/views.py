@@ -1,25 +1,40 @@
 from django.shortcuts import render, redirect
-from django.urls import reverse_lazy
+from django.http import HttpResponseRedirect
+from django.urls import reverse_lazy,reverse
 from django.views import View
 from django.views.generic import CreateView
-from django.contrib.auth import logout
+from django.contrib.auth import login, logout
 from django.contrib.auth.views import LoginView
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 from .forms import *
 from studio.key_generate import get_key
+from stream_app import settings
+from datetime import timedelta
+
+import jwt
 
 
 class LoginView(LoginView):
+    redirect_authenticated_user = True
     form_class=AuthForm
     template_name='login.html'
     
+    def form_valid(self, form):
+        """Security check complete. Log the user in."""
+        login(self.request, form.get_user())
+        response=HttpResponseRedirect(self.get_success_url())
+        
+        response.set_cookie('token', jwt.encode({"id": self.request.user.id}, key='secret', algorithm="HS256"),max_age=timedelta(days=30))
+        
+        return response
+
     def get_context_data(self,**kwargs):
         context=super().get_context_data(**kwargs)
         context['title']='Вход - Lastream.online'
-
+        
         return context
-    
+
 
 class UserRegistration(CreateView):
     form_class=UserForm

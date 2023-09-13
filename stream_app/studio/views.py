@@ -24,6 +24,7 @@ class Studio(LoginRequiredMixin,View):
             'title':'Студия - Lastream.online',
             'pull_url': settings.OME_RTMP_INPUT_URL,
             'output_url': f"{settings.OME_LLHLS_STREAMING_HOST}/{settings.OME_APP_NAME}/{request.user}/llhls.m3u8",
+            'chat_name': request.user.username
             })
     
     def post(self, request):
@@ -39,6 +40,7 @@ class Studio(LoginRequiredMixin,View):
             'title':'Студия - Lastream.online',
             'pull_url': settings.OME_RTMP_INPUT_URL,
             'output_url': f"{settings.OME_LLHLS_STREAMING_HOST}/{settings.OME_APP_NAME}/{request.user}/llhls.m3u8",
+            'chat_name': request.user.username
             })    
 
 

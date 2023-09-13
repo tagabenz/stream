@@ -35,7 +35,7 @@ services:
       OME_VHOST_NAME: ${OME_VHOST_NAME}
       OME_APP_NAME: ${OME_APP_NAME}   
     volumes:
-    - ./origin_conf/Server_stage.xml:/opt/ovenmediaengine/bin/origin_conf/Server.xml
+    - ./config/origin_conf/Server_stage.xml:/opt/ovenmediaengine/bin/origin_conf/Server.xml
     - ./cert/conf:/etc/letsencrypt:ro
     networks:
       nginx_net:
@@ -58,7 +58,7 @@ services:
       - 443:443
     volumes:
       - STATIC:/app/stream_app/static
-      - ./nginx/stage.conf:/etc/nginx/conf.d/default.conf
+      - ./config/nginx/stage.conf:/etc/nginx/conf.d/default.conf
       - ./cert/conf/options-ssl-nginx.conf:/etc/letsencrypt/options-ssl-nginx.conf
       - ./cert/conf:/etc/letsencrypt:ro
       - ./cert/www:/var/www/certbot:ro

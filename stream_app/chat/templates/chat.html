@@ -1,0 +1,61 @@
+<script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
+<div class="col-lg-4" id="chat" style="background-color: brown;">
+  <div id="header" class="text-center">Чат трансляции</div>
+  <div class="chat-message">
+      <input id="chat-message-input" class="chat-message-input" type="text" autocomplete="off" autofocus />
+  </div>
+  <ul id="chat-thread" class="chat-thread"></ul>
+</div>
+{{ user.username | json_script:"user" }}
+
+<script>
+  chatApi("http://192.168.0.198:8800/api/history", {"channel": "chat:index", "limit": 100}).then((data) => {
+    console.log(data);
+  });  
+
+  const token = Cookies.get('token');
+  
+  const chatThread = document.querySelector('#chat-thread');
+  const messageInput = document.querySelector('#chat-message-input');
+  
+  const centrifuge = new Centrifuge("ws://localhost:8800/connection/websocket", {
+    token: token
+  });
+
+  centrifuge.on('connecting', function (ctx) {
+    console.log(`connecting: ${ctx.code}, ${ctx.reason}`);
+  }).on('connected', function (ctx) {
+    console.log(`connected over ${ctx.transport}`);
+  }).on('disconnected', function (ctx) {
+    console.log(`disconnected: ${ctx.code}, ${ctx.reason}`);
+  }).connect();
+  
+  const sub = centrifuge.newSubscription(roomName);
+
+  sub.on('publication', function (ctx) {
+    const chatNewThread = document.createElement('li');
+    const chatNewMessage = document.createTextNode(ctx.data.message);
+    chatNewThread.appendChild(chatNewMessage);
+    chatThread.appendChild(chatNewThread);
+    chatThread.scrollTop = chatThread.scrollHeight;
+  }).on('subscribing', function (ctx) {
+    console.log(`subscribing: ${ctx.code}, ${ctx.reason}`);
+  }).on('subscribed', function (ctx) {
+    console.log('subscribed', ctx);
+  }).on('unsubscribed', function (ctx) {
+    console.log(`unsubscribed: ${ctx.code}, ${ctx.reason}`);
+  }).subscribe();
+
+  messageInput.focus();
+  messageInput.onkeyup = function (e) {
+    if (e.keyCode === 13) {  // enter, return
+      e.preventDefault();
+      const message = messageInput.value;
+      if (!message) {
+          return;
+      }
+      sub.publish({ 'message': message });
+      messageInput.value = '';
+    }
+  };
+</script>    
