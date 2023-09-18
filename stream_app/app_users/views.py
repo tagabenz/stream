@@ -24,8 +24,8 @@ class LoginView(LoginView):
         """Security check complete. Log the user in."""
         login(self.request, form.get_user())
         response=HttpResponseRedirect(self.get_success_url())
-        
-        response.set_cookie('token', jwt.encode({"id": self.request.user.id}, key='secret', algorithm="HS256"),max_age=timedelta(days=30))
+
+        response.set_cookie('token', jwt.encode({"sub": self.request.user.username }, key='secret', algorithm="HS256"),max_age=timedelta(days=30))
         
         return response
 

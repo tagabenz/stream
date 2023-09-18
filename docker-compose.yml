@@ -62,7 +62,8 @@ services:
         hard: 65535
     networks:
       nginx_net:
-
+    restart: always
+    
   redis:
     image: redis:latest
     ports:

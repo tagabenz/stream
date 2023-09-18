@@ -6,7 +6,6 @@
   "admin": true,
   "admin_password": "passwd",
   "admin_secret": "secret",
-  "api_key": "api-key",
   "allowed_origins": ["*"],
   "proxy_http_headers": ["Cookie"],
   "allow_subscribe_for_client": true,

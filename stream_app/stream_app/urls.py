@@ -6,12 +6,6 @@ from stream_app import settings
 from homepage.views import pageNotFound
 from studio.views import StudioAPIView
 
-from rest_framework_simplejwt.views import (
-    TokenObtainPairView,
-    TokenRefreshView,
-    TokenVerifyView,
-)
-
 
 urlpatterns = [
     path('admin/', admin.site.urls),

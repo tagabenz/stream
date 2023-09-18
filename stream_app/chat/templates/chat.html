@@ -1,4 +1,7 @@
+{% load static %}
 <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
+<script src="{% static 'jss/chat.js' %}"></script>
+
 <div class="col-lg-4" id="chat" style="background-color: brown;">
   <div id="header" class="text-center">Чат трансляции</div>
   <div class="chat-message">
@@ -6,18 +9,15 @@
   </div>
   <ul id="chat-thread" class="chat-thread"></ul>
 </div>
-{{ user.username | json_script:"user" }}
+{{ user.username | json_script:"user" }}  
 
 <script>
-  chatApi("http://192.168.0.198:8800/api/history", {"channel": "chat:index", "limit": 100}).then((data) => {
-    console.log(data);
-  });  
-
+  const roomName = document.getElementById('user').textContent.split(1,-1);
   const token = Cookies.get('token');
   
   const chatThread = document.querySelector('#chat-thread');
   const messageInput = document.querySelector('#chat-message-input');
-  
+  console.log(token)
   const centrifuge = new Centrifuge("ws://localhost:8800/connection/websocket", {
     token: token
   });
@@ -30,11 +30,13 @@
     console.log(`disconnected: ${ctx.code}, ${ctx.reason}`);
   }).connect();
   
-  const sub = centrifuge.newSubscription(roomName);
+  const sub = centrifuge.newSubscription("test1");
+  
+  
 
   sub.on('publication', function (ctx) {
     const chatNewThread = document.createElement('li');
-    const chatNewMessage = document.createTextNode(ctx.data.message);
+    const chatNewMessage = document.createTextNode(ctx.info.user+": "+ctx.data.message);
     chatNewThread.appendChild(chatNewMessage);
     chatThread.appendChild(chatNewThread);
     chatThread.scrollTop = chatThread.scrollHeight;
@@ -44,7 +46,17 @@
     console.log('subscribed', ctx);
   }).on('unsubscribed', function (ctx) {
     console.log(`unsubscribed: ${ctx.code}, ${ctx.reason}`);
+  }).on('error', function(ctx) {
+    console.log('client error', ctx);
   }).subscribe();
+  
+  sub.history({limit: 10}).then(function(ctx) {
+    for (const element of ctx.publications) {
+      sub.publish(element.data);
+    }
+  }, function(err) {
+      // history call failed with error
+  });
 
   messageInput.focus();
   messageInput.onkeyup = function (e) {
@@ -54,8 +66,9 @@
       if (!message) {
           return;
       }
-      sub.publish({ 'message': message });
+      sub.publish({ 'message': message});
       messageInput.value = '';
     }
   };
+
 </script>    
