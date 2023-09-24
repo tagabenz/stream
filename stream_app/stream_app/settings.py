@@ -46,8 +46,7 @@ def encode_access_token(token):
         .decode('utf-8')
 
 
-# OME_HOST = os.getenv('OME_HOST') 
-OME_HOST='192.168.0.198'
+OME_HOST = os.getenv('OME_HOST') 
 OME_VHOST_NAME = os.getenv('OME_VHOST_NAME')
 OME_APP_NAME = os.getenv('OME_APP_NAME')
 OME_POLICY_KEY=os.getenv('OME_POLICY_KEY')
