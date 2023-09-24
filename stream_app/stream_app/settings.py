@@ -46,7 +46,8 @@ def encode_access_token(token):
         .decode('utf-8')
 
 
-OME_HOST = os.getenv('OME_HOST') 
+# OME_HOST = os.getenv('OME_HOST') 
+OME_HOST='192.168.0.198'
 OME_VHOST_NAME = os.getenv('OME_VHOST_NAME')
 OME_APP_NAME = os.getenv('OME_APP_NAME')
 OME_POLICY_KEY=os.getenv('OME_POLICY_KEY')
@@ -54,8 +55,11 @@ PROTOCOL = get_http_protocol()
 OME_API_PORT = get_api_port()
 OME_LLHLS_PUBLISHER_PORT = get_llhls_publisher_port()
 WEBSOCKET_PROTOCOL = get_ws_protocol()
-if os.getenv('ENV') == 'DEV':OME_API_HOST = f'{PROTOCOL}://ome:{OME_API_PORT}/v1'
-else:OME_API_HOST = f'{PROTOCOL}://{OME_HOST}:{OME_API_PORT}/v1'
+if os.getenv('ENV') == 'DEV':
+    OME_API_HOST = f'{PROTOCOL}://ome:{OME_API_PORT}/v1'
+else:
+    OME_API_HOST = f'{PROTOCOL}://{OME_HOST}:{OME_API_PORT}/v1'
+
 OME_API_AUTH_HEADER = {'authorization': 'Basic ' + encode_access_token(os.getenv('OME_API_TOKEN'))}
 
 # OME_STREAM_NAME = app.config['OME_STREAM_NAME']

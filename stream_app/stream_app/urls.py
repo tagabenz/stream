@@ -9,10 +9,10 @@ from studio.views import StudioAPIView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('homepage.urls')),
     path('', include('app_users.urls')),
     path('', include('blog.urls')),
     path('', include('studio.urls')),
+    path('', include('homepage.urls')),
     path('api/v1/studio/<slug:command>', StudioAPIView.as_view(),name="is_online"),
 ]
 

@@ -49,7 +49,7 @@ services:
       - ./DATABASE:/db
     networks:
       nginx_net:
-    restart: always
+    # restart: always
   
   proxy:
     image: nginx:latest

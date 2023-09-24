@@ -9,6 +9,7 @@
   </div>
   <ul id="chat-thread" class="chat-thread"></ul>
 </div>
+
 {{ user.username | json_script:"user" }}  
 
 <script>
@@ -30,7 +31,7 @@
     console.log(`disconnected: ${ctx.code}, ${ctx.reason}`);
   }).connect();
   
-  const sub = centrifuge.newSubscription("test1");
+  const sub = centrifuge.newSubscription('test2');
   
   
 

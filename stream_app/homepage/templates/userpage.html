@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load chat_tags %}
+{% block body %}
+<div class="py-4 text-center">
+    <h1 class="mb-0 font-ctc">{{ object_list }}</h1>
+</div>
+<main class="container-fluid mx-0">
+    <div class="row py-3">
+        <div class="col-lg-8 mb-4"> 
+            <div id="player_id"></div>
+            <script src="{% static 'jss/player.js' %}"></script>
+        </div>  
+        {% chat user %}
+    </div>
+</main>
+{% endblock %}

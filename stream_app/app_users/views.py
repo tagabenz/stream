@@ -2,11 +2,12 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect
 from django.urls import reverse_lazy,reverse
 from django.views import View
-from django.views.generic import CreateView
+from django.views.generic import CreateView, DetailView
 from django.contrib.auth import login, logout
 from django.contrib.auth.views import LoginView
 from django.contrib.auth.mixins import LoginRequiredMixin
 
+from .models import Users
 from .forms import *
 from studio.key_generate import get_key
 from stream_app import settings
@@ -45,7 +46,7 @@ class UserRegistration(CreateView):
         self.object = form.save()
         self.object.stream_key=get_key(form.cleaned_data['username'])
         self.object.stream_name=f"Трансляция {form.cleaned_data['username']}"
-        
+        self.object.slug=form.cleaned_data['username']
         return super().form_valid(form)
 
     def get_context_data(self,**kwargs):
