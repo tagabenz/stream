@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponseNotFound
-from django.views.generic import ListView
-from django.views.generic.base import View
+from django.views.generic import ListView, DetailView
+# from django.views.generic.base import View
 from menu.models import Categories
 from app_users.models import Users
 from .utils import DataMixin
@@ -53,10 +53,8 @@ class CategoriesSort(DataMixin, ListView):
         return Users.objects.filter(username__in=self.get_stream_list(), cat__slug=self.kwargs['cat_slug']).select_related('cat')
 
 
-class UserPage(ListView):
-    model=Users
-    template_name='userpage.html'
-
-    def get_queryset(self):
-
-        return Users.objects.get(username="test2")
+class UserPage(DetailView):
+    model = Users
+    template_name = 'userpage.html'
+    slug_url_kwarg = 'user_slug'
+    context_object_name = 'user'

@@ -1,6 +1,5 @@
 {% load static %}
 <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
-<script src="{% static 'jss/chat.js' %}"></script>
 
 <div class="col-lg-4" id="chat" style="background-color: brown;">
   <div id="header" class="text-center">Чат трансляции</div>
@@ -10,16 +9,18 @@
   <ul id="chat-thread" class="chat-thread"></ul>
 </div>
 
-{{ user.username | json_script:"user" }}  
+{{ room_name | json_script:"roomName" }}  
+{{ connect_url | json_script:"connectUrl" }} 
 
 <script>
-  const roomName = document.getElementById('user').textContent.split(1,-1);
-  const token = Cookies.get('token');
-  
+  const roomName = JSON.parse(document.getElementById('roomName').textContent);
+  const connectUrl = JSON.parse(document.getElementById('connectUrl').textContent);
+
   const chatThread = document.querySelector('#chat-thread');
   const messageInput = document.querySelector('#chat-message-input');
-  console.log(token)
-  const centrifuge = new Centrifuge("ws://localhost:8800/connection/websocket", {
+
+  const token = Cookies.get('token');
+  const centrifuge = new Centrifuge(connectUrl, {
     token: token
   });
 
@@ -30,10 +31,8 @@
   }).on('disconnected', function (ctx) {
     console.log(`disconnected: ${ctx.code}, ${ctx.reason}`);
   }).connect();
-  
-  const sub = centrifuge.newSubscription('test2');
-  
-  
+
+  const sub = centrifuge.newSubscription(roomName);
 
   sub.on('publication', function (ctx) {
     const chatNewThread = document.createElement('li');
@@ -59,7 +58,6 @@
       // history call failed with error
   });
 
-  messageInput.focus();
   messageInput.onkeyup = function (e) {
     if (e.keyCode === 13) {  // enter, return
       e.preventDefault();

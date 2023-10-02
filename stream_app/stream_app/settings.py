@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 
 import os
 import base64
+import socket
+
 from pathlib import Path
 from datetime import timedelta
 
@@ -50,10 +52,12 @@ OME_HOST = os.getenv('OME_HOST')
 OME_VHOST_NAME = os.getenv('OME_VHOST_NAME')
 OME_APP_NAME = os.getenv('OME_APP_NAME')
 OME_POLICY_KEY=os.getenv('OME_POLICY_KEY')
-PROTOCOL = get_http_protocol()
 OME_API_PORT = get_api_port()
 OME_LLHLS_PUBLISHER_PORT = get_llhls_publisher_port()
+
+PROTOCOL = get_http_protocol()
 WEBSOCKET_PROTOCOL = get_ws_protocol()
+
 if os.getenv('ENV') == 'DEV':
     OME_API_HOST = f'{PROTOCOL}://ome:{OME_API_PORT}/v1'
 else:
@@ -75,6 +79,9 @@ OME_LLHLS_STREAMING_HOST = f'{PROTOCOL}://{OME_HOST}:{OME_LLHLS_PUBLISHER_PORT}'
 # OME_WEBRTC_STREAMING_PROTOCOL = get_ws_protocol(
 #     app.config['OME_WEBRTC_PUBLISHER_ENABLE_TLS'])
 # OME_WEBRTC_STREAMING_HOST = f'{OME_WEBRTC_STREAMING_PROTOCOL}://{OME_HOST}:{app.config["OME_WEBRTC_PUBLISHER_PORT"]}'
+
+CENTRIFUGE_HOST= f'{WEBSOCKET_PROTOCOL}://{OME_HOST}:8800/connection/websocket'
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -221,9 +228,9 @@ SESSION_COOKIE_AGE = 30*24*60*60
 #     )
 # }
 
-INTERNAL_IPS = [
-    "127.0.0.1",
-]
+# INTERNAL_IPS = [
+#     "127.0.0.1",
+# ]
 
 
 if DEBUG:
