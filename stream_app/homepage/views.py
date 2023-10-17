@@ -2,6 +2,8 @@ from django.shortcuts import render
 from django.http import HttpResponseNotFound
 from django.views.generic import ListView, DetailView
 # from django.views.generic.base import View
+
+from stream_app import settings
 from menu.models import Categories
 from app_users.models import Users
 from .utils import DataMixin
@@ -58,3 +60,10 @@ class UserPage(DetailView):
     template_name = 'userpage.html'
     slug_url_kwarg = 'user_slug'
     context_object_name = 'user'
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['output_url'] = f"{settings.OME_LLHLS_STREAMING_HOST}/{settings.OME_APP_NAME}/{self.object}/llhls.m3u8"
+        context['title'] = f"{self.object} - Lastream.online"
+        
+        return context

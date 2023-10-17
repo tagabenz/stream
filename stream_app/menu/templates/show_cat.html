@@ -1,5 +1,5 @@
 <div class="px-3 py-2 border-bottom font-ctc">
-    <div class="container d-flex flex-wrap justify-content-lg-start ms-5">
+    <div class="container d-flex flex-wrap justify-content-lg-start ms-0 p-0">
         {% for m in cats %}
             {% if m.slug in request_path %}
                 <button class="btn btn-dark rounded-pill px-3 ms-2 text-blue" onclick="location.href='{{ m.get_absolute_url }}';" data-bs-toggle="button">

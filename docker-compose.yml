@@ -63,14 +63,16 @@ services:
     networks:
       nginx_net:
     restart: always
-    
+    depends_on:
+      - redis
+
   redis:
     image: redis:latest
     ports:
       - 6379:6379
     networks:
       nginx_net:
-
+    restart: always
 
 volumes:
   PGDATA:

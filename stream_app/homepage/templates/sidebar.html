@@ -1,0 +1,43 @@
+{% if request.user.is_authenticated %}
+<!-- ======= Sidebar ======= -->
+<aside class="hidden text-bg-dark p-3">
+    <div align="right" class="">
+        <button type="button" id="showsb" class="btn p-0 focus-item" style="color: white;" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling">
+            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-box-arrow-in-right" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M6 3.5a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-2a.5.5 0 0 0-1 0v2A1.5 1.5 0 0 0 6.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-8A1.5 1.5 0 0 0 5 3.5v2a.5.5 0 0 0 1 0v-2z"/>
+                <path fill-rule="evenodd" d="M11.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H1.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z"/>
+            </svg>
+        </button>
+    </div>
+    <div class="offcanvas-body">
+        <!-- <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga provident tempore expedita fugiat modi debitis veniam accusantium porro asperiores! Sunt quis corporis animi veritatis corrupti earum numquam eveniet, dolorem repudiandae!</p>
+        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Officiis possimus laboriosam porro aliquid sapiente aspernatur quae eum, eos reprehenderit? Reiciendis praesentium maxime, ipsum architecto exercitationem enim? Ducimus beatae sint ratione?</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi ut odio aliquid ratione perspiciatis vero at iure amet labore, in quas explicabo quibusdam accusantium excepturi alias delectus ex! Dolores, ad?</p>
+        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Adipisci obcaecati eius, mollitia a qui, neque eligendi recusandae doloremque optio saepe voluptates, cupiditate nam minima nemo consequatur unde debitis nesciunt culpa.</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse dicta mollitia minus sint. Laudantium sunt placeat veritatis saepe porro qui pariatur itaque minus odit quidem? Atque qui et officiis iste?</p> -->
+    </div>
+</aside>
+
+<aside id="offcanvasScrolling" class="sidebar text-bg-dark p-3 offcanvas offcanvas-start" data-bs-scroll="true" data-bs-backdrop="false">
+    <div class="font-ctc-bold">
+        <div align="right">
+            <button type="button" id="hidesb" class="btn p-0 focus-item" style="color: white;" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling">
+                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-box-arrow-in-left" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M10 3.5a.5.5 0 0 0-.5-.5h-8a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5v-2a.5.5 0 0 1 1 0v2A1.5 1.5 0 0 1 9.5 14h-8A1.5 1.5 0 0 1 0 12.5v-9A1.5 1.5 0 0 1 1.5 2h8A1.5 1.5 0 0 1 11 3.5v2a.5.5 0 0 1-1 0v-2z"/>
+                    <path fill-rule="evenodd" d="M4.146 8.354a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H14.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3z"/>
+                  </svg>
+            </button>
+        </div>
+        <p id="titleSideBar" class="h5">Подписки:</p>
+    </div>
+    <div class="offcanvas-body">
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga provident tempore expedita fugiat modi debitis veniam accusantium porro asperiores! Sunt quis corporis animi veritatis corrupti earum numquam eveniet, dolorem repudiandae!</p>
+        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Officiis possimus laboriosam porro aliquid sapiente aspernatur quae eum, eos reprehenderit? Reiciendis praesentium maxime, ipsum architecto exercitationem enim? Ducimus beatae sint ratione?</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi ut odio aliquid ratione perspiciatis vero at iure amet labore, in quas explicabo quibusdam accusantium excepturi alias delectus ex! Dolores, ad?</p>
+        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Adipisci obcaecati eius, mollitia a qui, neque eligendi recusandae doloremque optio saepe voluptates, cupiditate nam minima nemo consequatur unde debitis nesciunt culpa.</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse dicta mollitia minus sint. Laudantium sunt placeat veritatis saepe porro qui pariatur itaque minus odit quidem? Atque qui et officiis iste?</p>
+    </div>
+</aside>
+{% else %}
+{% endif %}
+<!-- ======= End Sidebar ======= -->

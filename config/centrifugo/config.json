@@ -18,6 +18,6 @@
   "allow_presence_for_subscriber": true,
   "allow_presence_for_anonymous": true,
   "force_recovery": true,
-  "history_size": 10,
+  "history_size": 100,
   "history_ttl": "600s"
 }

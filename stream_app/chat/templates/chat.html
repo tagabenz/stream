@@ -1,16 +1,13 @@
 {% load static %}
 <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
-
-<div class="col-lg-4" id="chat" style="background-color: brown;">
-  <div id="header" class="text-center">Чат трансляции</div>
-  <div class="chat-message">
-      <input id="chat-message-input" class="chat-message-input" type="text" autocomplete="off" autofocus />
-  </div>
-  <ul id="chat-thread" class="chat-thread"></ul>
-</div>
-
 {{ room_name | json_script:"roomName" }}  
-{{ connect_url | json_script:"connectUrl" }} 
+{{ connect_url | json_script:"connectUrl" }}
+
+<div class="title text-center p-2 font-ctc-bold position-fixed" style="width: 27%;"><p class="h5">Чат трансляции:</p></div>
+<ul id="chat-thread" class="chat-thread position-absolute" style="top: 50px;"></ul>
+<div class="chat-message position-fixed p-2" style="bottom: 0;">
+  <input id="chat-message-input" class="chat-message-input" type="text" autocomplete="off" autofocus />
+</div>
 
 <script>
   const roomName = JSON.parse(document.getElementById('roomName').textContent);
@@ -69,5 +66,4 @@
       messageInput.value = '';
     }
   };
-
 </script>    

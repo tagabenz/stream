@@ -1,17 +1,39 @@
 {% extends 'base.html' %}
 {% load static %}
 {% load chat_tags %}
+{% load homepage_tags %}
 {% block body %}
-<div class="py-4 text-center">
-    <h1 class="mb-0 font-ctc">{{ user.username }}</h1>
+<div class="container-fluid d-flex p-0">
+    {% sidebar request %}
+    <main class="container-fluid">
+        <div class="row position-relative">
+            <div class="player col-lg-9 p-3 position-relative"> 
+                {{ output_url|json_script:"output_url" }}
+                <div id="player_id"></div>
+                <script src="{% static 'jss/player.js' %}"></script>
+            </div>
+            <div class="chat col-lg-3 p-0 position-fixed">
+                {% chat request %}
+            </div>  
+            <div class="row">
+                <div class="col-lg-9 p-3" style="width: 70%;">
+                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Temporibus vitae exercitationem reiciendis ipsam, deleniti itaque impedit, expedita dolorum iure vel ipsa provident asperiores ratione distinctio placeat molestiae laborum nam sequi?</p>
+                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Temporibus vitae exercitationem reiciendis ipsam, deleniti itaque impedit, expedita dolorum iure vel ipsa provident asperiores ratione distinctio placeat molestiae laborum nam sequi?</p>
+                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Temporibus vitae exercitationem reiciendis ipsam, deleniti itaque impedit, expedita dolorum iure vel ipsa provident asperiores ratione distinctio placeat molestiae laborum nam sequi?</p>
+                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Temporibus vitae exercitationem reiciendis ipsam, deleniti itaque impedit, expedita dolorum iure vel ipsa provident asperiores ratione distinctio placeat molestiae laborum nam sequi?</p>
+                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Temporibus vitae exercitationem reiciendis ipsam, deleniti itaque impedit, expedita dolorum iure vel ipsa provident asperiores ratione distinctio placeat molestiae laborum nam sequi?</p>
+                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Temporibus vitae exercitationem reiciendis ipsam, deleniti itaque impedit, expedita dolorum iure vel ipsa provident asperiores ratione distinctio placeat molestiae laborum nam sequi?</p>
+                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Temporibus vitae exercitationem reiciendis ipsam, deleniti itaque impedit, expedita dolorum iure vel ipsa provident asperiores ratione distinctio placeat molestiae laborum nam sequi?</p>
+                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Temporibus vitae exercitationem reiciendis ipsam, deleniti itaque impedit, expedita dolorum iure vel ipsa provident asperiores ratione distinctio placeat molestiae laborum nam sequi?</p>
+                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Temporibus vitae exercitationem reiciendis ipsam, deleniti itaque impedit, expedita dolorum iure vel ipsa provident asperiores ratione distinctio placeat molestiae laborum nam sequi?</p>
+                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Temporibus vitae exercitationem reiciendis ipsam, deleniti itaque impedit, expedita dolorum iure vel ipsa provident asperiores ratione distinctio placeat molestiae laborum nam sequi?</p>
+                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Temporibus vitae exercitationem reiciendis ipsam, deleniti itaque impedit, expedita dolorum iure vel ipsa provident asperiores ratione distinctio placeat molestiae laborum nam sequi?</p>
+                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Temporibus vitae exercitationem reiciendis ipsam, deleniti itaque impedit, expedita dolorum iure vel ipsa provident asperiores ratione distinctio placeat molestiae laborum nam sequi?</p>
+                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Temporibus vitae exercitationem reiciendis ipsam, deleniti itaque impedit, expedita dolorum iure vel ipsa provident asperiores ratione distinctio placeat molestiae laborum nam sequi?</p>
+                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Temporibus vitae exercitationem reiciendis ipsam, deleniti itaque impedit, expedita dolorum iure vel ipsa provident asperiores ratione distinctio placeat molestiae laborum nam sequi?</p>
+                </div>
+            </div>
+        </div>
+    </main>
 </div>
-<main class="container-fluid mx-0">
-    <div class="row py-3">
-        <div class="col-lg-8 mb-4"> 
-            <div id="player_id"></div>
-            <script src="{% static 'jss/player.js' %}"></script>
-        </div>  
-        {% user_chat request %}
-    </div>
-</main>
 {% endblock %}

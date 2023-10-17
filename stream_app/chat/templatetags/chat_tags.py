@@ -5,23 +5,13 @@ register=template.Library()
 
 # Centrifugo chat 
 @register.inclusion_tag('chat.html')
-def studio_chat(user):
-    # in studio.html/
+def chat(request):
     connect_url = settings.CENTRIFUGE_HOST
-    room_name = user.username
+    
+    if 'studio' in request.get_full_path():room_name = request.user.username
+    else: room_name = request.get_full_path().strip('/')
     
     return {
         'room_name':room_name,
-        'connect_url':connect_url
-    }
-
-@register.inclusion_tag('chat.html')
-def user_chat(request):
-    # in userpage.html
-    connect_url = settings.CENTRIFUGE_HOST
-    room_name = request.get_full_path()
-    
-    return {
-        'room_name':room_name.strip('/'),
         'connect_url':connect_url
     }
