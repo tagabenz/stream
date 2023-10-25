@@ -1,11 +1,11 @@
 from django.shortcuts import render
 from django.http import HttpResponseNotFound
 from django.views.generic import ListView, DetailView
-# from django.views.generic.base import View
 
 from stream_app import settings
 from menu.models import Categories
 from app_users.models import Users
+from studio.models import Studio
 from .utils import DataMixin
 
 
@@ -37,7 +37,7 @@ class CategoriesViews(DataMixin, ListView):
 
     def get_queryset(self):
 
-        return Users.objects.filter(username__in=self.get_stream_list()).select_related('cat')
+        return Users.objects.filter(username__in=self.get_stream_list()).select_related('studio')
     
 
 class CategoriesSort(DataMixin, ListView):
@@ -52,7 +52,7 @@ class CategoriesSort(DataMixin, ListView):
     
     def get_queryset(self):
         
-        return Users.objects.filter(username__in=self.get_stream_list(), cat__slug=self.kwargs['cat_slug']).select_related('cat')
+        return Users.objects.filter(username__in=self.get_stream_list(), cat__slug=self.kwargs['cat_slug']).select_related('studio')
 
 
 class UserPage(DetailView):

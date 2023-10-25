@@ -2,15 +2,15 @@
 {% load static %}
 {% load menu_tags %}
 {% block body %}
-{% show_cat request %}
-<div class="pb-4 text-center">
-{% if object_list %}
-    <h1 class="m-1 font-ctc">Сейчас в эфире</h1>
-{% else %}    
-    <h1 class="position-absolute top-50 start-50 translate-middle">В данном разделе никто не стримит :( Станьте первым!</h1>
-{% endif %}
-</div>
 <main>
+    {% show_cat request %}
+    <div class="pb-4 text-center">
+        {% if object_list %}
+            <h1 class="m-1 font-ctc">Сейчас в эфире</h1>
+        {% else %}    
+            <h1 class="position-absolute top-50 start-50 translate-middle">В данном разделе никто не стримит :( Станьте первым!</h1>
+        {% endif %}
+    </div>
     <div class="container-fluid m-0">
         <div class="row row-cols-1 row-cols-sm-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-3 row-cols-xxl-4 g-3" style="width: 100%;">
         {% for p in object_list %}

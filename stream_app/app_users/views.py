@@ -1,16 +1,14 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render
 from django.http import HttpResponseRedirect
-from django.urls import reverse_lazy,reverse
+from django.urls import reverse_lazy, reverse
 from django.views import View
-from django.views.generic import CreateView, DetailView
+from django.views.generic import CreateView 
 from django.contrib.auth import login, logout
 from django.contrib.auth.views import LoginView
 from django.contrib.auth.mixins import LoginRequiredMixin
 
-from .models import Users
 from .forms import *
 from studio.key_generate import get_key
-from stream_app import settings
 from datetime import timedelta
 
 import jwt
@@ -24,7 +22,7 @@ class LoginView(LoginView):
     def form_valid(self, form):
         """Security check complete. Log the user in."""
         login(self.request, form.get_user())
-        response=HttpResponseRedirect(self.get_success_url())
+        response = HttpResponseRedirect(self.get_success_url())
 
         response.set_cookie('token', jwt.encode({"sub": self.request.user.username }, key='secret', algorithm="HS256"),max_age=timedelta(days=30))
         
@@ -75,5 +73,7 @@ class UserProfile(LoginRequiredMixin, View):
 
 def logout_user(request):
     logout(request)
+    response = HttpResponseRedirect(reverse("home"))
+    response.delete_cookie('token')
     
-    return redirect ('home')   
+    return response

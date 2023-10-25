@@ -42,12 +42,15 @@ services:
   db:
     image: postgres:latest
     user: postgres
+    # password: django
     volumes:
       - PGDATA:/var/lib/postgresql/data
       - ./DATABASE:/db
     networks:
       nginx_net:  
-    restart: always
+    # restart: always
+    environment:
+      POSTGRES_PASSWORD: "django"
 
   centrifugo:
     image: centrifugo/centrifugo:v5

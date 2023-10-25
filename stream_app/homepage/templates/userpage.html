@@ -15,23 +15,21 @@
             <div class="chat col-lg-3 p-0 position-fixed">
                 {% chat request %}
             </div>  
-            <div class="row">
-                <div class="col-lg-9 p-3" style="width: 70%;">
-                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Temporibus vitae exercitationem reiciendis ipsam, deleniti itaque impedit, expedita dolorum iure vel ipsa provident asperiores ratione distinctio placeat molestiae laborum nam sequi?</p>
-                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Temporibus vitae exercitationem reiciendis ipsam, deleniti itaque impedit, expedita dolorum iure vel ipsa provident asperiores ratione distinctio placeat molestiae laborum nam sequi?</p>
-                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Temporibus vitae exercitationem reiciendis ipsam, deleniti itaque impedit, expedita dolorum iure vel ipsa provident asperiores ratione distinctio placeat molestiae laborum nam sequi?</p>
-                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Temporibus vitae exercitationem reiciendis ipsam, deleniti itaque impedit, expedita dolorum iure vel ipsa provident asperiores ratione distinctio placeat molestiae laborum nam sequi?</p>
-                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Temporibus vitae exercitationem reiciendis ipsam, deleniti itaque impedit, expedita dolorum iure vel ipsa provident asperiores ratione distinctio placeat molestiae laborum nam sequi?</p>
-                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Temporibus vitae exercitationem reiciendis ipsam, deleniti itaque impedit, expedita dolorum iure vel ipsa provident asperiores ratione distinctio placeat molestiae laborum nam sequi?</p>
-                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Temporibus vitae exercitationem reiciendis ipsam, deleniti itaque impedit, expedita dolorum iure vel ipsa provident asperiores ratione distinctio placeat molestiae laborum nam sequi?</p>
-                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Temporibus vitae exercitationem reiciendis ipsam, deleniti itaque impedit, expedita dolorum iure vel ipsa provident asperiores ratione distinctio placeat molestiae laborum nam sequi?</p>
-                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Temporibus vitae exercitationem reiciendis ipsam, deleniti itaque impedit, expedita dolorum iure vel ipsa provident asperiores ratione distinctio placeat molestiae laborum nam sequi?</p>
-                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Temporibus vitae exercitationem reiciendis ipsam, deleniti itaque impedit, expedita dolorum iure vel ipsa provident asperiores ratione distinctio placeat molestiae laborum nam sequi?</p>
-                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Temporibus vitae exercitationem reiciendis ipsam, deleniti itaque impedit, expedita dolorum iure vel ipsa provident asperiores ratione distinctio placeat molestiae laborum nam sequi?</p>
-                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Temporibus vitae exercitationem reiciendis ipsam, deleniti itaque impedit, expedita dolorum iure vel ipsa provident asperiores ratione distinctio placeat molestiae laborum nam sequi?</p>
-                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Temporibus vitae exercitationem reiciendis ipsam, deleniti itaque impedit, expedita dolorum iure vel ipsa provident asperiores ratione distinctio placeat molestiae laborum nam sequi?</p>
-                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Temporibus vitae exercitationem reiciendis ipsam, deleniti itaque impedit, expedita dolorum iure vel ipsa provident asperiores ratione distinctio placeat molestiae laborum nam sequi?</p>
-                </div>
+        </div>
+        <div class="row" style="width: 70%;">
+            <div class="px-3 d-flex" >
+                <img src="{{ user.image.url }}" width="100px" height="100px">
+                <ul class="font-ctc">
+                    <li class="h5">
+                        {{user.username}}
+                    </li>
+                    <li class="h4">
+                        {{ user.stream_name}}
+                    </li>
+                    <li class="h6">
+                        {{ user.cat }}
+                    </li>
+                </ul>
             </div>
         </div>
     </main>
