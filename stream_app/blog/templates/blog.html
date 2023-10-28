@@ -1,27 +1,29 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block body %}
-<div class="py-4 text-center">
-  <h1 class="mb-0 font-ctc">Блог</h1>
-</div>
-{% if blogs_list %}
-<section class="py-5 container album">
-  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-    {% for blog in blogs_list %}
-    <a href="{{ blog.id }}" target="_blank" class="text-decoration-none link-dark">
-      <article class="col shadow-sm">
-        <div class="card">
-          <img src="{{ blog.img_url }}" class="card-img-top" width="100%" height="255">
-        </div>  
-        <div class="card-body">
-          <h2 class="md-0">{{ blog.title }}</h2>
-        </div>
-      </article>
-    </a>
-  {% endfor %}
+<main>
+  <div class="py-4 text-center">
+    <h1 class="mb-0 font-ctc">Блог</h1>
   </div>
-</section>
-{% else %}
-<h2 class="position-absolute top-50 start-50 translate-middle">Здесь пока ничего нет...</h2>
-{% endif %}
+  {% if blogs_list %}
+  <section class="py-5 container album">
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+      {% for blog in blogs_list %}
+      <a href="{{ blog.id }}" target="_blank" class="text-decoration-none link-dark">
+        <article class="col shadow-sm">
+          <div class="card">
+            <img src="{{ blog.img_url }}" class="card-img-top" width="100%" height="255">
+          </div>  
+          <div class="card-body">
+            <h2 class="md-0">{{ blog.title }}</h2>
+          </div>
+        </article>
+      </a>
+    {% endfor %}
+    </div>
+  </section>
+  {% else %}
+  <h2 class="position-absolute top-50 start-50 translate-middle">Здесь пока ничего нет...</h2>
+  {% endif %}
+</main>
 {% endblock %}
