@@ -7,11 +7,14 @@ from django.contrib.auth import login, logout
 from django.contrib.auth.views import LoginView
 from django.contrib.auth.mixins import LoginRequiredMixin
 
-from .forms import *
-from studio.key_generate import get_key
 from datetime import timedelta
 
 import jwt
+
+from .forms import *
+
+from studio.models import Studio
+from studio.key_generate import get_key
 
 
 class LoginView(LoginView):
@@ -42,9 +45,11 @@ class UserRegistration(CreateView):
     
     def form_valid(self, form):
         self.object = form.save()
-        self.object.stream_key=get_key(form.cleaned_data['username'])
-        self.object.stream_name=f"Трансляция {form.cleaned_data['username']}"
-        self.object.slug=form.cleaned_data['username']
+        self.object.slug = form.cleaned_data['username']
+        stream = Studio.objects.create(stream_key = get_key(form.cleaned_data['username']),
+                                        stream_name = f"Трансляция {form.cleaned_data['username']}")
+        self.object.stream = stream
+        
         return super().form_valid(form)
 
     def get_context_data(self,**kwargs):

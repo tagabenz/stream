@@ -26,8 +26,8 @@ def pageNotFound(request, exception):
 
 
 class CategoriesViews(DataMixin, ListView):
-    model=Users
-    template_name='categories.html' 
+    model = Users
+    template_name = 'categories.html' 
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -41,8 +41,8 @@ class CategoriesViews(DataMixin, ListView):
     
 
 class CategoriesSort(DataMixin, ListView):
-    model=Users
-    template_name='categories.html'
+    model = Users
+    template_name = 'categories.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
