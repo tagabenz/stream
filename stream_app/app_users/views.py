@@ -19,8 +19,8 @@ from studio.key_generate import get_key
 
 class LoginView(LoginView):
     redirect_authenticated_user = True
-    form_class=AuthForm
-    template_name='login.html'
+    form_class = AuthForm
+    template_name = 'login.html'
     
     def form_valid(self, form):
         """Security check complete. Log the user in."""
@@ -32,29 +32,29 @@ class LoginView(LoginView):
         return response
 
     def get_context_data(self,**kwargs):
-        context=super().get_context_data(**kwargs)
-        context['title']='Вход - Lastream.online'
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Вход - Lastream.online'
         
         return context
 
 
 class UserRegistration(CreateView):
-    form_class=UserForm
-    template_name='registration.html'
+    form_class = UserForm
+    template_name = 'registration.html'
     success_url = reverse_lazy('login')
     
     def form_valid(self, form):
         self.object = form.save()
         self.object.slug = form.cleaned_data['username']
         stream = Studio.objects.create(stream_key = get_key(form.cleaned_data['username']),
-                                        stream_name = f"Трансляция {form.cleaned_data['username']}")
+                                    stream_name = f"Трансляция {form.cleaned_data['username']}")
         self.object.stream = stream
         
         return super().form_valid(form)
 
     def get_context_data(self,**kwargs):
-        context=super().get_context_data(**kwargs)
-        context['title']='Регистрация - Lastream.online'
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Регистрация - Lastream.online'
 
         return context
 

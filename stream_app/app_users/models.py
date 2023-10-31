@@ -15,7 +15,7 @@ class Users(AbstractUser):
     email = models.EmailField(unique=True)
     image = models.ImageField(null=True, upload_to="user_img/", default="/user_img/login_img.png", verbose_name="Аватар")
     slug = models.SlugField(max_length=255, unique=True, db_index=True, null=True, verbose_name='URL')
-    stream = models.OneToOneField(Studio, on_delete=models.CASCADE, null=True, blank=True, verbose_name="Трансляция")
+    stream = models.OneToOneField(Studio, on_delete=models.CASCADE, null=True, blank=True, verbose_name="stream")
     
     def get_absolute_url(self):
         return reverse('userpage',kwargs={'user_slug': self.slug})

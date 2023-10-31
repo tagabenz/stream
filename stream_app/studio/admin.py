@@ -3,6 +3,6 @@ from .models import *
 
 @admin.register(Studio)
 class Streams(admin.ModelAdmin):
-    list_display=('stream_name','stream_key','cat')
+    list_display=('pk','stream_name','stream_key','cat')
     
     

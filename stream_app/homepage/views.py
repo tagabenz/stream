@@ -3,9 +3,9 @@ from django.http import HttpResponseNotFound
 from django.views.generic import ListView, DetailView
 
 from stream_app import settings
-from menu.models import Categories
+# from menu.models import Categories
 from app_users.models import Users
-from studio.models import Studio
+# from studio.models import Studio
 from .utils import DataMixin
 
 
