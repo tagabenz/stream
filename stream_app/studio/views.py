@@ -22,7 +22,6 @@ class Studio(LoginRequiredMixin,View):
         return render(request,'studio.html', context={
             'user': request.user,
             'form': form,
-            # 'form_settings': form_settings, 
             'title':'Студия - Lastream.online',
             'pull_url': settings.OME_RTMP_INPUT_URL,
             'output_url': f"{settings.OME_LLHLS_STREAMING_HOST}/{settings.OME_APP_NAME}/{request.user}/llhls.m3u8",
@@ -31,7 +30,6 @@ class Studio(LoginRequiredMixin,View):
     
     def post(self, request):
         form = StreamForms(request.POST, instance=request.user.stream)
-        # form_settings = StreamSettingsForm(instance=request.user) 
 
         if form.is_valid():
             form.save()  
@@ -39,7 +37,6 @@ class Studio(LoginRequiredMixin,View):
         return render(request,'studio.html', context={
             'user': request.user,
             'form': form,
-            # 'form_settings': form_settings, 
             'title':'Студия - Lastream.online',
             'pull_url': settings.OME_RTMP_INPUT_URL,
             'output_url': f"{settings.OME_LLHLS_STREAMING_HOST}/{settings.OME_APP_NAME}/{request.user}/llhls.m3u8",

@@ -5,7 +5,7 @@ from django.views.generic import ListView, DetailView
 from stream_app import settings
 # from menu.models import Categories
 from app_users.models import Users
-# from studio.models import Studio
+from studio.models import Studio
 from .utils import DataMixin
 
 
@@ -26,7 +26,7 @@ def pageNotFound(request, exception):
 
 
 class CategoriesViews(DataMixin, ListView):
-    model = Users
+    model = Studio
     template_name = 'categories.html' 
 
     def get_context_data(self, **kwargs):
@@ -37,11 +37,11 @@ class CategoriesViews(DataMixin, ListView):
 
     def get_queryset(self):
 
-        return Users.objects.filter(username__in=self.get_stream_list())
+        return Studio.objects.filter(users__in=Users.objects.filter(username__in=self.get_stream_list()))
     
 
 class CategoriesSort(DataMixin, ListView):
-    model = Users
+    model = Studio
     template_name = 'categories.html'
 
     def get_context_data(self, **kwargs):
@@ -52,7 +52,8 @@ class CategoriesSort(DataMixin, ListView):
     
     def get_queryset(self):
         
-        return Users.objects.filter(username__in=self.get_stream_list(), cat__slug=self.kwargs['cat_slug'])
+        return Studio.objects.filter(users__in=Users.objects.filter(username__in=self.get_stream_list()), 
+                                    cat__slug=self.kwargs['cat_slug'])
 
 
 class UserPage(DetailView):
