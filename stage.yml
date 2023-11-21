@@ -51,7 +51,7 @@ services:
       - ./DATABASE:/db
     networks:
       nginx_net:
-    # restart: always
+    restart: always
     
   centrifugo:
     image: centrifugo/centrifugo:v5
