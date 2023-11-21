@@ -12,23 +12,46 @@
         <link rel="load" href="{% static 'fonts/CTCSans-Bold.otf' %}" as="font" />
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
         <link rel="stylesheet" href="{% static 'css/styles.css' %}" type="text/css">
+        <link rel="stylesheet" href="{% static 'css/chat_styles.css' %}" type="text/css">
+        <script src="{% static 'jss/scripts.js' %}"></script>
         <!-- <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.min.js"></script> -->
         <script src="https://cdn.jsdelivr.net/npm/hls.js@latest/dist/hls.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/ovenplayer/dist/ovenplayer.js"></script>
+        <script src="https://unpkg.com/centrifuge@3.1.0/dist/centrifuge.js"></script>
     </head>
     <body class="bg-light">
-        <header class="p-1 text-bg-dark font-ctc">
+        <header class="p-1 text-bg-dark font-ctc fixed-top">
           <div class="container-fluid">
             <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+              <button type="button" id="showsb" class="btn p-0 focus-item" style="color: white;" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling">
+                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
+                  <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
+                </svg>
+              </button>
+              <!-- ======= Sidebar ======= -->
+              <aside id="offcanvasScrolling" class="sidebar text-bg-dark p-3 offcanvas offcanvas-start" data-bs-scroll="true" data-bs-backdrop="false">
+                <div class="font-ctc-bold">
+                    <div align="right">
+                      <button type="button" class="btn-close" style="background-color: white;" data-bs-dismiss="offcanvas" aria-label="Закрыть"></button>
+                    </div>
+                    <p id="titleSideBar" class="h5">Подписки:</p>
+                </div>
+                <div class="offcanvas-body">
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga provident tempore expedita fugiat modi debitis veniam accusantium porro asperiores! Sunt quis corporis animi veritatis corrupti earum numquam eveniet, dolorem repudiandae!</p>
+                    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Officiis possimus laboriosam porro aliquid sapiente aspernatur quae eum, eos reprehenderit? Reiciendis praesentium maxime, ipsum architecto exercitationem enim? Ducimus beatae sint ratione?</p>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi ut odio aliquid ratione perspiciatis vero at iure amet labore, in quas explicabo quibusdam accusantium excepturi alias delectus ex! Dolores, ad?</p>
+                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Adipisci obcaecati eius, mollitia a qui, neque eligendi recusandae doloremque optio saepe voluptates, cupiditate nam minima nemo consequatur unde debitis nesciunt culpa.</p>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse dicta mollitia minus sint. Laudantium sunt placeat veritatis saepe porro qui pariatur itaque minus odit quidem? Atque qui et officiis iste?</p>
+                </div>
+            </aside>
+            <!-- ======= End Sidebar ======= -->
               <a href="{% url 'home' %}" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
-                <img src="{% static 'img/logo.png' %}" alt="На главную" class="bi me-3"role="img" aria-label="Bootstrap">
+                <img src="{% static 'img/logo.png' %}" alt="На главную" class="bi mx-3"role="img" aria-label="Bootstrap">
               </a>
               <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
                 {% show_menu 'id' request %} 
+                <li><a href="{{ user.get_absolute_url }}">userpage</a></li>
               </ul>
-              <!-- <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3 align-items-center" role="search">
-                <input type="search" class="form-control form-control-dark text-bg-dark" placeholder="Search..." aria-label="Search">
-              </form> -->
               {% if request.user.is_authenticated %}
               {% show_button request %}
               <div class="dropdown">
@@ -49,8 +72,10 @@
             </div>
           </div>
         </header>
+        <main>
         {% block body %}
         {% endblock %}
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>  
+        </main>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
     </body>
 </html>

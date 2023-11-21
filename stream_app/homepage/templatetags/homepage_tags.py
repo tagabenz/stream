@@ -8,4 +8,11 @@ register=template.Library()
 def show_button(request):
     instance=Users.objects.get(username=request.user)
     
-    return {'state': instance.is_online, 'request_path':request.get_full_path}
+    return {'request_path':request.get_full_path}
+
+
+# Show Sidebar with subscriptions
+# @register.inclusion_tag('sidebar.html')
+# def sidebar(request):
+    
+#     return {'request':request}

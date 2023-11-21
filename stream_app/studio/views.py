@@ -8,37 +8,39 @@ from rest_framework.views import APIView
 from .forms import *
 from .serializers import *
 from .key_generate import get_key
+from .models import Studio
 
 from stream_app import settings
 
 
 class Studio(LoginRequiredMixin,View):
     login_url = "/login"
+   
     def get(self, request):
-        form = StreamForms(instance=request.user)
-        form_settings = StreamSettingsForm(instance=request.user)   
+        form = StreamForms(instance=request.user.stream)
 
         return render(request,'studio.html', context={
+            'user': request.user,
             'form': form,
-            'form_settings': form_settings, 
             'title':'Студия - Lastream.online',
             'pull_url': settings.OME_RTMP_INPUT_URL,
             'output_url': f"{settings.OME_LLHLS_STREAMING_HOST}/{settings.OME_APP_NAME}/{request.user}/llhls.m3u8",
+            'chat_name': request.user.username
             })
     
     def post(self, request):
-        form = StreamForms(request.POST, instance=request.user)
-        form_settings = StreamSettingsForm(instance=request.user) 
+        form = StreamForms(request.POST, instance=request.user.stream)
 
         if form.is_valid():
             form.save()  
 
         return render(request,'studio.html', context={
+            'user': request.user,
             'form': form,
-            'form_settings': form_settings, 
             'title':'Студия - Lastream.online',
             'pull_url': settings.OME_RTMP_INPUT_URL,
             'output_url': f"{settings.OME_LLHLS_STREAMING_HOST}/{settings.OME_APP_NAME}/{request.user}/llhls.m3u8",
+            'chat_name': request.user.username
             })    
 
 

@@ -1,6 +1,6 @@
-import requests,json
+import requests
+import json
 
-from requests.auth import HTTPBasicAuth
 from stream_app import settings
 
 

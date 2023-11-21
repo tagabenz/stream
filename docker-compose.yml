@@ -35,20 +35,47 @@ services:
       OME_VHOST_NAME: ${OME_VHOST_NAME}
       OME_APP_NAME: ${OME_APP_NAME}   
     volumes:
-    - ./origin_conf:/opt/ovenmediaengine/bin/origin_conf
+      - ./config/origin_conf/Server.xml:/opt/ovenmediaengine/bin/origin_conf/Server.xml
     networks:
       nginx_net:
 
   db:
     image: postgres:latest
     user: postgres
+    # password: django
     volumes:
       - PGDATA:/var/lib/postgresql/data
       - ./DATABASE:/db
     networks:
       nginx_net:  
-    restart: always
+    # restart: always
+    environment:
+      POSTGRES_PASSWORD: "django"
 
+  centrifugo:
+    image: centrifugo/centrifugo:v5
+    volumes:
+      - ./config/centrifugo/:/centrifugo/
+    command: centrifugo -c config.json
+    ports:
+      - 8800:8800
+    ulimits:
+      nofile:
+        soft: 65535
+        hard: 65535
+    networks:
+      nginx_net:
+    restart: always
+    depends_on:
+      - redis
+
+  redis:
+    image: redis:latest
+    ports:
+      - 6379:6379
+    networks:
+      nginx_net:
+    restart: always
 
 volumes:
   PGDATA:

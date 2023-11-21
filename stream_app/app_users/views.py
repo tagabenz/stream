@@ -1,41 +1,60 @@
-from django.shortcuts import render, redirect
-from django.urls import reverse_lazy
+from django.shortcuts import render
+from django.http import HttpResponseRedirect
+from django.urls import reverse_lazy, reverse
 from django.views import View
-from django.views.generic import CreateView
-from django.contrib.auth import logout
+from django.views.generic import CreateView 
+from django.contrib.auth import login, logout
 from django.contrib.auth.views import LoginView
 from django.contrib.auth.mixins import LoginRequiredMixin
 
+from datetime import timedelta
+
+import jwt
+
 from .forms import *
+
+from studio.models import Studio
 from studio.key_generate import get_key
 
 
 class LoginView(LoginView):
-    form_class=AuthForm
-    template_name='login.html'
+    redirect_authenticated_user = True
+    form_class = AuthForm
+    template_name = 'login.html'
     
-    def get_context_data(self,**kwargs):
-        context=super().get_context_data(**kwargs)
-        context['title']='Вход - Lastream.online'
+    def form_valid(self, form):
+        """Security check complete. Log the user in."""
+        login(self.request, form.get_user())
+        response = HttpResponseRedirect(self.get_success_url())
 
+        response.set_cookie('token', jwt.encode({"sub": self.request.user.username }, key='secret', algorithm="HS256"),max_age=timedelta(days=30))
+        
+        return response
+
+    def get_context_data(self,**kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Вход - Lastream.online'
+        
         return context
-    
+
 
 class UserRegistration(CreateView):
-    form_class=UserForm
-    template_name='registration.html'
+    form_class = UserForm
+    template_name = 'registration.html'
     success_url = reverse_lazy('login')
     
     def form_valid(self, form):
         self.object = form.save()
-        self.object.stream_key=get_key(form.cleaned_data['username'])
-        self.object.stream_name=f"Трансляция {form.cleaned_data['username']}"
+        self.object.slug = form.cleaned_data['username']
+        stream = Studio.objects.create(stream_key = get_key(form.cleaned_data['username']),
+                                    stream_name = f"Трансляция {form.cleaned_data['username']}")
+        self.object.stream = stream
         
         return super().form_valid(form)
 
     def get_context_data(self,**kwargs):
-        context=super().get_context_data(**kwargs)
-        context['title']='Регистрация - Lastream.online'
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Регистрация - Lastream.online'
 
         return context
 
@@ -59,5 +78,7 @@ class UserProfile(LoginRequiredMixin, View):
 
 def logout_user(request):
     logout(request)
+    response = HttpResponseRedirect(reverse("home"))
+    response.delete_cookie('token')
     
-    return redirect ('home')   
+    return response

@@ -5,4 +5,4 @@ from .models import *
 @admin.register(Users)
 class UsersAdmin(admin.ModelAdmin):
     list_display=('pk','username',)
-    # prepopulated_fields= {"slug":("name",)}
+    prepopulated_fields= {"slug":("username",)}
