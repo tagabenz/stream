@@ -52,7 +52,32 @@ services:
     networks:
       nginx_net:
     # restart: always
-  
+    
+  centrifugo:
+    image: centrifugo/centrifugo:v5
+    volumes:
+      - ./config/centrifugo/:/centrifugo/
+    command: centrifugo -c config.json
+    ports:
+      - 8800:8800
+    ulimits:
+      nofile:
+        soft: 65535
+        hard: 65535
+    networks:
+      nginx_net:
+    restart: always
+    depends_on:
+      - redis
+
+  redis:
+    image: redis:latest
+    ports:
+      - 6379:6379
+    networks:
+      nginx_net:
+    restart: always
+
   proxy:
     image: nginx:latest
     ports:
@@ -71,7 +96,7 @@ services:
   
   certbot:
     image: certbot/certbot
-    user: 1000:1001
+    # user: 1000:1001
     volumes:
       - ./cert/conf:/etc/letsencrypt:rw
       - ./cert/www:/var/www/certbot:rw

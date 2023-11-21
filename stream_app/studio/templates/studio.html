@@ -2,85 +2,81 @@
 {% load static %}
 {% load chat_tags %}
 {% block body %}
-<main>
-    <div class="py-4 text-center">
-        <h1 class="mb-0 font-ctc">Студия</h1>
-    </div>
-    <div class="container-fluid mx-0 col-lg-12">
-        <div class="row py-3 col-lg-8 text-bg-dark" style="display: inline-flex;">
-            <div class="col-lg-6 mb-4" id="player">
-                {{ output_url|json_script:"output_url" }}
-                <div id="player_id"></div>
-                <script src="{% static 'jss/player.js' %}"></script>
-                <!-- <div id="waiting-rtmp-text" class="mt-2 text-center">
-                    <div class="spinner-grow spinner-grow-sm" role="status">
-                        <span class="visually-hidden">Loading...</span>
-                    </div>
-                    Ожидание запуска трансляции
+<div class="py-4 text-center">
+    <h1 class="mb-0 font-ctc">Студия</h1>
+</div>
+<div class="container-fluid mx-0 col-lg-12">
+    <div class="row py-3 col-lg-8 text-bg-dark" style="display: inline-flex;">
+        <div class="col-lg-6 mb-4" id="player">
+            {{ output_url|json_script:"output_url" }}
+            <div id="player_id"></div>
+            <script src="{% static 'jss/player.js' %}"></script>
+            <!-- <div id="waiting-rtmp-text" class="mt-2 text-center">
+                <div class="spinner-grow spinner-grow-sm" role="status">
+                    <span class="visually-hidden">Loading...</span>
                 </div>
-                <div id="connected-rtmp-input-text" class="mt-4 text-center text-primary d-none">
-                    Вы в эфире. <br>
-                    <span class="text-muted small">(The popup will close automatically.)</span>
-                </div> -->
+                Ожидание запуска трансляции
             </div>
-            <div class="col-lg-6 mb-4" id="stream_info">
-                <div class="col mb-3">
-                    <h5 class="font-ctc-bold text-white-50">Название трансляции:</h5>
-                    <h6 class="text-truncate">{{user.stream.stream_name}}</h6>
-                </div>
-                <div class="col mb-3">
-                    <h5 class="font-ctc-bold text-white-50">Категория:</h5>
-                    <h6>{{user.stream.cat}}</h6>
-                </div>
-                <div class="d-grid gap-2 d-md-flex justify-content-md-center">
-                    <!-- Button trigger modal -->
-                    <button type="button" class="btn btn-primary text-uppercase focus-item font-ctc" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Изменить</button>
-                </div>
-                <!-- Modal -->
-                <div class="modal fade text-dark" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h2 class="modal-title fs-5 font-ctc" id="staticBackdropLabel">Настройки трансляции</h2>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <form action="" method="post">
-                                    {% csrf_token %}
-                                    {% for f in form %}
-                                    <div class="mb-2">
-                                        <label class="font-ctc" for="{{ f.id_for_label }}">{{ f.label }}</label>
-                                        {{ f }}
-                                        <div class="text-danger">{{ f.errors }}</div>
-                                    </div>
-                                    {% endfor %}
-                                    <div class="modal-footer">
-                                        <button type="submit" class="btn btn-primary font-ctc text-uppercase focus-item">Сохранить</button>
-                                    </div>
-                                </form>
-                            </div>
+            <div id="connected-rtmp-input-text" class="mt-4 text-center text-primary d-none">
+                Вы в эфире. <br>
+                <span class="text-muted small">(The popup will close automatically.)</span>
+            </div> -->
+        </div>
+        <div class="col-lg-6 mb-4" id="stream_info">
+            <div class="col mb-3">
+                <h5 class="font-ctc-bold text-white-50">Название трансляции:</h5>
+                <h6 class="text-truncate">{{user.stream.stream_name}}</h6>
+            </div>
+            <div class="col mb-3">
+                <h5 class="font-ctc-bold text-white-50">Категория:</h5>
+                <h6>{{user.stream.cat}}</h6>
+            </div>
+            <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-primary text-uppercase focus-item font-ctc" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Изменить</button>
+            </div>
+            <!-- Modal -->
+            <div class="modal fade text-dark" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h2 class="modal-title fs-5 font-ctc" id="staticBackdropLabel">Настройки трансляции</h2>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="" method="post">
+                                {% csrf_token %}
+                                {% for f in form %}
+                                <div class="mb-2">
+                                    <label class="font-ctc" for="{{ f.id_for_label }}">{{ f.label }}</label>
+                                    {{ f }}
+                                    <div class="text-danger">{{ f.errors }}</div>
+                                </div>
+                                {% endfor %}
+                                <div class="modal-footer">
+                                    <button type="submit" class="btn btn-primary font-ctc text-uppercase focus-item">Сохранить</button>
+                                </div>
+                            </form>
                         </div>
                     </div>
-                </div>   
-            </div>
-            <div class="col-lg-8 mb-4"  id="settings">
-                <h2 class="font-ctc h4 text-white-50">Настройки трансляции:</h2>
-                <div class="input-group mb-2">
-                    <span class="input-group-text text-bg-dark"><label for="pull_url" class="font-ctc text-white-50 h5 mb-0">URL:</label></span>
-                    <input type="text" class="form-control text-bg-dark" id="pull_url" value="{{ pull_url }}" disabled>
-                    <button type="button" class="btn btn-outline-light text-uppercase focus-item font-ctc" onclick="copyUrl()">Копировать</button>
                 </div>
-                <div class="input-group mb-2">
-                    <span class="input-group-text text-bg-dark"><label for="stream_key" class="font-ctc text-white-50 h5 mb-0">KEY:</label></span>
-                    <input type="password" class="form-control text-bg-dark" id="stream_key" value="{{ user.stream.stream_key }}" disabled>
-                    <button type="button" class="btn btn-outline-light text-uppercase focus-item font-ctc" onclick="copyKey()">Копировать</button>
-                </div>
-            </div>
+            </div>   
         </div>
-        <div class="col-lg-4" id="chat" style="display: inline-flex; width: 30%; height: 100%;">
-            {% chat request %}
+        <div class="col-lg-8 mb-4"  id="settings">
+            <h2 class="font-ctc h4 text-white-50">Настройки трансляции:</h2>
+            <div class="input-group mb-2">
+                <span class="input-group-text text-bg-dark"><label for="pull_url" class="font-ctc text-white-50 h5 mb-0">URL:</label></span>
+                <input type="text" class="form-control text-bg-dark" id="pull_url" value="{{ pull_url }}" disabled>
+                <button type="button" class="btn btn-outline-light text-uppercase focus-item font-ctc" onclick="copyUrl()">Копировать</button>
+            </div>
+            <div class="input-group mb-2">
+                <span class="input-group-text text-bg-dark"><label for="stream_key" class="font-ctc text-white-50 h5 mb-0">KEY:</label></span>
+                <input type="password" class="form-control text-bg-dark" id="stream_key" value="{{ user.stream.stream_key }}" disabled>
+                <button type="button" class="btn btn-outline-light text-uppercase focus-item font-ctc" onclick="copyKey()">Копировать</button>
+            </div>
         </div>
     </div>
-    <script src="{% static 'jss/studio.js' %}"></script>
-</main>
+    {% chat request %}
+</div>
+<script src="{% static 'jss/studio.js' %}"></script>
 {% endblock %}

@@ -3,35 +3,38 @@
 {% load chat_tags %}
 {% load homepage_tags %}
 {% block body %}
-<div class="container-fluid d-flex p-0">
-    {% sidebar request %}
-    <main class="container-fluid">
-        <div class="row position-relative">
-            <div class="player col-lg-9 p-3 position-relative"> 
+<div class="container-fluid p-0">
+    <div class="primary p-3">
+        <div class="row">
+            <div class="player col-lg-12"> 
                 {{ output_url|json_script:"output_url" }}
                 <div id="player_id"></div>
                 <script src="{% static 'jss/player.js' %}"></script>
             </div>
-            <div class="chat col-lg-3 p-0 position-fixed">
-                {% chat request %}
-            </div>  
         </div>
-        <div class="row" style="width: 70%;">
+        <div class="row">
+            <h4 class="text-truncate font-ctc pt-3 mb-2">{{ user.stream }}</h4>
             <div class="px-3 d-flex" >
-                <img src="{{ user.image.url }}" width="100px" height="100px">
-                <ul class="font-ctc">
-                    <li class="h5">
+                <img src="{{ user.image.url }}" width="70px" height="70px">
+                <ul class="font-ctc px-2">
+                    <li class="ls-n h3">
                         {{user.username}}
                     </li>
-                    <li class="h4">
-                        {{ user.stream_name}}
-                    </li>
-                    <li class="h6">
-                        {{ user.cat }}
+                    <li class="ls-n h5">
+                        <a class="focus-item" href="{{ user.stream.cat.get_absolute_url }}">{{ user.stream.cat }}</a>
                     </li>
                 </ul>
             </div>
         </div>
-    </main>
+        <div class="row">
+            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolor non exercitationem atque saepe sapiente fugiat maxime quibusdam, cum quis in sunt architecto obcaecati fuga itaque recusandae rem a neque soluta.</p>
+            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolor non exercitationem atque saepe sapiente fugiat maxime quibusdam, cum quis in sunt architecto obcaecati fuga itaque recusandae rem a neque soluta.</p>
+            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolor non exercitationem atque saepe sapiente fugiat maxime quibusdam, cum quis in sunt architecto obcaecati fuga itaque recusandae rem a neque soluta.</p>
+            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolor non exercitationem atque saepe sapiente fugiat maxime quibusdam, cum quis in sunt architecto obcaecati fuga itaque recusandae rem a neque soluta.</p>
+            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolor non exercitationem atque saepe sapiente fugiat maxime quibusdam, cum quis in sunt architecto obcaecati fuga itaque recusandae rem a neque soluta.</p>
+            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolor non exercitationem atque saepe sapiente fugiat maxime quibusdam, cum quis in sunt architecto obcaecati fuga itaque recusandae rem a neque soluta.</p>
+        </div>
+    </div>
+    {% chat request %}
 </div>
 {% endblock %}

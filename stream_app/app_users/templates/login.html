@@ -1,31 +1,29 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block body %}
-<main>
-    <div class="text-center">
-        <div class="form-signin w-100 m-auto">
-            <form action="{% url 'login' %}" method="post">
-                {% csrf_token %}
-                <img class="mb-2" src="{% static 'img/logo.png' %}">
-                <h1 class="h3 mb-3 fw-normal font-ctc">Войти в Lastream</h1>
-                <div class="form-floating">
-                    {{ form.username }}
-                    <label for="{{ form.username.id_for_label }}">{{ form.username.label }}</label>
-                </div>
-                <div class="form-floating">
-                    {{ form.password }}
-                    <label for="{{ form.password.id_for_label }}">{{ form.password.label }}</label>
-                </div>
-                <div class="text-danger">{{ form.non_field_errors }}</div>
-                <div class="checkbox mb-3">
-                    <label>
-                    <input type="checkbox" value="remember-me"> Запомнить
-                    </label>
-                </div>
-                <button class="w-100 btn btn-lg btn-primary text-uppercase font-ctc focus-item" type="submit">Войти</button>
-                <p class="mt-5 mb-3 text-muted">Войдите или <a href="{% url 'registration' %}">Зарегистрируйтесь</a></p>
-            </form>
-        </div>
+<div class="text-center">
+    <div class="form-signin w-100 m-auto">
+        <form action="{% url 'login' %}" method="post">
+            {% csrf_token %}
+            <img class="mb-2" src="{% static 'img/logo.png' %}">
+            <h1 class="h3 mb-3 fw-normal font-ctc">Войти в Lastream</h1>
+            <div class="form-floating">
+                {{ form.username }}
+                <label for="{{ form.username.id_for_label }}">{{ form.username.label }}</label>
+            </div>
+            <div class="form-floating">
+                {{ form.password }}
+                <label for="{{ form.password.id_for_label }}">{{ form.password.label }}</label>
+            </div>
+            <div class="text-danger">{{ form.non_field_errors }}</div>
+            <div class="checkbox mb-3">
+                <label>
+                <input type="checkbox" value="remember-me"> Запомнить
+                </label>
+            </div>
+            <button class="w-100 btn btn-lg btn-primary text-uppercase font-ctc focus-item" type="submit">Войти</button>
+            <p class="mt-5 mb-3 text-muted">Войдите или <a href="{% url 'registration' %}">Зарегистрируйтесь</a></p>
+        </form>
     </div>
-</main>
+</div>
 {% endblock %}

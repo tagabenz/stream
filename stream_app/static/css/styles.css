@@ -26,6 +26,10 @@ header {
     box-shadow: 0px 1px 5px rgb(128,174,255);
 }
 
+.primary {
+    width: 70%;
+}
+
 .active {
     color: rgb(128,174,255)!important;
     text-decoration: underline;
@@ -60,25 +64,6 @@ header {
     border-top-right-radius: 0;
 }
 
-.hidden {
-    position: fixed;
-    top: 50px;
-    bottom: 0!important;
-    width: 76px!important;  
-    overflow-y: scroll;
-    /* scrollbar-width: thin;   */
-    box-shadow: inset -0px 1px 5px rgb(128,174,255);
-}
-
-.hidden::-webkit-scrollbar {
-    width: 5px;
-    height: auto;
-}
-
-.hidden::-webkit-scrollbar-thumb {
-    background-color: rgb(128,174,255)
-}
-
 .sidebar {
     top: 50px!important;
     bottom: 0!important;
@@ -89,16 +74,10 @@ header {
     box-shadow: inset -0px 1px 5px rgb(128,174,255);
 }
 
-.player{
-    left: 0;
-    width: 70%;
+#player_id {
+    box-shadow: 0px 1px 5px rgb(128,174,255);
 }
 
-.chat {
-    width: 27%;
-    top: 50px;
-    bottom: 0;
-    right: 0;
-    overflow-y: scroll;
-    box-shadow: inset -0px 1px 5px rgb(128,174,255);
+.ls-n {
+    list-style-type: none;
 }

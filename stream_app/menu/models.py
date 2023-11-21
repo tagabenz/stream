@@ -16,12 +16,12 @@ class Menu(models.Model):
 
 
 class Categories(models.Model):
-    name = models.CharField(max_length=100,db_index=True)
-    slug = models.SlugField(max_length=255,unique=True,db_index=True, verbose_name='URL')
+    name = models.CharField(max_length=100, db_index=True)
+    slug = models.SlugField(max_length=255, unique=True, db_index=True, verbose_name='URL')
     img = models.ImageField(upload_to="svg/", null=True)
 
     def get_absolute_url(self):
-        return reverse('show_categories',kwargs={'cat_slug': self.slug})
+        return reverse('show_categories', kwargs={'cat_slug': self.slug})
     
     def __str__(self):
         return self.name

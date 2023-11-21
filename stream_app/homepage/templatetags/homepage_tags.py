@@ -12,7 +12,7 @@ def show_button(request):
 
 
 # Show Sidebar with subscriptions
-@register.inclusion_tag('sidebar.html')
-def sidebar(request):
+# @register.inclusion_tag('sidebar.html')
+# def sidebar(request):
     
-    return {'request':request}
+#     return {'request':request}

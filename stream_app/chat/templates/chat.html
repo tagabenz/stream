@@ -3,11 +3,17 @@
 {{ room_name | json_script:"roomName" }}  
 {{ connect_url | json_script:"connectUrl" }}
 
-<div class="title text-center p-2 font-ctc-bold position-fixed" style="width: 27%;"><p class="h5">Чат трансляции:</p></div>
-<ul id="chat-thread" class="chat-thread position-absolute" style="top: 50px;"></ul>
-<div class="chat-message position-fixed p-2" style="bottom: 0;">
-  <input id="chat-message-input" class="chat-message-input" type="text" autocomplete="off" autofocus />
-</div>
+<aside class="chat mt-3">
+  <div class="chat-header text-bg-dark font-ctc-bold text-center p-2">
+    <h5 class="title m-0">Чат трансляции:</h5>
+  </div>
+  <div class="chat-body p-3">
+    <ul id="chat-thread"></ul>
+  </div>
+  <div class="chat-footer p-2 border">
+    <input id="chat-message-input" class="chat-message-input" type="text" autocomplete="off" autofocus />
+  </div>
+</aside>
 
 <script>
   const roomName = JSON.parse(document.getElementById('roomName').textContent);
@@ -20,8 +26,17 @@
   const centrifuge = new Centrifuge(connectUrl, {
     token: token
   });
+  
+  function printMessage(element){
+    const chatNewThread = document.createElement('li');
+    const chatNewMessage = document.createTextNode(element.info.user+": "+element.data.message);
+    chatNewThread.appendChild(chatNewMessage);
+    chatThread.appendChild(chatNewThread);
+    chatThread.scrollTop = chatThread.scrollHeight;
+  }
 
   centrifuge.on('connecting', function (ctx) {
+    // console.log(ctx)
     console.log(`connecting: ${ctx.code}, ${ctx.reason}`);
   }).on('connected', function (ctx) {
     console.log(`connected over ${ctx.transport}`);
@@ -32,11 +47,8 @@
   const sub = centrifuge.newSubscription(roomName);
 
   sub.on('publication', function (ctx) {
-    const chatNewThread = document.createElement('li');
-    const chatNewMessage = document.createTextNode(ctx.info.user+": "+ctx.data.message);
-    chatNewThread.appendChild(chatNewMessage);
-    chatThread.appendChild(chatNewThread);
-    chatThread.scrollTop = chatThread.scrollHeight;
+    printMessage(ctx);
+
   }).on('subscribing', function (ctx) {
     console.log(`subscribing: ${ctx.code}, ${ctx.reason}`);
   }).on('subscribed', function (ctx) {
@@ -47,9 +59,10 @@
     console.log('client error', ctx);
   }).subscribe();
   
-  sub.history({limit: 10}).then(function(ctx) {
+  sub.history({limit: 100}).then(function(ctx) {
     for (const element of ctx.publications) {
-      sub.publish(element.data);
+      printMessage(element);
+      // console.log(element)
     }
   }, function(err) {
       // history call failed with error
