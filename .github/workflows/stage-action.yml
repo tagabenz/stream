@@ -8,7 +8,7 @@ on:
 
 jobs:
   start_project:
-    runs-on: stage-runner 
+    runs-on: self-hosted
     steps:
       - name: Get_code
         uses: actions/checkout@v3  
