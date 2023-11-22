@@ -97,7 +97,7 @@ SECRET_KEY = 'django-insecure-%zz2d0a5rb0%5v)$p6l1f8n@*(8ef#tgds4-^*qx=b8p%cw_!$
 if os.getenv('ENV') == 'PROD':DEBUG = False
 else:
     DEBUG = True
-    # CSRF_TRUSTED_ORIGINS=[f"https://{OME_HOST}"]
+    CSRF_TRUSTED_ORIGINS=[f"https://{OME_HOST}"]
     
 ALLOWED_HOSTS = ['*']
 
