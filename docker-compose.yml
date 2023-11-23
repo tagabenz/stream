@@ -51,7 +51,9 @@ services:
     # restart: always
     environment:
       POSTGRES_PASSWORD: "django"
-
+    ports:
+      - 5432:5432
+      
   centrifugo:
     image: centrifugo/centrifugo:v5
     volumes:

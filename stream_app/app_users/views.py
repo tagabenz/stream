@@ -46,10 +46,13 @@ class UserRegistration(CreateView):
     def form_valid(self, form):
         self.object = form.save()
         self.object.slug = form.cleaned_data['username']
-        stream = Studio.objects.create(stream_key = get_key(form.cleaned_data['username']),
-                                    stream_name = f"Трансляция {form.cleaned_data['username']}")
-        self.object.stream = stream
-        
+        stream = Studio.objects.create(stream_key=get_key(form.cleaned_data['username']),
+                                    stream_name=f"Трансляция {form.cleaned_data['username']}",
+                                    author=self.object
+                                    )
+        # self.object.stream = stream
+        stream.save()
+
         return super().form_valid(form)
 
     def get_context_data(self,**kwargs):

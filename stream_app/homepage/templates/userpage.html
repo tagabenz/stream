@@ -13,15 +13,15 @@
             </div>
         </div>
         <div class="row">
-            <h4 class="text-truncate font-ctc pt-3 mb-2">{{ user.stream }}</h4>
+            <h4 class="text-truncate font-ctc pt-3 mb-2">{{ user.studio }}</h4>
             <div class="px-3 d-flex" >
-                <img src="{{ user.image.url }}" width="70px" height="70px">
+                <img src="{{ user.image.url }}" width="70px" height="70px" class="rounded-circle">
                 <ul class="font-ctc px-2">
                     <li class="ls-n h3">
                         {{user.username}}
                     </li>
                     <li class="ls-n h5">
-                        <a class="focus-item" href="{{ user.stream.cat.get_absolute_url }}">{{ user.stream.cat }}</a>
+                        <a class="focus-item" href="{{ user.studio.cat.get_absolute_url }}">{{ user.studio.cat }}</a>
                     </li>
                 </ul>
             </div>

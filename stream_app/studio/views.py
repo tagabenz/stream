@@ -17,7 +17,7 @@ class Studio(LoginRequiredMixin,View):
     login_url = "/login"
    
     def get(self, request):
-        form = StreamForms(instance=request.user.stream)
+        form = StreamForms(instance=request.user.studio)
 
         return render(request,'studio.html', context={
             'user': request.user,
@@ -29,7 +29,7 @@ class Studio(LoginRequiredMixin,View):
             })
     
     def post(self, request):
-        form = StreamForms(request.POST, instance=request.user.stream)
+        form = StreamForms(request.POST, instance=request.user.studio)
 
         if form.is_valid():
             form.save()  

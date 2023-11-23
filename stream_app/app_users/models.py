@@ -1,7 +1,6 @@
 from django.urls import reverse
 from django.db import models
 from django.contrib.auth.models import AbstractUser
-from studio.models import Studio
 
 
 class Users(AbstractUser):
@@ -15,7 +14,10 @@ class Users(AbstractUser):
     email = models.EmailField(unique=True)
     image = models.ImageField(null=True, upload_to="user_img/", default="/user_img/login_img.png", verbose_name="Аватар")
     slug = models.SlugField(max_length=255, unique=True, db_index=True, null=True, verbose_name='URL')
-    stream = models.OneToOneField(Studio, on_delete=models.CASCADE, null=True, blank=True, verbose_name="stream")
+    following = models.ManyToManyField('self', related_name='followers', blank=True, symmetrical=False)
     
+    def __str__(self):
+        return self.username
+
     def get_absolute_url(self):
         return reverse('userpage',kwargs={'user_slug': self.slug})

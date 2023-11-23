@@ -28,23 +28,7 @@
                   <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
                 </svg>
               </button>
-              <!-- ======= Sidebar ======= -->
-              <aside id="offcanvasScrolling" class="sidebar text-bg-dark p-3 offcanvas offcanvas-start" data-bs-scroll="true" data-bs-backdrop="false">
-                <div class="font-ctc-bold">
-                    <div align="right">
-                      <button type="button" class="btn-close" style="background-color: white;" data-bs-dismiss="offcanvas" aria-label="Закрыть"></button>
-                    </div>
-                    <p id="titleSideBar" class="h5">Подписки:</p>
-                </div>
-                <div class="offcanvas-body">
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga provident tempore expedita fugiat modi debitis veniam accusantium porro asperiores! Sunt quis corporis animi veritatis corrupti earum numquam eveniet, dolorem repudiandae!</p>
-                    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Officiis possimus laboriosam porro aliquid sapiente aspernatur quae eum, eos reprehenderit? Reiciendis praesentium maxime, ipsum architecto exercitationem enim? Ducimus beatae sint ratione?</p>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi ut odio aliquid ratione perspiciatis vero at iure amet labore, in quas explicabo quibusdam accusantium excepturi alias delectus ex! Dolores, ad?</p>
-                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Adipisci obcaecati eius, mollitia a qui, neque eligendi recusandae doloremque optio saepe voluptates, cupiditate nam minima nemo consequatur unde debitis nesciunt culpa.</p>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse dicta mollitia minus sint. Laudantium sunt placeat veritatis saepe porro qui pariatur itaque minus odit quidem? Atque qui et officiis iste?</p>
-                </div>
-            </aside>
-            <!-- ======= End Sidebar ======= -->
+              {% sidebar request.user %}
               <a href="{% url 'home' %}" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
                 <img src="{% static 'img/logo.png' %}" alt="На главную" class="bi mx-3"role="img" aria-label="Bootstrap">
               </a>
@@ -56,7 +40,7 @@
               {% show_button request %}
               <div class="dropdown">
                 <a href="#" class="d-block link-light text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                  <img src="{{ user.image.url }}" alt="" width="32" height="32" class="rounded-circle">
+                  <img src="{{ request.user.image.url }}" alt="" width="32" height="32" class="rounded-circle">
                 </a>
                 <ul class="dropdown-menu shadow" data-bs-theme="dark">
                   <li><a class="dropdown-item text-white focus-item font-ctc-bold text-capitalize" href="{% url 'profile' %}">Профиль</a></li>

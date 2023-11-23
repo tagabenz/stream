@@ -25,11 +25,11 @@
         <div class="col-lg-6 mb-4" id="stream_info">
             <div class="col mb-3">
                 <h5 class="font-ctc-bold text-white-50">Название трансляции:</h5>
-                <h6 class="text-truncate">{{user.stream.stream_name}}</h6>
+                <h6 class="text-truncate">{{user.studio.stream_name}}</h6>
             </div>
             <div class="col mb-3">
                 <h5 class="font-ctc-bold text-white-50">Категория:</h5>
-                <h6>{{user.stream.cat}}</h6>
+                <h6>{{user.studio.cat}}</h6>
             </div>
             <div class="d-grid gap-2 d-md-flex justify-content-md-center">
                 <!-- Button trigger modal -->
@@ -71,7 +71,7 @@
             </div>
             <div class="input-group mb-2">
                 <span class="input-group-text text-bg-dark"><label for="stream_key" class="font-ctc text-white-50 h5 mb-0">KEY:</label></span>
-                <input type="password" class="form-control text-bg-dark" id="stream_key" value="{{ user.stream.stream_key }}" disabled>
+                <input type="password" class="form-control text-bg-dark" id="stream_key" value="{{ user.studio.stream_key }}" disabled>
                 <button type="button" class="btn btn-outline-light text-uppercase focus-item font-ctc" onclick="copyKey()">Копировать</button>
             </div>
         </div>
