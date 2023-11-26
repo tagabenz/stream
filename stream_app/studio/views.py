@@ -46,10 +46,10 @@ class Studio(LoginRequiredMixin,View):
 
 class StudioAPIView(APIView):
     def get(self, request, command):
-       try:instance=Users.objects.get(username=request.user)
+       try:instance = Users.objects.get(username=request.user)
        except:return Response({'error':'Object does not exists'})
 
-       if command=="status_change":
+       if command == "status_change":
            if instance.is_online:instance.is_online=False
            else:instance.is_online=True
            instance.save()
@@ -57,11 +57,11 @@ class StudioAPIView(APIView):
            return Response(instance.is_online)
     
     def put(self, request, command, *args, **kwargs):
-        try:instance=Users.objects.get(username=request.user)
+        try:instance = Users.objects.get(username=request.user)
         except:return Response({'error':'Object does not exists'})
 
-        if command=="key_generate":
-            serializer=Key_Generate_Serializer(data={'stream_key': get_key(request.user)},instance=instance)
+        if command == "key_generate":
+            serializer = Key_Generate_Serializer(data={'stream_key': get_key(request.user)},instance=instance)
             serializer.is_valid(raise_exception=True)
             serializer.save()
             

@@ -7,12 +7,14 @@ from django.contrib.auth import login, logout
 from django.contrib.auth.views import LoginView
 from django.contrib.auth.mixins import LoginRequiredMixin
 
+from rest_framework.views import APIView, Response
 from datetime import timedelta
 
 import jwt
 
+from .models import Users
 from .forms import *
-
+from .serializers import UsersSerializer
 from studio.models import Studio
 from studio.key_generate import get_key
 
@@ -85,3 +87,11 @@ def logout_user(request):
     response.delete_cookie('token')
     
     return response
+
+
+class UsersAPIView(APIView):
+    def get(self, request):
+        user = Users.objects.get(username=request.user)
+
+        return Response(UsersSerializer(user).data)
+ 

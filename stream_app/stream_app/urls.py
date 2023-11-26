@@ -5,6 +5,7 @@ from django.conf.urls.static import static
 from stream_app import settings
 from homepage.views import pageNotFound
 from studio.views import StudioAPIView
+from app_users.views import UsersAPIView
 
 
 urlpatterns = [
@@ -13,8 +14,10 @@ urlpatterns = [
     path('', include('blog.urls')),
     path('', include('studio.urls')),
     path('', include('homepage.urls')),
-    path('api/v1/studio/<slug:command>', StudioAPIView.as_view(),name="is_online"),
+    path('api/v1/studio/<slug:command>', StudioAPIView.as_view(), name="is_online"),
+    path('api/v1/subscriptions', UsersAPIView.as_view(), name="subscriptions")
 ]
+
 
 if settings.DEBUG:
     import debug_toolbar
