@@ -15,9 +15,6 @@ class Users(AbstractUser):
     image = models.ImageField(null=True, upload_to="user_img/", default="/user_img/login_img.png", verbose_name="Аватар")
     slug = models.SlugField(max_length=255, unique=True, db_index=True, null=True, verbose_name='URL')
     following = models.ManyToManyField('self', related_name='followers', blank=True, symmetrical=False)
-    
-    def __str__(self):
-        return self.username
 
     def get_absolute_url(self):
         return reverse('userpage',kwargs={'user_slug': self.slug})

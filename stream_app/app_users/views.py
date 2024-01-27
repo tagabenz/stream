@@ -2,12 +2,13 @@ from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.urls import reverse_lazy, reverse
 from django.views import View
-from django.views.generic import CreateView 
+from django.views.generic import CreateView
 from django.contrib.auth import login, logout
 from django.contrib.auth.views import LoginView
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 from rest_framework.views import APIView, Response
+from rest_framework.generics import UpdateAPIView
 from datetime import timedelta
 
 import jwt
@@ -94,4 +95,7 @@ class UsersAPIView(APIView):
         user = Users.objects.get(username=request.user)
 
         return Response(UsersSerializer(user).data)
- 
+
+class UsersAPIUpdate(UpdateAPIView):
+    queryset = Users.objects.all()
+    serializer_class = UsersSerializer

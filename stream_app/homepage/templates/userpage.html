@@ -18,43 +18,31 @@
                 <img src="{{ user.image.url }}" width="70px" height="70px" class="rounded-circle">
                 <ul class="font-ctc px-2">
                     <li class="ls-n h3">
-                        {{user.username}}
+                        {{ user.username }}
                     </li>
                     <li class="ls-n h5">
                         <a class="focus-item" href="{{ user.studio.cat.get_absolute_url }}">{{ user.studio.cat }}</a>
                     </li>
                 </ul>
+                <!-- subscribe button -->
+                {% if request.user.is_authenticated %}
+                {% if request.user in user.followers.all %}
                 <div class="">
-                    <!-- {% verbatim %}
-                    <button type="button" id="button" class="btn btn-primary font-ctc text-uppercase focus-item">{{ text }}</button>
-                    {% endverbatim %}
-                    <script>
-                        const Counter = {
-                            data() {
-                                return {
-                                    text: "Подписаться"
-                                }
-                            },
-                            // mounted() {
-                            //     setInterval(() => {
-                            //         this.text++
-                            //     }, 1000)
-                            // }
-                        }
-                        Vue.createApp(Counter).mount('#button')
-                    </script> -->                    
+                    <button type="button" class="btn btn-primary font-ctc text-uppercase focus-item">Отписаться</button>
                 </div>
+                {% else %}
+                <div class="">
+                    <button type="button" class="btn btn-primary font-ctc text-uppercase focus-item" onclick="subscribe({{ request.user.id }}, {{user.id}})">Подписаться</button>
+                </div>
+                {% endif %}
+                {% endif %}
+                <!-- end subscribe button -->
             </div>
         </div>
         <div class="row">
-            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolor non exercitationem atque saepe sapiente fugiat maxime quibusdam, cum quis in sunt architecto obcaecati fuga itaque recusandae rem a neque soluta.</p>
-            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolor non exercitationem atque saepe sapiente fugiat maxime quibusdam, cum quis in sunt architecto obcaecati fuga itaque recusandae rem a neque soluta.</p>
-            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolor non exercitationem atque saepe sapiente fugiat maxime quibusdam, cum quis in sunt architecto obcaecati fuga itaque recusandae rem a neque soluta.</p>
-            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolor non exercitationem atque saepe sapiente fugiat maxime quibusdam, cum quis in sunt architecto obcaecati fuga itaque recusandae rem a neque soluta.</p>
-            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolor non exercitationem atque saepe sapiente fugiat maxime quibusdam, cum quis in sunt architecto obcaecati fuga itaque recusandae rem a neque soluta.</p>
-            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolor non exercitationem atque saepe sapiente fugiat maxime quibusdam, cum quis in sunt architecto obcaecati fuga itaque recusandae rem a neque soluta.</p>
         </div>
     </div>
     {% chat request %}
 </div>
+<script src="{% static 'jss/userpage.js' %}"></script>
 {% endblock %}

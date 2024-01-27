@@ -13,12 +13,11 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
         <link rel="stylesheet" href="{% static 'css/styles.css' %}" type="text/css">
         <link rel="stylesheet" href="{% static 'css/chat_styles.css' %}" type="text/css">
-        <script src="{% static 'jss/scripts.js' %}"></script>
-        <!-- <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.min.js"></script> -->
         <script src="https://cdn.jsdelivr.net/npm/hls.js@latest/dist/hls.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/ovenplayer/dist/ovenplayer.js"></script>
         <script src="https://unpkg.com/centrifuge@3.1.0/dist/centrifuge.js"></script>
-        <script src="https://unpkg.com/vue@next"></script>
+        <!-- <script src="https://unpkg.com/vue@next"></script> -->
+        <script src="{% static 'jss/scripts.js' %}"></script>
     </head>
     <body class="bg-light">
         <header class="p-1 text-bg-dark font-ctc fixed-top">
@@ -57,7 +56,7 @@
             </div>
           </div>
         </header>
-        <main>
+        <main id="main">
         {% block body %}
         {% endblock %}
         </main>
